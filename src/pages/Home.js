@@ -1,12 +1,18 @@
 // Home
 import React from 'react';
+import Dresses from '../components/Dresses';
 import Header from './../components/Header';
 
 const Home = () => {
 	return (
-		<div>
-			<Header location="서울특별시 강남구" />
-		</div>
+		<>
+			<header>
+				<Header location="서울특별시 강남구" />
+			</header>
+			<main>
+				<Dresses />
+			</main>
+		</>
 	);
 };
 
