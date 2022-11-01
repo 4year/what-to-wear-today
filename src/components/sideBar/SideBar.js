@@ -1,8 +1,8 @@
 // overlay 및 container
-import React from 'react';
+import React from "react";
 
 const SideBar = () => {
-	return <div></div>;
+  return <div></div>;
 };
 
 export default SideBar;
