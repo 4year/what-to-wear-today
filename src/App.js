@@ -1,5 +1,7 @@
 import Home from './pages/Home';
 import styled from 'styled-components';
+import { useState } from 'react';
+import Loadging from './pages/Loadging';
 
 const AppContainer = styled.div`
 	margin: 0 auto;
@@ -10,9 +12,15 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+	const [loading, setLoading] = useState(true);
+
+	setTimeout(() => {
+		setLoading(false);
+	}, 3000);
+
 	return (
 		<AppContainer className="App">
-			<Home />
+			{loading ? <Loadging /> : <Home />}
 		</AppContainer>
 	);
 }
