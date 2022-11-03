@@ -1,6 +1,7 @@
 import React from "react";
 
 const scrollBar = () => {
-  return <div>test</div>;
+  return <div></div>;
 };
+
 export default scrollBar;
