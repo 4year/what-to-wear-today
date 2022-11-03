@@ -2,7 +2,6 @@
 import React from 'react';
 import Location from './Location';
 
-
 const SideBar = () => {
 	return (
     <div>

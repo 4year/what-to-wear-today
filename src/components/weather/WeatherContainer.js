@@ -5,12 +5,14 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 393px;
   border: 3px solid black;
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 800;
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 50px;
+  font-weight: 600;
 
   .temp {
     color: navy;
+    font-weight: bold;
   }
 `;
 
