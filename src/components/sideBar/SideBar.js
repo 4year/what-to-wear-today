@@ -2,12 +2,11 @@
 import React from 'react';
 import Location from './Location';
 
+
 const SideBar = () => {
 	return (
     <div>
-      <Location visible={true}>
-        sideHeader
-        LocationList
+      <Location visible={true}>                
       </Location>
     </div>
   );

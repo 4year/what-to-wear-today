@@ -2,14 +2,20 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import styled from 'styled-components';
+import LocationList from './LocationList';
+import SideHeader from './SideHeader';
 
-const Location = ({className, visible, children}) => {
+
+const Location = ({className, visible}) => {
 	return (
     <div>
       <ModalOverlay visible={visible}/>
       <ModalWrapper className={className} tabIndex="-1" visible={visible}>
-        <ModalInner tabIndex="0" className="modal-inner">
-          {children}
+        <ModalInner tabIndex="0" className="modal-inner">       
+          <SideHeader/>
+          <LocationList/>
+          <LocationList/>
+          <LocationList/>
         </ModalInner>
       </ModalWrapper>
     </div>
@@ -55,7 +61,7 @@ const ModalInner = styled.div`
   top: 50%;
   left: 50%;   
   transform: translateY(-50%);  
-  padding: 40px 20px;
+  padding: 20px 20px;
 `
 
 export default Location;
