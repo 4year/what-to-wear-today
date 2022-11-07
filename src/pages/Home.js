@@ -1,17 +1,21 @@
 // Home
 import React from 'react';
 import Dresses from '../components/Dresses';
+import SideBar from '../components/sideBar/SideBar';
+import WeatherContainer from '../components/weather/WeatherContainer';
 import Header from './../components/Header';
 
-const Home = () => {
+const Home = ({ weather }) => {
 	return (
 		<>
 			<header>
-				<Header location="서울특별시 강남구" />
+				<Header location={weather.name} />
 			</header>
 			<main>
-				<Dresses />
+				<Dresses temperature={Math.round(weather.main.temp - 273.15)} />
+				<WeatherContainer weather={weather} />
 			</main>
+			{/* <SideBar /> */}
 		</>
 	);
 };
