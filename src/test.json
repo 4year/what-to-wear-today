@@ -1,0 +1,60 @@
+{
+  "coord": {
+      "lon": 127.0508,
+      "lat": 37.5953
+  },
+  "weather": [
+      {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+      }
+  ],
+  "base": "stations",
+  "main": {
+      "temp": 283.78,
+      "feels_like": 282,
+      "temp_min": 278.53,
+      "temp_max": 284.87,
+      "pressure": 1024,
+      "humidity": 42,
+      "sea_level": 1024,
+      "grnd_level": 1017
+  },
+  "visibility": 10000,
+  "wind": {
+      "speed": 0.94,
+      "deg": 158,
+      "gust": 1.4
+  },
+  "clouds": {
+      "all": 92
+  },
+  "dt": 1667784125,
+  "sys": {
+      "type": 1,
+      "id": 8105,
+      "country": "KR",
+      "sunrise": 1667772152,
+      "sunset": 1667809702
+  },
+  "timezone": 32400,
+  "id": 1835847,
+  "name": "Seoul",
+  "cod": 200
+}
+
+
+[
+    {
+        "id": 6,
+        "temp": [
+            9,
+            10,
+            11
+        ],
+        "image": "/images/dresses/dress1.png",
+        "desc": "트렌치 코트, 야상, 점퍼, 스타킹, 기모바지"
+    }
+]

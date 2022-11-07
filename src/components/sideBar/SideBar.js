@@ -4,11 +4,10 @@ import Location from './Location';
 
 const SideBar = () => {
 	return (
-    <div>
-      <Location visible={true}>                
-      </Location>
-    </div>
-  );
+		<div>
+			<Location visible={true}></Location>
+		</div>
+	);
 };
 
 export default SideBar;
