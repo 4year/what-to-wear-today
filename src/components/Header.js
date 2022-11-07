@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { IoShareOutline } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
