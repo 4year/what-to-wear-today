@@ -44,17 +44,3 @@
   "name": "Seoul",
   "cod": 200
 }
-
-
-[
-    {
-        "id": 6,
-        "temp": [
-            9,
-            10,
-            11
-        ],
-        "image": "/images/dresses/dress1.png",
-        "desc": "트렌치 코트, 야상, 점퍼, 스타킹, 기모바지"
-    }
-]
