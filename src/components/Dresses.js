@@ -1,6 +1,6 @@
 // 기온별 의상 이미지 슬라이더, text
 import React, { useState } from 'react';
-import { Data } from './../test';
+import { Data } from './../dressData';
 import styled from 'styled-components';
 
 const DressData = Data;
