@@ -1,33 +1,7 @@
 // 기온별 의상 이미지 슬라이더, text
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Data } from './../test';
-
-// const image = {
-// 	desc: '반팔, 셔츠, 반바지, 면바지',
-// 	list: [
-// 		{
-// 			id: `image1`,
-// 			url: process.env.PUBLIC_URL + '/images/dresses/dress1.png',
-// 			alt: 'dress 1',
-// 		},
-// 		{
-// 			id: `image2`,
-// 			url: process.env.PUBLIC_URL + '/images/dresses/dress2.png',
-// 			alt: 'dress 2',
-// 		},
-// 		{
-// 			id: `image3`,
-// 			url: process.env.PUBLIC_URL + '/images/dresses/dress3.png',
-// 			alt: 'dress 3',
-// 		},
-// 		{
-// 			id: `image4`,
-// 			url: process.env.PUBLIC_URL + '/images/dresses/dress4.png',
-// 			alt: 'dress 4',
-// 		},
-// 	],
-// };
+import styled from 'styled-components';
 
 const DressData = Data;
 
@@ -35,11 +9,10 @@ const Dresses = ({ temperature }) => {
 	// const [currentIndex, setCurrentIndex] = useState(0);
 	// const [transX, setTransX] = useState(0);
 
-	const dressInfo = DressData.filter((el) => {
-		return el.temp.find((el) => el === temperature) && el;
+	// 현재 기온에 맞는 옷 정보
+	const dressInfo = DressData.filter((dress) => {
+		return dress.temp.indexOf(temperature) !== -1 && dress;
 	});
-
-	console.log(dressInfo);
 
 	return (
 		<DressContainer>
@@ -57,12 +30,14 @@ const Dresses = ({ temperature }) => {
 					</Slide>
 				</Slider>
 			</Viewer>
+
 			{/* Bullets */}
 			<BulletsContainer>
 				{/* {image.list.map(({ id }) => (
 					<span key={id}>●</span>
 				))} */}
 			</BulletsContainer>
+
 			{/* Dresses Description */}
 			<p>{dressInfo[0].desc}</p>
 		</DressContainer>

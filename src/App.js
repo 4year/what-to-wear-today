@@ -1,40 +1,46 @@
-import Home from './pages/Home';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
-import Loadging from './pages/Loadging';
 import { API_KEY } from './config';
-import { useEffect } from 'react';
+import Loadging from './pages/Loadging';
+import Home from './pages/Home';
 
 const App = () => {
 	const [loading, setLoading] = useState(true);
 	const [result, setResult] = useState({});
 
-	setTimeout(() => {
-		setLoading(false);
-	}, 3000);
-
-	const getCurrentLocation = () => {
+	// 현재 위치 가져오기
+	const getCurrentLocation = useCallback(() => {
 		navigator.geolocation.getCurrentPosition((position) => {
-			const lat = position.coords.latitude;
-			const lon = position.coords.longitude;
+			const lat = position.coords.latitude; // 위도
+			const lon = position.coords.longitude; // 경도
 
-			console.log(lat, lon);
-
+			localStorage.setItem('Loaction', JSON.stringify({ lat, lon }));
 			getCurrentWeather(lat, lon);
 		});
-	};
+	}, []);
 
-	useEffect(getCurrentLocation, []);
-
+	// 현재 날씨 가져오기
 	const getCurrentWeather = async (lat, lon) => {
 		const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
 
 		const result = await fetch(url).then((response) => response.json());
 
-		console.log(result);
-
+		setLoading(false); // 날씨 가져오기 성공하면 로딩 false
 		setResult(result);
 	};
+
+	// 앱 로드시,
+	// localStorage 위치가 있으면 getCurrentWeather(위치) 아니면 getCurrentLocation
+	useEffect(() => {
+		let storedLocation = localStorage.getItem('Loaction');
+
+		if (storedLocation) {
+			storedLocation = JSON.parse(storedLocation);
+			getCurrentWeather(storedLocation.lat, storedLocation.lon);
+		} else {
+			getCurrentLocation();
+		}
+	}, [getCurrentLocation]);
 
 	return (
 		<AppContainer className="App">
