@@ -2,14 +2,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-touch-drag-slider';
-import { Data } from './../dressData';
-
-const DressData = Data;
+import { WeatherData } from '../WeatherData';
 
 const Dresses = ({ temperature }) => {
 	// 현재 기온에 맞는 옷 정보 data
-	const dressInfo = DressData.find((dress) => {
-		return dress.temp.indexOf(temperature) !== -1 && dress;
+	const dressInfo = WeatherData.find((data) => {
+		return data.temp.indexOf(temperature) !== -1 && data;
 	});
 
 	return (
