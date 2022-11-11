@@ -15,7 +15,7 @@ const Dresses = ({ temperature }) => {
 			{/* Image Slide */}
 			<Slider activeIndex={0} transition={0.5} scaleOnDrag={true}>
 				{dressInfo.images.map((image, idx) => (
-					<img key={idx} src={image} alt="dressImage" />
+					<img key={idx} src={image} alt={`dressImage${idx + 1}`} />
 				))}
 			</Slider>
 
