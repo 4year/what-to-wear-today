@@ -8,6 +8,7 @@ import { HiOutlinePlus } from 'react-icons/hi';
 import SideBar from './sideBar/SideBar';
 import SideHeader from './sideBar/SideHeader';
 import Location from './sideBar/Location';
+import LocationList from './sideBar/LocationList';
 
 
 const HeaderContainer = styled.header`
@@ -44,16 +45,7 @@ const Header = ({ location, closable, onClose }) => {
     setModalVisible(false);
     console.log(modalVisible);
   }
-  // const onMaskClick = (e) => {
-  //   if (e.target === e.currentTarget){
-  //     onClose(e)
-  //   }
-  // }  
-  // const close = (e) =>{
-  //   if(onClose){
-  //     onClose(e)
-  //   }
-  // }
+  
   return (
 		<HeaderContainer>
 			<span>{location}</span>
@@ -62,13 +54,15 @@ const Header = ({ location, closable, onClose }) => {
 				<BiMenuAltRight className="icon" onClick={openModal}/>
 			</div>
       {modalVisible && 
-      <SideBar visible={modalVisible} closable={true} maskClosable={true} onClose={closeModal}>
-        {/* <SideHeader>
-          <IoIosArrowBack size="20px" onClose={closeModal}/>
-          <h3>지역목록</h3>        
-          <HiOutlinePlus size="20px"/>
-        </SideHeader>
-        <Location/> */}
+      <SideBar 
+        visible={modalVisible} 
+        closable={true} 
+        maskClosable={true} 
+        onClose={closeModal}>        
+        {/* <SideHeader/>
+        <Location>
+          <LocationList/>         
+        </Location> */}
       </SideBar>}
 		</HeaderContainer>
     

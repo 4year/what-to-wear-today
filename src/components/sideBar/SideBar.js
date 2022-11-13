@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 import Location from './Location';
 import SideHeader from './SideHeader';
+import { IoIosArrowBack } from 'react-icons/io';
+import { HiOutlinePlus } from 'react-icons/hi';
+
 
 const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {	
   const onMaskClick = (e) => {
@@ -25,8 +28,12 @@ const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
         tabIndex="-1"
         visible={visible}>    
         <ModalInner tabIndex="0" className="modal-inner">
-          {closable && <SideHeader className="modal-close" onClick={close} />}
-          {/* <SideHeader/> */}
+          {closable && 
+          <SideHeader>
+            <IoIosArrowBack className="modal-close" size="20px" onClick={close}/>
+            <h3>지역목록</h3>
+            <HiOutlinePlus className="add-list" size="20px"/>
+          </SideHeader>}          
           <Location/>  
         </ModalInner>
       </ModalWrapper>		
@@ -85,4 +92,17 @@ const ModalInner = styled.div`
   padding: 10px 10px;
 `;
 
+// const SideHeader = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   /* background-color: tomato; */
+//   align-items: center;
+//   margin-bottom: 20px;
+//   .back{
+//     cursor: pointer;
+//   }
+//   .add-list{
+//     cursor: pointer;
+//   }
+// `
 export default SideBar;

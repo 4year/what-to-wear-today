@@ -6,9 +6,7 @@ import LocationList from "./LocationList";
 const Location = () => { 
   return (
     <div>     
-      <LocationList />
-      <LocationList />
-      <LocationList />    
+      <LocationList/>
     </div>
   );
 };
