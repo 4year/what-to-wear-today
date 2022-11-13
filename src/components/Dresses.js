@@ -93,7 +93,6 @@ const DressContainer = styled.div`
 	justify-content: center;
 
 	p {
-		margin-bottom: 0;
 		font-size: 20px;
 		font-weight: bold;
 	}
@@ -114,6 +113,8 @@ const Slide = styled.div`
 
 const SlideImage = styled.img`
 	width: ${SLIDER_WIDTH}px;
+	height: 360px;
+	object-fit: cover;
 	cursor: ${(props) => (props.slide.length === 1 ? 'default' : 'pointer')};
 `;
 
