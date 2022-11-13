@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../WeatherData';
-import { inrange } from './../utils/drag/index';
-import registerDragEvent from './../utils/drag/registaerDragEvent';
+import { inrange } from './../utils/slide/index';
+import registerDragEvent from './../utils/slide/registaerDragEvent';
 
 const SLIDER_WIDTH = 400;
 
