@@ -8,13 +8,9 @@ import SideBar from '../components/sideBar/SideBar';
 const Home = ({ weather }) => {
 	return (
 		<>
-			<div>
-				<Header location={weather.name} />
-				<main>
-					<Dresses temperature={Math.round(weather.main.temp - 273.15)} />
-					<WeatherContainer weather={weather} />
-				</main>
-			</div>
+			<Header location={weather.name} />
+			<Dresses temperature={Math.round(weather.main.temp - 273.15)} />
+			<WeatherContainer weather={weather} />
 			{/* <SideBar /> */}
 		</>
 	);
