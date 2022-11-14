@@ -10,7 +10,6 @@ import SideHeader from './sideBar/SideHeader';
 import Location from './sideBar/Location';
 import LocationList from './sideBar/LocationList';
 
-
 const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
@@ -35,37 +34,27 @@ const HeaderContainer = styled.header`
 	}
 `;
 
-const Header = ({ location, closable, onClose }) => {
-	const [modalVisible, setModalVisible] = useState(false);
-  const openModal = () => {
-    setModalVisible(true);
-    console.log(modalVisible)
-  }
-  const closeModal = () => {
-    setModalVisible(false);
-    console.log(modalVisible);
-  }
-  
-  return (
+const Header = ({ setModalVisible, location, closable, onClose }) => {
+	const openModal = () => {
+		setModalVisible(true);
+	};
+
+	return (
 		<HeaderContainer>
 			<span>{location}</span>
 			<div className="iconBox">
 				<IoShareOutline className="icon" />
-				<BiMenuAltRight className="icon" onClick={openModal}/>
+				<BiMenuAltRight className="icon" onClick={openModal} />
 			</div>
-      {modalVisible && 
+			{/* {modalVisible && 
       <SideBar 
         visible={modalVisible} 
         closable={true} 
         maskClosable={true} 
         onClose={closeModal}>        
-        {/* <SideHeader/>
-        <Location>
-          <LocationList/>         
-        </Location> */}
       </SideBar>}
+			 */}
 		</HeaderContainer>
-    
 	);
 };
 
