@@ -2,13 +2,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Location from './Location';
 import SideHeader from './SideHeader';
 import { IoIosArrowBack } from 'react-icons/io';
 import { HiOutlinePlus } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
+import SearchBar from '../addLocation/SearchBar';
+
 
 const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
-	const onMaskClick = (e) => {
+	// const navigate = useNavigate();
+
+  // const navigateToSearchBar = () => {
+  //   navigate(`../addLocation/SearchBar.js`);
+  // };
+  const [search, setSearch] = useState(false);
+  
+  const onClickLocationPlus = () => {
+    setSearch(true);
+    console.log(search);
+  }
+  
+  const onMaskClick = (e) => {
 		if (e.target === e.currentTarget) {
 			onClose(e);
 		}
@@ -32,9 +48,10 @@ const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
 						<SideHeader>
 							<IoIosArrowBack className="modal-close" size="20px" onClick={close} />
 							<h3>지역목록</h3>
-							<HiOutlinePlus className="add-list" size="20px" />
+							<HiOutlinePlus className="add-list" size="20px" onClick={onClickLocationPlus} /> 
 						</SideHeader>
 					)}
+          <SearchBar show={search}/>
 					<Location />
 				</ModalInner>
 			</ModalWrapper>
@@ -46,6 +63,9 @@ Location.propTypes = {
 	visible: PropTypes.bool,
 };
 
+SearchBar.propTypes = {
+  show: PropTypes.bool,
+}
 const ModalOverlay = styled.div`
 	max-width: 393px;
 	height: 852px;
