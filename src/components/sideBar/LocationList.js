@@ -11,7 +11,7 @@ const LocationList = () => {
       <List>
         <h4>서울특별시</h4>
         <div className='temp'>
-          <WiDayCloudyWindy size="34px"/>
+          <WiDayCloudyWindy size="20px"/>
           <span>21°C</span>          
         </div>
       </List>
@@ -25,14 +25,18 @@ const List = styled.div`
   align-items: center;
   border: 2px solid black;
   border-radius: 15px;
-  padding: 3px 20px; 
+  padding: 2px 20px;
+  margin:0 8px;   
   margin-bottom: 15px;
+  h4{
+    font-size: 12px;
+  }
   .temp{
-    width : 90px;
+    width : 50px;
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;        
     span{
-      font-size: 20px;
+      font-size: 15px;
     }
   }
 `
