@@ -91,6 +91,7 @@ const DressContainer = styled.div`
 	flex-direction: column;
 	align-content: center;
 	justify-content: center;
+	height: 50%;
 
 	p {
 		font-size: 20px;
