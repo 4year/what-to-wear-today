@@ -113,8 +113,8 @@ const Slide = styled.div`
 
 const SlideImage = styled.img`
 	width: ${SLIDER_WIDTH}px;
-	height: 360px;
-	object-fit: cover;
+	height: 320px;
+	object-fit: contain;
 	cursor: ${(props) => (props.slide.length === 1 ? 'default' : 'pointer')};
 `;
 
