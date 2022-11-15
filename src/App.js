@@ -57,12 +57,11 @@ const App = () => {
 };
 
 const AppContainer = styled.div`
-	margin: 0 auto;
-	max-width: 390px;
-	max-height: 844px;
+	width: 390px;
+	height: 844px;
 	overflow: hidden;
 	text-align: center;
-	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+	box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 54%) 0px 1px 2px;
 `;
 
 export default App;
