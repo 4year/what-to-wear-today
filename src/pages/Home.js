@@ -8,25 +8,23 @@ import SideBar from '../components/sideBar/SideBar';
 const Home = ({ weather }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
+	const openModal = () => {
+		setModalVisible(true);
+	};
+
 	const closeModal = () => {
 		setModalVisible(false);
-		console.log(modalVisible);
 	};
 
 	return (
-		<>
-			<Header location={weather.name} setModalVisible={setModalVisible} />
+		<React.Fragment>
+			<Header location={weather.name} openModal={openModal} />
 			<Dresses temperature={Math.round(weather.main.temp - 273.15)} />
 			<WeatherContainer weather={weather} />
 			{modalVisible && (
-				<SideBar
-					visible={modalVisible}
-					closable={true}
-					maskClosable={true}
-					onClose={closeModal}
-				></SideBar>
+				<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
 			)}
-		</>
+		</React.Fragment>
 	);
 };
 
