@@ -101,7 +101,6 @@ const DressContainer = styled.div`
 
 const Viewer = styled.div`
 	width: ${SLIDER_WIDTH}px;
-	overflow: hidden;
 `;
 
 const Slider = styled.div`
