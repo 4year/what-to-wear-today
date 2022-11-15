@@ -20,7 +20,8 @@ const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px;
+	padding: 3px 10px;
+	border-bottom: 1px solid #00000021;
 
 	span {
 		font-size: 20px;
