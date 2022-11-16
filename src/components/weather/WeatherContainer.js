@@ -77,23 +77,35 @@ const WeatherContainer = ({ weather }) => {
 };
 
 const Container = styled.div`
-	height: 42%;
+	height: 43%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	font-size: 20px;
 	line-height: 50px;
 	font-weight: 600;
 	background-color: ${(props) => props.background};
 
+	/* 
+	  position: absolute;
+    top: 0;
+    height: 100%;
+	*/
+
 	.wave {
-		height: 0;
+		/* display: none; */
+		width: 100%;
+		height: 10%;
 	}
 `;
 
 const CurrentWeather = styled.div`
+	padding: 10% 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
 
 	.weather {
 		display: flex;

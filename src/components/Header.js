@@ -20,13 +20,13 @@ const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	width: 100%;
 	height: 7%;
-	padding: 3px 10px;
 	border-bottom: 1px solid #00000021;
 
 	span {
 		font-size: 20px;
-		padding-left: 10px;
+		padding: 0 20px;
 	}
 
 	.iconBox {

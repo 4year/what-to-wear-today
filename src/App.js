@@ -61,8 +61,6 @@ const AppContainer = styled.div`
 	height: 100%;
 	max-width: 390px;
 	max-height: 844px;
-	overflow: hidden;
-	text-align: center;
 	box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 54%) 0px 1px 2px;
 `;
 
