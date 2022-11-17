@@ -49,20 +49,7 @@ const WeatherContainer = ({ weather }) => {
 
 	return (
 		<Container background={background}>
-			<div className="wave">
-				<svg
-					data-name="Layer 1"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 1200 120"
-					preserveAspectRatio="none"
-				>
-					<path
-						d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-						fill="#FFFFFF"
-						fillOpacity="1"
-					></path>
-				</svg>
-			</div>
+			<div className="wave" />
 			<CurrentWeather>
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
@@ -84,16 +71,16 @@ const wave = keyframes`
 		background-position-x: 0;
 	}
 	100%{
-		background-position-x: 500px;
+		background-position-x: 350px;
 	}
 `;
 
 const Container = styled.div`
 	height: 43%;
 	width: 100%;
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: center; */
 	font-size: 20px;
 	line-height: 50px;
 	font-weight: 600;
@@ -109,6 +96,9 @@ const Container = styled.div`
 		/* display: none; */
 		width: 100%;
 		height: 10%;
+		background: url(${process.env.PUBLIC_URL + './images/wave.png'});
+		background-size: 350px 100%;
+		/* animation: ${wave} 5s linear infinite; */
 	}
 `;
 
