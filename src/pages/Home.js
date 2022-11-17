@@ -5,6 +5,7 @@ import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
+import { registerDragEvent } from '../utils/drag';
 
 const Home = ({ weather }) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -20,7 +21,12 @@ const Home = ({ weather }) => {
 	return (
 		<HomeContainer>
 			<Header location={weather.name} openModal={openModal} />
-			<main>
+			<main
+				// 드래그(스크롤) 이벤트
+				{...registerDragEvent({
+					onDragStart: (moveX, moveY) => {},
+				})}
+			>
 				<Dresses temperature={Math.round(weather.main.temp)} />
 				<WeatherContainer weather={weather} />
 				{modalVisible && (
@@ -39,7 +45,7 @@ const HomeContainer = styled.div`
 	text-align: center;
 
 	main {
-		height: 100%;
+		height: calc(100% - 3rem);
 		margin-top: 3rem;
 	}
 `;

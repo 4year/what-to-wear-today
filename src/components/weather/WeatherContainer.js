@@ -76,8 +76,8 @@ const wave = keyframes`
 `;
 
 const Container = styled.div`
-	height: 50%;
 	width: 100%;
+	height: 47%;
 	/* display: flex;
 	flex-direction: column;
 	align-items: center; */
@@ -97,7 +97,7 @@ const Container = styled.div`
 		width: 100%;
 		height: 10%;
 		background: url(${process.env.PUBLIC_URL + './images/wave.png'});
-		background-size: 350px 100%;
+		background-size: 95% 100%;
 		/* animation: ${wave} 5s linear infinite; */
 	}
 `;
@@ -107,7 +107,7 @@ const CurrentWeather = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 11% 0;
+	height: 90%;
 
 	.weather {
 		display: flex;
