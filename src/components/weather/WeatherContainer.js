@@ -146,7 +146,7 @@ const Container = styled.div`
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
-		animation: ${scrollUpTop} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+		animation: ${scrollUpTop} 2.5s ease-out forwards;
 	}
 `;
 
@@ -157,11 +157,11 @@ const WaveContianer = styled.div`
 	background-size: 350px 100%;
 
 	&.scrollUp {
-		animation: ${wave} 5s linear infinite;
+		animation: ${wave} 1s linear infinite;
 	}
 
 	&.scrollEnd {
-		animation: ${waveHeight} 5s linear forwards;
+		animation: ${waveHeight} 3s linear forwards;
 	}
 `;
 
@@ -173,7 +173,7 @@ const CurrentWeather = styled.div`
 	height: 90%;
 
 	&.scrollEnd {
-		animation: ${scrollUpHeight} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+		animation: ${scrollUpHeight} 3s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
 	}
 
 	.weather {
