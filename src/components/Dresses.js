@@ -29,7 +29,13 @@ const Dresses = ({ temperature }) => {
 
 	// 슬라이드 width
 	useEffect(() => {
-		setSlideWidth(containerRef.current.getBoundingClientRect().width);
+		const slideWidthHandler = () => {
+			setSlideWidth(containerRef.current.offsetWidth);
+		};
+		window.addEventListener('resize', slideWidthHandler);
+		return () => {
+			window.removeEventListener('resize', slideWidthHandler);
+		};
 	}, []);
 
 	return (
