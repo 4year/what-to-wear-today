@@ -3,6 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
+import { keyframes } from 'styled-components';
+
+const waveImage = process.env.PUBLIC_URL + './images/wave.svg';
 
 const WeatherContainer = ({ weather }) => {
 	const dateBuilder = (d) => {
@@ -39,7 +42,7 @@ const WeatherContainer = ({ weather }) => {
 		return `${date} ${month} ${year} ${dayOfWeek}`;
 	};
 
-	const temperature = Math.round(weather.main.temp - 273.15);
+	const temperature = Math.round(weather.main.temp);
 	const background = WeatherData.find((data) => {
 		return data.temp.indexOf(temperature) !== -1 && data.background;
 	});
@@ -75,6 +78,15 @@ const WeatherContainer = ({ weather }) => {
 		</Container>
 	);
 };
+
+const wave = keyframes`
+	0%{
+		background-position-x: 0;
+	}
+	100%{
+		background-position-x: 500px;
+	}
+`;
 
 const Container = styled.div`
 	height: 43%;
