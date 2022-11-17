@@ -89,13 +89,15 @@ const wave = keyframes`
 	100%{
 		background-position-x: 350px;
 	}
-`;
+	`;
 
 const waveHeight = keyframes`
 	0%{
+		background-position-x: 0;
 		height: 10%;
 	}
 	100%{
+		background-position-x: 350px;
 		height: 0;
 	}
 `;
