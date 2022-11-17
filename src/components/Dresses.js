@@ -1,10 +1,8 @@
 // 기온별 의상 이미지 슬라이더, text
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../WeatherData';
-import { inrange } from './../utils/drag/index';
-import registerDragEvent from './../utils/drag/registaerDragEvent';
-import { useEffect } from 'react';
+import { inrange, registerDragEvent } from './../utils/drag';
 
 const Dresses = ({ temperature }) => {
 	// 현재 기온에 맞는 옷 정보 data
