@@ -1,11 +1,8 @@
 // weather container
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
-import { keyframes } from 'styled-components';
-
-const waveImage = process.env.PUBLIC_URL + './images/wave.svg';
 
 const WeatherContainer = ({ weather }) => {
 	const dateBuilder = (d) => {
@@ -42,15 +39,16 @@ const WeatherContainer = ({ weather }) => {
 		return `${date} ${month} ${year} ${dayOfWeek}`;
 	};
 
+	// 배경 색
 	const temperature = Math.round(weather.main.temp);
 	const background = WeatherData.find((data) => {
 		return data.temp.indexOf(temperature) !== -1 && data.background;
 	});
 
 	return (
-		<Container background={background}>
-			<div className="wave" />
-			<CurrentWeather>
+		<Container className="scrollUp" background={background}>
+			<WaveContianer className="scrollUp" />
+			<CurrentWeather className="scrollUp">
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
 					{temperature}°C
@@ -69,36 +67,59 @@ const WeatherContainer = ({ weather }) => {
 const wave = keyframes`
 	0%{
 		background-position-x: 0;
+		height: 10%;
 	}
 	100%{
 		background-position-x: 350px;
+		height: 0;
+	}
+`;
+
+const scrollUpTop = keyframes`
+	0% {
+		top: 470px;
+	}
+	100% {
+		top: 0
+	}
+`;
+
+const scrollUpHeight = keyframes`
+	0% {
+		height: 90%;
+		margin-top: 0;
+	}
+	100% {
+		height: 40%;
+		margin-top: 3rem;
 	}
 `;
 
 const Container = styled.div`
 	width: 100%;
 	height: 47%;
-	/* display: flex;
-	flex-direction: column;
-	align-items: center; */
 	font-size: 20px;
 	line-height: 50px;
 	font-weight: 600;
 	background-color: ${(props) => props.background};
 
-	/* 
-	  position: absolute;
-    top: 0;
-    height: 100%;
-	*/
+	&.scrollUp {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		animation: ${scrollUpTop} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+	}
+`;
 
-	.wave {
-		/* display: none; */
-		width: 100%;
-		height: 10%;
-		background: url(${process.env.PUBLIC_URL + './images/wave.png'});
-		background-size: 95% 100%;
-		/* animation: ${wave} 5s linear infinite; */
+const WaveContianer = styled.div`
+	width: 100%;
+	background: url(${process.env.PUBLIC_URL + './images/wave.png'});
+	background-size: 350px 100%;
+
+	&.scrollUp {
+		animation: ${wave} 5s linear forwards;
 	}
 `;
 
@@ -108,6 +129,10 @@ const CurrentWeather = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 90%;
+
+	&.scrollUp {
+		animation: ${scrollUpHeight} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+	}
 
 	.weather {
 		display: flex;
