@@ -76,7 +76,7 @@ const wave = keyframes`
 `;
 
 const Container = styled.div`
-	height: 43%;
+	height: 50%;
 	width: 100%;
 	/* display: flex;
 	flex-direction: column;
@@ -103,11 +103,11 @@ const Container = styled.div`
 `;
 
 const CurrentWeather = styled.div`
-	padding: 10% 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 11% 0;
 
 	.weather {
 		display: flex;

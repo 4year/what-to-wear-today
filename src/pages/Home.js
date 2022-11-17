@@ -20,11 +20,13 @@ const Home = ({ weather }) => {
 	return (
 		<HomeContainer>
 			<Header location={weather.name} openModal={openModal} />
-			<Dresses temperature={Math.round(weather.main.temp)} />
-			<WeatherContainer weather={weather} />
-			{modalVisible && (
-				<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
-			)}
+			<main>
+				<Dresses temperature={Math.round(weather.main.temp)} />
+				<WeatherContainer weather={weather} />
+				{modalVisible && (
+					<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
+				)}
+			</main>
 		</HomeContainer>
 	);
 };
@@ -35,6 +37,11 @@ const HomeContainer = styled.div`
 	height: 100%;
 	overflow: hidden;
 	text-align: center;
+
+	main {
+		height: 100%;
+		margin-top: 3rem;
+	}
 `;
 
 export default Home;

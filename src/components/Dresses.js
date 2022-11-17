@@ -94,10 +94,6 @@ const Dresses = ({ temperature }) => {
 };
 
 const DressContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
 	width: 100%;
 	height: 50%;
 
@@ -129,10 +125,6 @@ const SlideImage = styled.img`
 `;
 
 const Bullets = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	span {
 		font-size: 15px;
 		margin: 0 5px;
