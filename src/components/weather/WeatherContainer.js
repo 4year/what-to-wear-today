@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
 
-const WeatherContainer = ({ weather }) => {
+const WeatherContainer = ({ weather, scrollUp }) => {
 	const dateBuilder = (d) => {
 		const months = [
 			'January',
@@ -46,9 +46,23 @@ const WeatherContainer = ({ weather }) => {
 	});
 
 	return (
-		<Container className="scrollUp" background={background}>
-			<WaveContianer className="scrollUp" />
-			<CurrentWeather className="scrollUp">
+		<Container
+			className={
+				scrollUp ? (scrollUp < 0 && scrollUp > -100 ? 'scrollUp' : 'scrollEnd') : ''
+			}
+			background={background}
+			scrollY={scrollUp}
+		>
+			<WaveContianer
+				className={
+					scrollUp
+						? scrollUp < 0 && scrollUp > -100
+							? 'scrollUp'
+							: 'scrollEnd'
+						: ''
+				}
+			/>
+			<CurrentWeather className={scrollUp ? 'scrollUp' : ''}>
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
 					{temperature}°C
@@ -67,10 +81,17 @@ const WeatherContainer = ({ weather }) => {
 const wave = keyframes`
 	0%{
 		background-position-x: 0;
-		height: 10%;
 	}
 	100%{
 		background-position-x: 350px;
+	}
+`;
+
+const waveHeight = keyframes`
+	0%{
+		height: 10%;
+	}
+	100%{
 		height: 0;
 	}
 `;
@@ -80,7 +101,7 @@ const scrollUpTop = keyframes`
 		top: 470px;
 	}
 	100% {
-		top: 0
+		top: 0;
 	}
 `;
 
@@ -109,17 +130,32 @@ const Container = styled.div`
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
+		transform: translateY(${(props) => props.scrollY}px);
+		transition: transform 300ms linner;
+	}
+
+	&.scrollEnd {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
 		animation: ${scrollUpTop} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
 	}
 `;
 
 const WaveContianer = styled.div`
 	width: 100%;
+	height: 10%;
 	background: url(${process.env.PUBLIC_URL + './images/wave.png'});
 	background-size: 350px 100%;
 
 	&.scrollUp {
-		animation: ${wave} 5s linear forwards;
+		animation: ${wave} 5s linear infinite;
+	}
+
+	&.scrollEnd {
+		animation: ${waveHeight} 5s linear forwards;
 	}
 `;
 

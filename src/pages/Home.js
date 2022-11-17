@@ -6,9 +6,11 @@ import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
 import { registerDragEvent } from '../utils/drag';
+import { inrange } from './../utils/drag';
 
 const Home = ({ weather }) => {
 	const [modalVisible, setModalVisible] = useState(false);
+	const [scrollUp, setScrollUp] = useState(0);
 
 	const openModal = () => {
 		setModalVisible(true);
@@ -24,11 +26,21 @@ const Home = ({ weather }) => {
 			<main
 				// 드래그(스크롤) 이벤트
 				{...registerDragEvent({
-					onDragStart: (moveX, moveY) => {},
+					onDragStart: (moveX, moveY) => {
+						console.log(moveY);
+						setScrollUp(inrange(moveY, -100, 0));
+					},
+					onDragEnd: (moveX, moveY) => {
+						if (moveY <= -100) {
+							setScrollUp(1);
+						} else {
+							setScrollUp(0);
+						}
+					},
 				})}
 			>
 				<Dresses temperature={Math.round(weather.main.temp)} />
-				<WeatherContainer weather={weather} />
+				<WeatherContainer weather={weather} scrollUp={scrollUp} />
 				{modalVisible && (
 					<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
 				)}
