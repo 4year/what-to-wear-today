@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { API_KEY } from './config';
 import Loadging from './pages/Loadging';
@@ -7,6 +7,16 @@ import Home from './pages/Home';
 const App = () => {
 	const [loading, setLoading] = useState(true);
 	const [result, setResult] = useState({});
+
+	// 현재 위치 가져오기
+	const getCurrentLocation = useCallback(() => {
+		navigator.geolocation.getCurrentPosition((position) => {
+			const lat = position.coords.latitude; // 위도
+			const lon = position.coords.longitude; // 경도
+
+			getCurrentWeather(lat, lon);
+		});
+	}, []);
 
 	// 현재 날씨 가져오기
 	const getCurrentWeather = async (lat, lon) => {
@@ -23,32 +33,12 @@ const App = () => {
 	};
 
 	// 앱 마운트 시,
-	// localStorage 위치가 있으면 getCurrentWeather(위치) 아니면 getCurrentLocation()
 	useEffect(() => {
-		// 현재 위치 가져오기
-		const getCurrentLocation = () => {
-			navigator.geolocation.getCurrentPosition((position) => {
-				const lat = position.coords.latitude; // 위도
-				const lon = position.coords.longitude; // 경도
-
-				localStorage.setItem('Loaction', JSON.stringify({ lat, lon })); // 현재 위치 localStorage에 저장
-				getCurrentWeather(lat, lon);
-			});
-		};
-
-		let storedLocation = localStorage.getItem('Loaction');
-
-		if (storedLocation) {
-			storedLocation = JSON.parse(storedLocation);
-			getCurrentWeather(storedLocation.lat, storedLocation.lon);
-		} else {
-			getCurrentLocation();
-		}
-
+		getCurrentLocation();
 		return () => {
 			console.log('app unmounted');
 		};
-	}, []);
+	}, [getCurrentLocation]);
 
 	return (
 		<AppContainer className="App">
