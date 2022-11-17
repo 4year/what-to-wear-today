@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { API_KEY } from './config';
-import Loadging from './pages/Loadging';
+import Loading from './pages/Loading';
 import Home from './pages/Home';
 
 const App = () => {
@@ -30,12 +30,12 @@ const App = () => {
 				const lat = position.coords.latitude; // 위도
 				const lon = position.coords.longitude; // 경도
 
-				localStorage.setItem('Loaction', JSON.stringify({ lat, lon })); // 현재 위치 localStorage에 저장
+				localStorage.setItem('Location', JSON.stringify({ lat, lon })); // 현재 위치 localStorage에 저장
 				getCurrentWeather(lat, lon);
 			});
 		};
 
-		let storedLocation = localStorage.getItem('Loaction');
+		let storedLocation = localStorage.getItem('Location');
 
 		if (storedLocation) {
 			storedLocation = JSON.parse(storedLocation);
@@ -51,7 +51,7 @@ const App = () => {
 
 	return (
 		<AppContainer className="App">
-			{loading ? <Loadging /> : <Home weather={result} />}
+			{loading ? <Loading /> : <Home weather={result} />}
 		</AppContainer>
 	);
 };
