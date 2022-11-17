@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from 'styled-components';
 
-
 const SideHeader = ({ children }) => { 
   return (
     <div>
@@ -18,7 +17,7 @@ const Header = styled.div`
   justify-content: space-between;
   /* background-color: tomato; */
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
   .modal-close{
     cursor: pointer;
   }

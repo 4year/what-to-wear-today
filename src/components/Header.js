@@ -3,12 +3,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoShareOutline } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
-import { IoIosArrowBack } from 'react-icons/io';
-import { HiOutlinePlus } from 'react-icons/hi';
-import SideBar from './sideBar/SideBar';
-import SideHeader from './sideBar/SideHeader';
-import Location from './sideBar/Location';
-import LocationList from './sideBar/LocationList';
 
 const HeaderContainer = styled.header`
 	display: flex;
@@ -34,7 +28,7 @@ const HeaderContainer = styled.header`
 	}
 `;
 
-const Header = ({ setModalVisible, location, closable, onClose }) => {
+const Header = ({ setModalVisible, location }) => {
 	const openModal = () => {
 		setModalVisible(true);
 	};
@@ -45,15 +39,7 @@ const Header = ({ setModalVisible, location, closable, onClose }) => {
 			<div className="iconBox">
 				<IoShareOutline className="icon" />
 				<BiMenuAltRight className="icon" onClick={openModal} />
-			</div>
-			{/* {modalVisible && 
-      <SideBar 
-        visible={modalVisible} 
-        closable={true} 
-        maskClosable={true} 
-        onClose={closeModal}>        
-      </SideBar>}
-			 */}
+			</div>		
 		</HeaderContainer>
 	);
 };
