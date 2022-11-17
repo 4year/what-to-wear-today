@@ -62,7 +62,11 @@ const WeatherContainer = ({ weather, scrollUp }) => {
 						: ''
 				}
 			/>
-			<CurrentWeather className={scrollUp ? 'scrollUp' : ''}>
+			<CurrentWeather
+				className={
+					scrollUp ? (scrollUp < 0 && scrollUp > -100 ? '' : 'scrollEnd') : ''
+				}
+			>
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
 					{temperature}°C
@@ -98,7 +102,7 @@ const waveHeight = keyframes`
 
 const scrollUpTop = keyframes`
 	0% {
-		top: 470px;
+		top: 370px;
 	}
 	100% {
 		top: 0;
@@ -166,7 +170,7 @@ const CurrentWeather = styled.div`
 	justify-content: center;
 	height: 90%;
 
-	&.scrollUp {
+	&.scrollEnd {
 		animation: ${scrollUpHeight} 5s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
 	}
 
