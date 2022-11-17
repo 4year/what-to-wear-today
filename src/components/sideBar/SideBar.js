@@ -2,28 +2,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Location from './Location';
 import SideHeader from './SideHeader';
+import SearchBar from '../addLocation/SearchBar';
+import CurrentLocation from './CurrentLocation';
 import { IoIosArrowBack } from 'react-icons/io';
 import { HiOutlinePlus } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
-import SearchBar from '../addLocation/SearchBar';
+
+
 
 
 const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
-	// const navigate = useNavigate();
-
-  // const navigateToSearchBar = () => {
-  //   navigate(`../addLocation/SearchBar.js`);
-  // };
   const [search, setSearch] = useState(false);
   
   const onClickLocationPlus = () => {
     setSearch(true);
     console.log(search);
   }
-  
+
+  const onClickLocationCancel = () => {
+    setSearch(false);
+    console.log(search);
+  } 
+
   const onMaskClick = (e) => {
 		if (e.target === e.currentTarget) {
 			onClose(e);
@@ -46,13 +47,21 @@ const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
 				<ModalInner tabIndex="0" className="modal-inner">
 					{closable && (
 						<SideHeader>
-							<IoIosArrowBack className="modal-close" size="20px" onClick={close} />
+							<IoIosArrowBack 
+              className="modal-close" 
+              size="20px" 
+              onClick={close} 
+              />
 							<h3>지역목록</h3>
-							<HiOutlinePlus className="add-list" size="20px" onClick={onClickLocationPlus} /> 
+							<HiOutlinePlus 
+              className="add-list" 
+              size="20px" 
+              onClick={onClickLocationPlus} 
+              /> 
 						</SideHeader>
 					)}
-          <SearchBar show={search}/>
-					<Location />
+          <SearchBar show={search} hide={onClickLocationCancel}/>
+					<CurrentLocation />
 				</ModalInner>
 			</ModalWrapper>
 		</div>
@@ -101,14 +110,14 @@ const ModalWrapper = styled.div`
 
 const ModalInner = styled.div`
 	box-sizing: border-box;
-	position: relative;
+	position: absolute;
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 	background-color: #fff;
 	width: 70%;
 	height: 100%;
 	max-width: 480px;
 	top: 50%;
-	left: 30%;
+	right: 0;
 	transform: translateY(-50%);
 	padding: 10px 10px;
 `;
