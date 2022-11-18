@@ -36,7 +36,7 @@ const HeaderContainer = styled.header`
 
 	.iconBox {
 		.icon {
-			padding: 10px;
+			padding: 10px 15px;
 			font-size: 25px;
 			cursor: pointer;
 
