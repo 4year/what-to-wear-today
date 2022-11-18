@@ -6,13 +6,9 @@ import Location from './Location';
 import SideHeader from './SideHeader';
 import SearchBar from '../addLocation/SearchBar';
 import CurrentLocation from './CurrentLocation';
-import { IoIosArrowBack } from 'react-icons/io';
-import { HiOutlinePlus } from 'react-icons/hi';
 
 
-
-
-const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
+const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) => {
   const [search, setSearch] = useState(false);
   
   const onClickLocationPlus = () => {
@@ -27,12 +23,14 @@ const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
 
   const onMaskClick = (e) => {
 		if (e.target === e.currentTarget) {
-			onClose(e);
+			modalOnClose(e);
 		}
 	};
+
 	const close = (e) => {
-		if (onClose) {
-			onClose(e);
+		if (modalOnClose) {
+			modalOnClose(e);
+     
 		}
 	};
 	return (
@@ -46,18 +44,7 @@ const SideBar = ({ className, visible, onClose, maskClosable, closable }) => {
 			>
 				<ModalInner tabIndex="0" className="modal-inner">
 					{closable && (
-						<SideHeader>
-							<IoIosArrowBack 
-              className="modal-close" 
-              size="20px" 
-              onClick={close} 
-              />
-							<h3>지역목록</h3>
-							<HiOutlinePlus 
-              className="add-list" 
-              size="20px" 
-              onClick={onClickLocationPlus} 
-              /> 
+						<SideHeader close={close} onClickLocationPlus={onClickLocationPlus}>							 
 						</SideHeader>
 					)}
           <SearchBar show={search} hide={onClickLocationCancel}/>

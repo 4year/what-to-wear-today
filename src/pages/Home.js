@@ -23,7 +23,7 @@ const Home = ({ weather }) => {
 					visible={modalVisible}
 					closable={true}
 					maskClosable={true}
-					onClose={closeModal}
+					modalOnClose={closeModal}
 				></SideBar>
 			)}
 		</>
