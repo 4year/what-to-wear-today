@@ -33,6 +33,7 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
      
 		}
 	};
+  
 	return (
 		<div>
 			<ModalOverlay visible={visible} />
