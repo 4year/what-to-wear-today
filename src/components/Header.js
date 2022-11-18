@@ -1,24 +1,33 @@
 // main header
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { IoShareOutline } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
-import { IoIosArrowBack } from 'react-icons/io';
-import { HiOutlinePlus } from 'react-icons/hi';
-import SideBar from './sideBar/SideBar';
-import SideHeader from './sideBar/SideHeader';
-import Location from './sideBar/Location';
-import LocationList from './sideBar/LocationList';
+
+const Header = ({ openModal, location }) => {
+	return (
+		<HeaderContainer>
+			<span>{location}</span>
+			<div className="iconBox">
+				<IoShareOutline className="icon" />
+				<BiMenuAltRight className="icon" onClick={openModal} />
+			</div>
+		</HeaderContainer>
+	);
+};
+
 
 const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px;
+	width: 100%;
+	height: 7%;
+	border-bottom: 1px solid #00000021;
 
 	span {
 		font-size: 20px;
-		padding-left: 10px;
+		padding: 0 20px;
 	}
 
 	.iconBox {
@@ -34,7 +43,8 @@ const HeaderContainer = styled.header`
 	}
 `;
 
-const Header = ({ setModalVisible, location, closable, onClose }) => {
+
+const Header = ({ setModalVisible, location }) => {
 	const openModal = () => {
 		setModalVisible(true);
 	};
@@ -45,15 +55,7 @@ const Header = ({ setModalVisible, location, closable, onClose }) => {
 			<div className="iconBox">
 				<IoShareOutline className="icon" />
 				<BiMenuAltRight className="icon" onClick={openModal} />
-			</div>
-			{/* {modalVisible && 
-      <SideBar 
-        visible={modalVisible} 
-        closable={true} 
-        maskClosable={true} 
-        onClose={closeModal}>        
-      </SideBar>}
-			 */}
+			</div>		
 		</HeaderContainer>
 	);
 };

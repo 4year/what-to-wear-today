@@ -168,4 +168,27 @@ const WeeklyWeather = () => {
   );
 };
 
+const Container = styled.div`
+	height: 55%;
+	width: 95%;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 20px;
+	font-size: 1rem;
+`;
+
+const WeeklyWeatherTable = styled.table`
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	text-align: center;
+
+	th {
+		color: white;
+	}
+
+	td {
+		font-weight: 600;
+	}
+`;
+
 export default WeeklyWeather;

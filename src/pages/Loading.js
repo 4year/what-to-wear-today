@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const loadingImg = process.env.PUBLIC_URL + '/images/loading.gif';
 
-const LoadgingContainer = styled.div`
+const LoadingContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-content: center;
@@ -13,12 +13,12 @@ const LoadgingContainer = styled.div`
 	height: 100%;
 `;
 
-const Loadging = () => {
+const Loading = () => {
 	return (
-		<LoadgingContainer>
+		<LoadingContainer>
 			<img src={loadingImg} alt="loading" />
-		</LoadgingContainer>
+		</LoadingContainer>
 	);
 };
 
-export default Loadging;
+export default Loading;
