@@ -42,10 +42,10 @@ const Home = ({ weather }) => {
 			>
 				<Dresses temperature={Math.round(weather.main.temp)} />
 				<WeatherContainer weather={weather} dragUp={dragUp} />
-				{modalVisible && (
-					<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
-				)}
 			</main>
+			{modalVisible && (
+				<SideBar visible={modalVisible} maskClosable={true} onClose={closeModal} />
+			)}
 		</HomeContainer>
 	);
 };
