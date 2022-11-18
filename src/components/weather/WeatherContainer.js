@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
 
-const WeatherContainer = ({ weather, scrollUp }) => {
+const WeatherContainer = ({ weather, dragUp }) => {
 	const dateBuilder = (d) => {
 		const months = [
 			'January',
@@ -48,24 +48,18 @@ const WeatherContainer = ({ weather, scrollUp }) => {
 	return (
 		<Container
 			className={
-				scrollUp ? (scrollUp < 0 && scrollUp > -100 ? 'scrollUp' : 'scrollEnd') : ''
+				dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
 			}
 			background={background}
-			scrollY={scrollUp}
+			scrollY={dragUp}
 		>
 			<WaveContianer
 				className={
-					scrollUp
-						? scrollUp < 0 && scrollUp > -100
-							? 'scrollUp'
-							: 'scrollEnd'
-						: ''
+					dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
 				}
 			/>
 			<CurrentWeather
-				className={
-					scrollUp ? (scrollUp < 0 && scrollUp > -100 ? '' : 'scrollEnd') : ''
-				}
+				className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}
 			>
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
@@ -102,7 +96,7 @@ const waveHeight = keyframes`
 	}
 `;
 
-const scrollUpTop = keyframes`
+const dragUpTop = keyframes`
 	0% {
 		top: 370px;
 	}
@@ -111,7 +105,7 @@ const scrollUpTop = keyframes`
 	}
 `;
 
-const scrollUpHeight = keyframes`
+const dragUpHeight = keyframes`
 	0% {
 		height: 90%;
 		margin-top: 0;
@@ -130,7 +124,7 @@ const Container = styled.div`
 	font-weight: 600;
 	background-color: ${(props) => props.background};
 
-	&.scrollUp {
+	&.dragUp {
 		position: absolute;
 		display: flex;
 		flex-direction: column;
@@ -140,13 +134,13 @@ const Container = styled.div`
 		transition: transform 300ms linner;
 	}
 
-	&.scrollEnd {
+	&.dragEnd {
 		position: absolute;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
-		animation: ${scrollUpTop} 2.5s ease-out forwards;
+		animation: ${dragUpTop} 2.5s ease-out forwards;
 	}
 `;
 
@@ -156,11 +150,11 @@ const WaveContianer = styled.div`
 	background: url(${process.env.PUBLIC_URL + './images/wave.png'});
 	background-size: 350px 100%;
 
-	&.scrollUp {
+	&.dragUp {
 		animation: ${wave} 1s linear infinite;
 	}
 
-	&.scrollEnd {
+	&.dragEnd {
 		animation: ${waveHeight} 3s linear forwards;
 	}
 `;
@@ -172,8 +166,8 @@ const CurrentWeather = styled.div`
 	justify-content: center;
 	height: 90%;
 
-	&.scrollEnd {
-		animation: ${scrollUpHeight} 3s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+	&.dragEnd {
+		animation: ${dragUpHeight} 3s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
 	}
 
 	.weather {
