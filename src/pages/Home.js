@@ -43,7 +43,7 @@ const Home = ({ weather }) => {
 				<Dresses temperature={Math.round(weather.main.temp)} />
 				<WeatherContainer weather={weather} dragUp={dragUp} />
 			</main>
-			{modalVisible && <SideBar visible={modalVisible} onClose={closeModal} />}
+			{modalVisible && <SideBar onClose={closeModal} />}
 		</HomeContainer>
 	);
 };
