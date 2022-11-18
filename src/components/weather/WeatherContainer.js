@@ -1,30 +1,26 @@
 // weather container
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
-import { keyframes } from 'styled-components';
 
-const waveImage = process.env.PUBLIC_URL + './images/wave.svg';
-
-const WeatherContainer = ({ weather }) => {
-  const dateBuilder = (d) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-
+const WeatherContainer = ({ weather, dragUp }) => {
+	const dateBuilder = (d) => {
+		const months = [
+			'January',
+			'February',
+			'March',
+			'April',
+			'May',
+			'June',
+			'July',
+			'August',
+			'September',
+			'October',
+			'November',
+			'December',
+		];
+    
 		const week = [
 			'Sunday',
 			'Monday',
@@ -43,28 +39,28 @@ const WeatherContainer = ({ weather }) => {
 		return `${date} ${month} ${year} ${dayOfWeek}`;
 	};
 
+	// 배경 색
 	const temperature = Math.round(weather.main.temp);
 	const background = WeatherData.find((data) => {
 		return data.temp.indexOf(temperature) !== -1 && data.background;
 	});
 
 	return (
-		<Container background={background}>
-			<div className="wave">
-				<svg
-					data-name="Layer 1"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 1200 120"
-					preserveAspectRatio="none"
-				>
-					<path
-						d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-						fill="#FFFFFF"
-						fillOpacity="1"
-					></path>
-				</svg>
-			</div>
-			<CurrentWeather>
+		<Container
+			className={
+				dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
+			}
+			background={background}
+			scrollY={dragUp}
+		>
+			<WaveContianer
+				className={
+					dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
+				}
+			/>
+			<CurrentWeather
+				className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}
+			>
 				<div className="date">{dateBuilder(new Date())}</div>
 				<div className="weather">
 					{temperature}°C
@@ -85,40 +81,94 @@ const wave = keyframes`
 		background-position-x: 0;
 	}
 	100%{
-		background-position-x: 500px;
+		background-position-x: 350px;
+	}
+	`;
+
+const waveHeight = keyframes`
+	0%{
+		background-position-x: 0;
+		height: 10%;
+	}
+	100%{
+		background-position-x: 350px;
+		height: 0;
+	}
+`;
+
+const dragUpTop = keyframes`
+	0% {
+		top: 370px;
+	}
+	100% {
+		top: 0;
+	}
+`;
+
+const dragUpHeight = keyframes`
+	0% {
+		height: 90%;
+		margin-top: 0;
+	}
+	100% {
+		height: 40%;
+		margin-top: 3rem;
 	}
 `;
 
 const Container = styled.div`
-	height: 43%;
 	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	height: 47%;
 	font-size: 20px;
 	line-height: 50px;
 	font-weight: 600;
 	background-color: ${(props) => props.background};
 
-	/* 
-	  position: absolute;
-    top: 0;
-    height: 100%;
-	*/
+	&.dragUp {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		transform: translateY(${(props) => props.scrollY}px);
+		transition: transform 300ms linner;
+	}
 
-	.wave {
-		/* display: none; */
-		width: 100%;
-		height: 10%;
+	&.dragEnd {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		animation: ${dragUpTop} 2.5s ease-out forwards;
+	}
+`;
+
+const WaveContianer = styled.div`
+	width: 100%;
+	height: 10%;
+	background: url(${process.env.PUBLIC_URL + './images/wave.png'});
+	background-size: 350px 100%;
+
+	&.dragUp {
+		animation: ${wave} 1s linear infinite;
+	}
+
+	&.dragEnd {
+		animation: ${waveHeight} 3s linear forwards;
 	}
 `;
 
 const CurrentWeather = styled.div`
-	padding: 10% 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	height: 90%;
+
+	&.dragEnd {
+		animation: ${dragUpHeight} 3s cubic-bezier(0.17, 0.81, 0.49, 0.97) forwards;
+	}
 
 	.weather {
 		display: flex;

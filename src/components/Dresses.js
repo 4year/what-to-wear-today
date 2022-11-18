@@ -1,10 +1,8 @@
 // 기온별 의상 이미지 슬라이더, text
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../WeatherData';
-import { inrange } from './../utils/drag/index';
-import registerDragEvent from './../utils/drag/registaerDragEvent';
-import { useEffect } from 'react';
+import { inrange, registerDragEvent } from './../utils/drag';
 
 const Dresses = ({ temperature }) => {
 	// 현재 기온에 맞는 옷 정보 data
@@ -29,7 +27,13 @@ const Dresses = ({ temperature }) => {
 
 	// 슬라이드 width
 	useEffect(() => {
-		setSlideWidth(containerRef.current.getBoundingClientRect().width);
+		const slideWidthHandler = () => {
+			setSlideWidth(containerRef.current.offsetWidth);
+		};
+		window.addEventListener('resize', slideWidthHandler);
+		return () => {
+			window.removeEventListener('resize', slideWidthHandler);
+		};
 	}, []);
 
 	return (
@@ -94,12 +98,8 @@ const Dresses = ({ temperature }) => {
 };
 
 const DressContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
 	width: 100%;
-	height: 50%;
+	height: 53%;
 
 	p {
 		font-size: 1.2rem;
@@ -129,10 +129,6 @@ const SlideImage = styled.img`
 `;
 
 const Bullets = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	span {
 		font-size: 15px;
 		margin: 0 5px;

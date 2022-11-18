@@ -18,12 +18,16 @@ const Header = ({ openModal, location }) => {
 
 
 const HeaderContainer = styled.header`
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: 7%;
+	height: 3rem;
 	border-bottom: 1px solid #00000021;
+	z-index: 999;
 
 	span {
 		font-size: 20px;

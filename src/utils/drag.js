@@ -1,9 +1,17 @@
-// 터치스크린 여부 확인
-const isTouchScreen =
-	typeof window !== 'undefined' &&
-	window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+// 드래그 범위 지정
+export const inrange = (move, min, max) => {
+	if (move < min) return min;
+	if (move > max) return max;
+	return move;
+};
 
-const registerDragEvent = ({ onDragStart, onDragEnd }) => {
+// 드래드 이벤트
+export const registerDragEvent = ({ onDragStart, onDragEnd }) => {
+	// 터치스크린 여부 확인
+	const isTouchScreen =
+		typeof window !== 'undefined' &&
+		window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
 	if (isTouchScreen) {
 		return {
 			// 터치 이벤트
@@ -55,4 +63,3 @@ const registerDragEvent = ({ onDragStart, onDragEnd }) => {
 		},
 	};
 };
-export default registerDragEvent;

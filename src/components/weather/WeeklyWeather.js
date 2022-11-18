@@ -169,8 +169,9 @@ const WeeklyWeather = () => {
 };
 
 const Container = styled.div`
-	height: 55%;
+	height: 60%;
 	width: 95%;
+	margin: 10px;
 	background-color: rgba(0, 0, 0, 0.3);
 	border-radius: 20px;
 	font-size: 1rem;
