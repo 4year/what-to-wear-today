@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { API_KEY } from './config';
-import Loadging from './pages/Loadging';
+import Loading from './pages/Loading';
 import Home from './pages/Home';
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
 
 	// 앱 마운트 시,
 	useEffect(() => {
-		getCurrentLocation();
+
 		return () => {
 			console.log('app unmounted');
 		};
@@ -42,7 +42,7 @@ const App = () => {
 
 	return (
 		<AppContainer className="App">
-			{loading ? <Loadging /> : <Home weather={result} />}
+			{loading ? <Loading /> : <Home weather={result} />}
 		</AppContainer>
 	);
 };
