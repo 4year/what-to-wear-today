@@ -3,25 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
+import { keyframes } from 'styled-components';
 
-const Container = styled.div`
-	width: 393px;
-	height: 345px;
-	margin: 0 auto;
-	font-size: 20px;
-	line-height: 50px;
-	font-weight: 600;
-	background-color: ${(props) => props.background};
-
-	.temp {
-		color: navy;
-		font-weight: bold;
-	}
-`;
-
-const CurrentWeather = styled.div`
-	height: 100%;
-`;
+const waveImage = process.env.PUBLIC_URL + './images/wave.svg';
 
 const WeatherContainer = ({ weather }) => {
 	const dateBuilder = (d) => {
@@ -40,14 +24,6 @@ const WeatherContainer = ({ weather }) => {
 			'December',
 		];
 
-		let date = d.getDate();
-		let month = months[d.getMonth()];
-		let year = d.getFullYear();
-
-		return `${date} ${month} ${year}`;
-	};
-
-	const Day = () => {
 		const week = [
 			'Sunday',
 			'Monday',
@@ -57,12 +33,16 @@ const WeatherContainer = ({ weather }) => {
 			'Friday',
 			'Saturday',
 		];
-		let now = new Date();
-		let dayOfWeek = week[now.getDay()];
-		return `${dayOfWeek}`;
+
+		let date = d.getDate();
+		let month = months[d.getMonth()];
+		let year = d.getFullYear();
+		let dayOfWeek = week[d.getDay()];
+
+		return `${date} ${month} ${year} ${dayOfWeek}`;
 	};
 
-	const temperature = Math.round(weather.main.temp - 273.15);
+	const temperature = Math.round(weather.main.temp);
 	const background = WeatherData.find((data) => {
 		return data.temp.indexOf(temperature) !== -1 && data.background;
 	});
@@ -82,25 +62,69 @@ const WeatherContainer = ({ weather }) => {
 						fillOpacity="1"
 					></path>
 				</svg>
-				<CurrentWeather>
-					<div className="location-box">
-						<div className="location">{weather.name}</div>
-						<div className="date">{dateBuilder(new Date())}</div>
-					</div>
+			</div>
+			<CurrentWeather>
+				<div className="date">{dateBuilder(new Date())}</div>
+				<div className="weather">
+					{temperature}°C
 					<img
 						src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
 						alt="weather icon"
 					/>
-					<p>{weather.weather[0].description}</p>
-					<div className="weather-box">
-						<div className="temp">{temperature}°C</div>
-						<div className="weather">{Day(new Date())}</div>
-					</div>
-				</CurrentWeather>
-			</div>
+					{weather.weather[0].description}
+				</div>
+			</CurrentWeather>
 			<WeeklyWeather />
 		</Container>
 	);
 };
+
+const wave = keyframes`
+	0%{
+		background-position-x: 0;
+	}
+	100%{
+		background-position-x: 500px;
+	}
+`;
+
+const Container = styled.div`
+	height: 43%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 20px;
+	line-height: 50px;
+	font-weight: 600;
+	background-color: ${(props) => props.background};
+
+	/* 
+	  position: absolute;
+    top: 0;
+    height: 100%;
+	*/
+
+	.wave {
+		/* display: none; */
+		width: 100%;
+		height: 10%;
+	}
+`;
+
+const CurrentWeather = styled.div`
+	padding: 10% 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.weather {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+`;
 
 export default WeatherContainer;

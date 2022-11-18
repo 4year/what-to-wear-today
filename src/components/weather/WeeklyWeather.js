@@ -2,43 +2,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-	max-height: 852px;
-	background-color: rgba(0, 0, 0, 0.3);
-	border-radius: 20px;
-	margin: 0 auto;
-	margin-top: 20px;
-	font-size: 14px;
-	padding: 15px 5px;
-`;
-
-const TableTitle = styled.table`
-	border-spacing: 5px;
-	margin: 0 auto;
-	/* text-align: center; */
-
-	th {
-		/* border: 1px solid black; */
-		border-spacing: 0 20px;
-		height: 20px;
-		padding: 10px 20px;
-		color: white;
-		text-align: left;
-	}
-
-	td {
-		/* border: 1px solid black; */
-		border-spacing: 0 20px;
-		height: 20px;
-		padding: 10px 20px;
-		font-weight: 600;
-	}
-`;
-
 const WeeklyWeather = () => {
 	return (
 		<Container>
-			<TableTitle>
+			<WeeklyWeatherTable>
 				<thead>
 					<tr>
 						<th style={{ visibility: 'hidden' }}></th>
@@ -111,9 +78,32 @@ const WeeklyWeather = () => {
 						<td></td>
 					</tr>
 				</tbody>
-			</TableTitle>
+			</WeeklyWeatherTable>
 		</Container>
 	);
 };
+
+const Container = styled.div`
+	height: 55%;
+	width: 95%;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 20px;
+	font-size: 1rem;
+`;
+
+const WeeklyWeatherTable = styled.table`
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	text-align: center;
+
+	th {
+		color: white;
+	}
+
+	td {
+		font-weight: 600;
+	}
+`;
 
 export default WeeklyWeather;
