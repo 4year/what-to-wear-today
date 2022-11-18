@@ -8,13 +8,7 @@ import SideHeader from './SideHeader';
 import SearchBar from '../addLocation/SearchBar';
 import CurrentLocation from './CurrentLocation';
 
-const SideBar = ({
-	className,
-	visible,
-	modalOnClose,
-	maskClosable,
-	closable,
-}) => {
+const SideBar = ({ visible, modalOnClose, maskClosable }) => {
 	const [search, setSearch] = useState(false);
 
 	const onClickLocationPlus = () => {
@@ -40,7 +34,7 @@ const SideBar = ({
 	};
 
 	return (
-		<div>
+		<SidebarContainer>
 			<ModalOverlay visible={visible} />
 			<ModalWrapper
 				onClick={maskClosable ? onMaskClick : null}
@@ -48,17 +42,12 @@ const SideBar = ({
 				visible={visible}
 			>
 				<ModalInner tabIndex="0" className="modal-inner">
-					{closable && (
-						<SideHeader
-							close={close}
-							onClickLocationPlus={onClickLocationPlus}
-						></SideHeader>
-					)}
+					<SideHeader close={close} onClickLocationPlus={onClickLocationPlus} />
 					<SearchBar show={search} hide={onClickLocationCancel} />
 					<CurrentLocation />
 				</ModalInner>
 			</ModalWrapper>
-		</div>
+		</SidebarContainer>
 	);
 };
 
@@ -69,33 +58,29 @@ Location.propTypes = {
 SearchBar.propTypes = {
 	show: PropTypes.bool,
 };
-const ModalOverlay = styled.div`
-	max-width: 393px;
-	height: 852px;
-	margin: 0 auto;
-	/* text-align: center; */
-	box-sizing: border-box;
-	display: ${(props) => (props.visible ? 'block' : 'none')};
-	position: fixed;
+
+const SidebarContainer = styled.div`
+	position: absolute;
 	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+`;
+
+const ModalOverlay = styled.div`
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 999;
 `;
 
 const ModalWrapper = styled.div`
-	max-width: 393px;
-	height: 852px;
+	width: 100%;
+	height: 100%;
 	margin: 0 auto;
 	box-sizing: border-box;
-	display: ${(props) => (props.visible ? 'block' : 'none')};
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
 	z-index: 1000;
 	overflow: auto;
 	outline: 0;
