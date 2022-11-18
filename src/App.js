@@ -34,7 +34,7 @@ const App = () => {
 
 	// 앱 마운트 시,
 	useEffect(() => {
-
+		getCurrentLocation();
 		return () => {
 			console.log('app unmounted');
 		};

@@ -1,194 +1,167 @@
 // 이번주 날씨 Container
-import React from "react";
-import styled from "styled-components";
-import { CiTempHigh } from "react-icons/ci";
-import { TiWeatherSunny } from "react-icons/ti";
-import { TiWeatherShower } from "react-icons/ti";
-
-const Container = styled.div`
-  max-height: 852px;
-  margin: 0 auto;
-  margin-top: 10px;
-  font-size: 14px;
-  padding: 15px 5px;
-
-  /* hr {
-    width: 90%;
-    color: #dde3e6;
-  } */
-`;
-
-const Wrap = styled.div`
-  display: flex;
-  overflow: hidden;
-`;
-
-const WrapList = styled.div`
-  margin: 5px 20px;
-  line-height: 30px;
-
-  div {
-    width: 2.2rem;
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-
-  h3 {
-    font-size: 14px;
-    font-weight: bold;
-    /* padding-right: 200px; */
-  }
-`;
+import React from 'react';
+import styled from 'styled-components';
+import { TbTemperature } from 'react-icons/tb';
+import { TiWeatherSunny } from 'react-icons/ti';
+import { TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = () => {
-  return (
-    <>
-      {/* 내일 */}
-      <Container>
-        <Title>
-          <h3>내일</h3>
-          <div>
-            <CiTempHigh size="20px" />
-            <TiWeatherSunny size="20px" />
-            <TiWeatherShower size="20px" />
-          </div>
-        </Title>
-        <Wrap>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>0시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>3시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>6시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>9시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>12시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>15시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>18시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>21시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>24시</div>
-          </WrapList>
-        </Wrap>
-      </Container>
-      {/* 모레 */}
-      <Container>
-        <Title>
-          <h3>모레</h3>
-          <div>
-            <CiTempHigh size="20px" />
-            <TiWeatherSunny size="20px" />
-            <TiWeatherShower size="20px" />
-          </div>
-        </Title>{" "}
-        <Wrap>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>0시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>3시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>6시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>9시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>12시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>15시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>18시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>21시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>24시</div>
-          </WrapList>
-        </Wrap>
-      </Container>
-    </>
-  );
+	return (
+		<>
+			{/* 내일 */}
+			<Container>
+				<Title>
+					<h3>내일</h3>
+					<div>
+						<TbTemperature size="20px" />
+						<TiWeatherSunny size="20px" />
+						<TiWeatherShower size="20px" />
+					</div>
+				</Title>
+				<Wrap>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>0시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>3시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>6시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>9시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>12시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>15시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>18시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>21시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>24시</div>
+					</WrapList>
+				</Wrap>
+			</Container>
+			{/* 모레 */}
+			<Container>
+				<Title>
+					<h3>모레</h3>
+					<div>
+						<TbTemperature size="20px" />
+						<TiWeatherSunny size="20px" />
+						<TiWeatherShower size="20px" />
+					</div>
+				</Title>{' '}
+				<Wrap>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>0시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>3시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>6시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>9시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>12시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>15시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>18시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>21시</div>
+					</WrapList>
+					<WrapList>
+						<div>{}°C</div>
+						<div>img</div> {/* <img src="" alt="" /> */}
+						<div>24시</div>
+					</WrapList>
+				</Wrap>
+			</Container>
+		</>
+	);
 };
 
 const Container = styled.div`
 	height: 60%;
-	width: 95%;
+	width: 85%;
 	margin: 10px;
-	background-color: rgba(0, 0, 0, 0.3);
+	padding: 15px 5px;
+	background-color: rgb(255 255 255 / 20%);
 	border-radius: 20px;
-	font-size: 1rem;
+	font-size: 14px;
 `;
 
-const WeeklyWeatherTable = styled.table`
-	width: 100%;
-	height: 100%;
-	padding: 10px;
-	text-align: center;
+const Wrap = styled.div`
+	display: flex;
+	overflow: hidden;
+`;
 
-	th {
-		color: white;
+const WrapList = styled.div`
+	margin: 5px 20px;
+	line-height: 30px;
+
+	div {
+		width: 2.2rem;
 	}
+`;
 
-	td {
-		font-weight: 600;
+const Title = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+
+	h3 {
+		font-size: 14px;
+		font-weight: bold;
+		/* padding-right: 200px; */
 	}
 `;
 

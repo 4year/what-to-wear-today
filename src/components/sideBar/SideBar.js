@@ -1,5 +1,5 @@
-
-import React from 'react';
+// 사이드 바
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Location from './Location';
@@ -8,35 +8,36 @@ import SideHeader from './SideHeader';
 import SearchBar from '../addLocation/SearchBar';
 import CurrentLocation from './CurrentLocation';
 
+const SideBar = ({
+	className,
+	visible,
+	modalOnClose,
+	maskClosable,
+	closable,
+}) => {
+	const [search, setSearch] = useState(false);
 
-const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) => {
-  const [search, setSearch] = useState(false);
-  
-  const onClickLocationPlus = () => {
-    setSearch(true);
-    console.log(search);
-  }
+	const onClickLocationPlus = () => {
+		setSearch(true);
+		console.log(search);
+	};
 
-  const onClickLocationCancel = () => {
-    setSearch(false);
-    console.log(search);
-  } 
+	const onClickLocationCancel = () => {
+		setSearch(false);
+		console.log(search);
+	};
 
-  const onMaskClick = (e) => {
-
+	const onMaskClick = (e) => {
 		if (e.target === e.currentTarget) {
 			modalOnClose(e);
 		}
 	};
 
-
 	const close = (e) => {
 		if (modalOnClose) {
 			modalOnClose(e);
-     
 		}
 	};
-  
 
 	return (
 		<div>
@@ -47,14 +48,14 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
 				visible={visible}
 			>
 				<ModalInner tabIndex="0" className="modal-inner">
-
 					{closable && (
-						<SideHeader close={close} onClickLocationPlus={onClickLocationPlus}>							 
-						</SideHeader>
+						<SideHeader
+							close={close}
+							onClickLocationPlus={onClickLocationPlus}
+						></SideHeader>
 					)}
-          <SearchBar show={search} hide={onClickLocationCancel}/>
+					<SearchBar show={search} hide={onClickLocationCancel} />
 					<CurrentLocation />
-
 				</ModalInner>
 			</ModalWrapper>
 		</div>
@@ -62,30 +63,29 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
 };
 
 Location.propTypes = {
-  visible: PropTypes.bool,
+	visible: PropTypes.bool,
 };
 
 SearchBar.propTypes = {
-  show: PropTypes.bool,
-}
+	show: PropTypes.bool,
+};
 const ModalOverlay = styled.div`
-  max-width: 393px;
-  height: 852px;
-  margin: 0 auto;
-  /* text-align: center; */
-  box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
+	max-width: 393px;
+	height: 852px;
+	margin: 0 auto;
+	/* text-align: center; */
+	box-sizing: border-box;
+	display: ${(props) => (props.visible ? 'block' : 'none')};
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 999;
 `;
 
 const ModalWrapper = styled.div`
-
 	max-width: 393px;
 	height: 852px;
 	margin: 0 auto;
