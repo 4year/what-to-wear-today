@@ -5,12 +5,38 @@ import styled from 'styled-components';
 import Location from './Location';
 import SideHeader from './SideHeader';
 
-const SideBar = ({ visible, onClose, maskClosable }) => {
-	const onMaskClick = (e) => {
+import SearchBar from '../addLocation/SearchBar';
+import CurrentLocation from './CurrentLocation';
+
+
+const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) => {
+  const [search, setSearch] = useState(false);
+  
+  const onClickLocationPlus = () => {
+    setSearch(true);
+    console.log(search);
+  }
+
+  const onClickLocationCancel = () => {
+    setSearch(false);
+    console.log(search);
+  } 
+
+  const onMaskClick = (e) => {
+
 		if (e.target === e.currentTarget) {
-			onClose(e);
+			modalOnClose(e);
 		}
 	};
+
+
+	const close = (e) => {
+		if (modalOnClose) {
+			modalOnClose(e);
+     
+		}
+	};
+  
 
 	return (
 		<div>
@@ -21,8 +47,14 @@ const SideBar = ({ visible, onClose, maskClosable }) => {
 				visible={visible}
 			>
 				<ModalInner tabIndex="0" className="modal-inner">
-					<SideHeader onClose={onClose} />
-					<Location />
+
+					{closable && (
+						<SideHeader close={close} onClickLocationPlus={onClickLocationPlus}>							 
+						</SideHeader>
+					)}
+          <SearchBar show={search} hide={onClickLocationCancel}/>
+					<CurrentLocation />
+
 				</ModalInner>
 			</ModalWrapper>
 		</div>
@@ -33,6 +65,9 @@ Location.propTypes = {
 	visible: PropTypes.bool,
 };
 
+SearchBar.propTypes = {
+  show: PropTypes.bool,
+}
 const ModalOverlay = styled.div`
 	max-width: 393px;
 	height: 852px;
@@ -67,14 +102,14 @@ const ModalWrapper = styled.div`
 
 const ModalInner = styled.div`
 	box-sizing: border-box;
-	position: relative;
+	position: absolute;
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 	background-color: #fff;
 	width: 70%;
 	height: 100%;
 	max-width: 480px;
 	top: 50%;
-	left: 30%;
+	right: 0;
 	transform: translateY(-50%);
 	padding: 10px 10px;
 `;
