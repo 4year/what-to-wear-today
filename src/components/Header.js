@@ -16,7 +16,6 @@ const Header = ({ openModal, location }) => {
 	);
 };
 
-
 const HeaderContainer = styled.header`
 	position: absolute;
 	top: 0;
@@ -46,22 +45,5 @@ const HeaderContainer = styled.header`
 		}
 	}
 `;
-
-
-const Header = ({ setModalVisible, location }) => {
-	const openModal = () => {
-		setModalVisible(true);
-	};
-
-	return (
-		<HeaderContainer>
-			<span>{location}</span>
-			<div className="iconBox">
-				<IoShareOutline className="icon" />
-				<BiMenuAltRight className="icon" onClick={openModal} />
-			</div>		
-		</HeaderContainer>
-	);
-};
 
 export default Header;
