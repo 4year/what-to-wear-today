@@ -34,13 +34,14 @@ const WrapList = styled.div`
 
 const Title = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 
   h3 {
     font-size: 14px;
     font-weight: bold;
-    padding-right: 200px;
+    /* padding-right: 200px; */
   }
 `;
 
@@ -57,7 +58,6 @@ const WeeklyWeather = () => {
             <TiWeatherShower size="20px" />
           </div>
         </Title>
-        {/* <hr /> */}
         <Wrap>
           <WrapList>
             <div>{}°C</div>

@@ -17,7 +17,6 @@ const Home = ({ weather }) => {
   return (
     <>
       <Header location={weather.name} setModalVisible={setModalVisible} />
-      <WeeklyWeather />
       <Dresses temperature={Math.round(weather.main.temp - 273.15)} />
       <WeatherContainer weather={weather} />
       {modalVisible && (
