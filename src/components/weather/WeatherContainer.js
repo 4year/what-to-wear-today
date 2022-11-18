@@ -8,21 +8,22 @@ import { keyframes } from 'styled-components';
 const waveImage = process.env.PUBLIC_URL + './images/wave.svg';
 
 const WeatherContainer = ({ weather }) => {
-	const dateBuilder = (d) => {
-		const months = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
+  const dateBuilder = (d) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
 
 		const week = [
 			'Sunday',

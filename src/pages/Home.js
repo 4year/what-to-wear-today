@@ -1,13 +1,14 @@
 // Home
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Header from './../components/Header';
-import Dresses from '../components/Dresses';
-import WeatherContainer from '../components/weather/WeatherContainer';
-import SideBar from '../components/sideBar/SideBar';
+import React, { useState } from "react";
+import Header from "./../components/Header";
+import Dresses from "../components/Dresses";
+import WeatherContainer from "../components/weather/WeatherContainer";
+import SideBar from "../components/sideBar/SideBar";
+import WeeklyWeather from "../components/weather/WeeklyWeather";
+
 
 const Home = ({ weather }) => {
-	const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
 	const openModal = () => {
 		setModalVisible(true);

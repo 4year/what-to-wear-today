@@ -1,4 +1,4 @@
-// overlay 및 container
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -62,29 +62,30 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
 };
 
 Location.propTypes = {
-	visible: PropTypes.bool,
+  visible: PropTypes.bool,
 };
 
 SearchBar.propTypes = {
   show: PropTypes.bool,
 }
 const ModalOverlay = styled.div`
-	max-width: 393px;
-	height: 852px;
-	margin: 0 auto;
-	/* text-align: center; */
-	box-sizing: border-box;
-	display: ${(props) => (props.visible ? 'block' : 'none')};
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	z-index: 999;
+  max-width: 393px;
+  height: 852px;
+  margin: 0 auto;
+  /* text-align: center; */
+  box-sizing: border-box;
+  display: ${(props) => (props.visible ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
 `;
 
 const ModalWrapper = styled.div`
+
 	max-width: 393px;
 	height: 852px;
 	margin: 0 auto;

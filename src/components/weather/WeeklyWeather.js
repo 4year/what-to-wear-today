@@ -1,86 +1,171 @@
 // 이번주 날씨 Container
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { CiTempHigh } from "react-icons/ci";
+import { TiWeatherSunny } from "react-icons/ti";
+import { TiWeatherShower } from "react-icons/ti";
+
+const Container = styled.div`
+  max-height: 852px;
+  margin: 0 auto;
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 15px 5px;
+
+  /* hr {
+    width: 90%;
+    color: #dde3e6;
+  } */
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  overflow: hidden;
+`;
+
+const WrapList = styled.div`
+  margin: 5px 20px;
+  line-height: 30px;
+
+  div {
+    width: 2.2rem;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+    /* padding-right: 200px; */
+  }
+`;
 
 const WeeklyWeather = () => {
-	return (
-		<Container>
-			<WeeklyWeatherTable>
-				<thead>
-					<tr>
-						<th style={{ visibility: 'hidden' }}></th>
-						<th>오전</th>
-						<th>오후</th>
-						<th>최저</th>
-						<th>최고</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>Mon</th>
-						<td>맑음</td>
-						<td>흐림</td>
-						<td>14°C</td>
-						<td>21°C</td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Tue</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Wed</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Thu</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Fri</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Sat</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr>
-						<th>Sun</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</WeeklyWeatherTable>
-		</Container>
-	);
+  return (
+    <>
+      {/* 내일 */}
+      <Container>
+        <Title>
+          <h3>내일</h3>
+          <div>
+            <CiTempHigh size="20px" />
+            <TiWeatherSunny size="20px" />
+            <TiWeatherShower size="20px" />
+          </div>
+        </Title>
+        <Wrap>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>0시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>3시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>6시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>9시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>12시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>15시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>18시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>21시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>24시</div>
+          </WrapList>
+        </Wrap>
+      </Container>
+      {/* 모레 */}
+      <Container>
+        <Title>
+          <h3>모레</h3>
+          <div>
+            <CiTempHigh size="20px" />
+            <TiWeatherSunny size="20px" />
+            <TiWeatherShower size="20px" />
+          </div>
+        </Title>{" "}
+        <Wrap>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>0시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>3시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>6시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>9시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>12시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>15시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>18시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>21시</div>
+          </WrapList>
+          <WrapList>
+            <div>{}°C</div>
+            <div>img</div> {/* <img src="" alt="" /> */}
+            <div>24시</div>
+          </WrapList>
+        </Wrap>
+      </Container>
+    </>
+  );
 };
 
 const Container = styled.div`
