@@ -1,5 +1,5 @@
 // < 지역목록  + 버튼
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import { IoIosArrowBack } from 'react-icons/io';
 import { HiOutlinePlus } from 'react-icons/hi';
@@ -37,5 +37,6 @@ const Header = styled.div`
     cursor: pointer;
   }
 `
+
 
 export default SideHeader;

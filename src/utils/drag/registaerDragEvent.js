@@ -8,18 +8,17 @@ const registerDragEvent = ({ onDragStart, onDragEnd }) => {
 		return {
 			// 터치 이벤트
 			onTouchStart: (touchEvent) => {
-				const initX = touchEvent.touches[0].pageX;
-				const initY = touchEvent.touches[0].pageY;
-
 				const touchMoveHandler = (moveEvent) => {
-					const moveX = moveEvent.touches[0].pageX - initX;
-					const moveY = moveEvent.touches[0].pageY - initY;
+					const moveX = moveEvent.touches[0].pageX - touchEvent.touches[0].pageX;
+					const moveY = moveEvent.touches[0].pageY - touchEvent.touches[0].pageY;
 					onDragStart(moveX, moveY);
 				};
 
 				const touchEndHandler = (moveEvent) => {
-					const moveX = moveEvent.touches[0].pageX - initX;
-					const moveY = moveEvent.touches[0].pageY - initY;
+					const moveX =
+						moveEvent.changedTouches[0].pageX - touchEvent.changedTouches[0].pageX;
+					const moveY =
+						moveEvent.changedTouches[0].pageY - touchEvent.changedTouches[0].pageY;
 					onDragEnd(moveX, moveY);
 					document.removeEventListener('touchmove', touchMoveHandler);
 				};

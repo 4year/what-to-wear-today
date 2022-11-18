@@ -1,9 +1,10 @@
 // overlay 및 container
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Location from './Location';
 import SideHeader from './SideHeader';
+
 import SearchBar from '../addLocation/SearchBar';
 import CurrentLocation from './CurrentLocation';
 
@@ -22,10 +23,12 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
   } 
 
   const onMaskClick = (e) => {
+
 		if (e.target === e.currentTarget) {
 			modalOnClose(e);
 		}
 	};
+
 
 	const close = (e) => {
 		if (modalOnClose) {
@@ -34,22 +37,24 @@ const SideBar = ({ className, visible, modalOnClose, maskClosable, closable }) =
 		}
 	};
   
+
 	return (
 		<div>
 			<ModalOverlay visible={visible} />
 			<ModalWrapper
-				className={className}
 				onClick={maskClosable ? onMaskClick : null}
 				tabIndex="-1"
 				visible={visible}
 			>
 				<ModalInner tabIndex="0" className="modal-inner">
+
 					{closable && (
 						<SideHeader close={close} onClickLocationPlus={onClickLocationPlus}>							 
 						</SideHeader>
 					)}
           <SearchBar show={search} hide={onClickLocationCancel}/>
 					<CurrentLocation />
+
 				</ModalInner>
 			</ModalWrapper>
 		</div>
@@ -82,7 +87,6 @@ const ModalOverlay = styled.div`
 const ModalWrapper = styled.div`
 	max-width: 393px;
 	height: 852px;
-	/* text-align: center; */
 	margin: 0 auto;
 	box-sizing: border-box;
 	display: ${(props) => (props.visible ? 'block' : 'none')};
@@ -110,17 +114,4 @@ const ModalInner = styled.div`
 	padding: 10px 10px;
 `;
 
-// const SideHeader = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   /* background-color: tomato; */
-//   align-items: center;
-//   margin-bottom: 20px;
-//   .back{
-//     cursor: pointer;
-//   }
-//   .add-list{
-//     cursor: pointer;
-//   }
-// `
 export default SideBar;
