@@ -1,19 +1,13 @@
 // 지역 목록 container
-import React from "react";
-import LocationList from "./LocationList";
+import React from 'react';
+import LocationList from './LocationList';
 
-
-const Location = () => { 
+const Location = () => {
   return (
-    <div>     
-      <LocationList/>
+    <div>
+      <LocationList />
     </div>
   );
 };
-
-
-
-
-
 
 export default Location;
