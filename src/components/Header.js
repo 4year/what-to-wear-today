@@ -25,6 +25,7 @@ const HeaderContainer = styled.header`
 	align-items: center;
 	width: 100%;
 	height: 3rem;
+	padding: 5px 0;
 	border-bottom: 1px solid #00000021;
 	z-index: 999;
 
@@ -35,7 +36,7 @@ const HeaderContainer = styled.header`
 
 	.iconBox {
 		.icon {
-			padding: 10px;
+			padding: 10px 15px;
 			font-size: 25px;
 			cursor: pointer;
 

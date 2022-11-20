@@ -20,7 +20,7 @@ const WeatherContainer = ({ weather, dragUp }) => {
 			'November',
 			'December',
 		];
-    
+
 		const week = [
 			'Sunday',
 			'Monday',

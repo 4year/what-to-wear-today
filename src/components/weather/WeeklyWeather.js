@@ -75,7 +75,7 @@ const WeeklyWeather = () => {
 						<TiWeatherSunny size="20px" />
 						<TiWeatherShower size="20px" />
 					</div>
-				</Title>{' '}
+				</Title>
 				<Wrap>
 					<WrapList>
 						<div>{}°C</div>
@@ -129,8 +129,8 @@ const WeeklyWeather = () => {
 };
 
 const Container = styled.div`
-	height: 60%;
-	width: 85%;
+	height: 30%;
+	width: 90%;
 	margin: 10px;
 	padding: 15px 5px;
 	background-color: rgb(255 255 255 / 20%);
