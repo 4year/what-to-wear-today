@@ -1,17 +1,12 @@
 // weather container
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { convertDate, convertTemp } from '../../utils/weather';
-import { WeatherData } from '../../WeatherData';
+import { convertDate, convertTemp, getWeatherData } from '../../utils/weather';
 import WeeklyWeather from './WeeklyWeather';
 
 const WeatherContainer = ({ weather, dragUp, weekly }) => {
   const temperature = convertTemp(weather.main.temp);
-
-  // 배경 색
-  const background = WeatherData.find(data => {
-    return data.temp.indexOf(temperature) !== -1 && data.background;
-  });
+  const background = getWeatherData(temperature).background;
 
   return (
     <Container
