@@ -2,18 +2,18 @@
 import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
+import { registerDragEvent, inrange } from '../utils/drag';
+import { convertDate, convertTemp } from '../utils/weather';
+import { API_KEY_IMG } from '../config';
 import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
-import { registerDragEvent, inrange } from '../utils/drag';
-import html2canvas from 'html2canvas';
-import { API_KEY_IMG } from '../config';
 
 const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [dragUp, setDragUp] = useState(0);
-  const [shareImg, setShareImg] = useState('');
 
   const homeRef = useRef();
 
@@ -31,34 +31,69 @@ const Home = () => {
   };
 
   // 공유하기
-  const copyDOM = async () => {
+  const onShare = async () => {
+    // DOM to Image
     await html2canvas(homeRef.current, { useCORS: true }).then(canvas => {
       const imgUrl = canvas.toDataURL('image/jpg').split(',')[1];
       uploadImgur(imgUrl);
     });
   };
 
+  // 이미지 호스팅
   const uploadImgur = async imgUrl => {
-    const form = new FormData();
-    form.append('image', imgUrl);
+    const data = new FormData();
+    data.append('image', imgUrl);
     const url = `https://api.imgbb.com/1/upload?key=${API_KEY_IMG}`;
 
     try {
       const result = await fetch(url, {
         method: 'POST',
-        body: form,
+        body: data,
       }).then(response => response.json());
-      setShareImg(result.data.url);
+      kakaoShare(result.data.url);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const kakaoShare = () => {};
+  // 카카오 공유하기
+  const kakaoShare = image => {
+    console.log(image);
+    window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: `${convertDate(WEATHER.dt)}\n현재 날씨: ${convertTemp(
+          WEATHER.main.temp
+        )}°C`,
+        description: '날씨에 따라 오늘 입을 옷을 추천',
+        imageUrl: image,
+        link: {
+          mobileWebUrl: 'http://localhost:3000',
+          webUrl: 'http://localhost:3000',
+        },
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'http://localhost:3000',
+            webUrl: 'http://localhost:3000',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'http://localhost:3000',
+            webUrl: 'http://localhost:3000',
+          },
+        },
+      ],
+    });
+  };
 
   return (
     <HomeContainer ref={homeRef}>
-      <Header location={WEATHER.name} openModal={openModal} onShare={copyDOM} />
+      <Header location={WEATHER.name} openModal={openModal} onShare={onShare} />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
