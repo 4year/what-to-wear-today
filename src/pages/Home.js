@@ -1,11 +1,9 @@
 // Home
-import React, { useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
-import html2canvas from 'html2canvas';
+import { useLocation } from 'react-router-dom';
 import { registerDragEvent, inrange } from '../utils/drag';
-import { convertDate, convertTemp } from '../utils/weather';
-import { API_KEY_IMG } from '../config';
+import { convertDate, convertTemp, getWeatherData } from '../utils/weather';
 import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
@@ -30,70 +28,33 @@ const Home = () => {
     setModalVisible(false);
   };
 
-  // 공유하기
-  const onShare = async () => {
-    // DOM to Image
-    await html2canvas(homeRef.current, { useCORS: true }).then(canvas => {
-      const imgUrl = canvas.toDataURL('image/jpg').split(',')[1];
-      uploadImgur(imgUrl);
-    });
-  };
-
-  // 이미지 호스팅
-  const uploadImgur = async imgUrl => {
-    const data = new FormData();
-    data.append('image', imgUrl);
-    const url = `https://api.imgbb.com/1/upload?key=${API_KEY_IMG}`;
-
-    try {
-      const result = await fetch(url, {
-        method: 'POST',
-        body: data,
-      }).then(response => response.json());
-      kakaoShare(result.data.url);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   // 카카오 공유하기
-  const kakaoShare = image => {
-    console.log(image);
-    window.Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
+  const kakaoShare = useCallback(() => {
+    // 공유할 옷 정보
+    const shareData = getWeatherData(convertTemp(WEATHER.main.temp));
+    const shareImages = shareData.images;
+    const shareDesc = shareData.desc;
+
+    window.Kakao.Share.sendCustom({
+      templateId: 86200,
+      templateArgs: {
         title: `${convertDate(WEATHER.dt)}\n현재 날씨: ${convertTemp(
           WEATHER.main.temp
         )}°C`,
-        description: '날씨에 따라 오늘 입을 옷을 추천',
-        imageUrl: image,
-        link: {
-          mobileWebUrl: 'http://localhost:3000',
-          webUrl: 'http://localhost:3000',
-        },
+        description: shareDesc,
+        img1: shareImages[0],
+        img2: shareImages[1] || 'https://i.ibb.co/3YmZK5n/logo.png', // 두번째 이미지 없으면 로고
       },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: 'http://localhost:3000',
-            webUrl: 'http://localhost:3000',
-          },
-        },
-        {
-          title: '앱으로 보기',
-          link: {
-            mobileWebUrl: 'http://localhost:3000',
-            webUrl: 'http://localhost:3000',
-          },
-        },
-      ],
     });
-  };
+  }, [WEATHER]);
 
   return (
     <HomeContainer ref={homeRef}>
-      <Header location={WEATHER.name} openModal={openModal} onShare={onShare} />
+      <Header
+        location={WEATHER.name}
+        openModal={openModal}
+        onShare={kakaoShare}
+      />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
