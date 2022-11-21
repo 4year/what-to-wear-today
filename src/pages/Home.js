@@ -1,22 +1,27 @@
 // Home
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
-import { registerDragEvent } from '../utils/drag';
-import { inrange } from './../utils/drag';
-import { useLocation } from 'react-router-dom';
+import { registerDragEvent, inrange } from '../utils/drag';
+import html2canvas from 'html2canvas';
+import { API_KEY_IMG } from '../config';
 
 const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [dragUp, setDragUp] = useState(0);
+  const [shareImg, setShareImg] = useState('');
+
+  const homeRef = useRef();
 
   // 날씨 정보 받아오기
   const location = useLocation();
   const WEATHER = location.state.result;
 
+  // 모달
   const openModal = () => {
     setModalVisible(true);
   };
@@ -25,9 +30,35 @@ const Home = () => {
     setModalVisible(false);
   };
 
+  // 공유하기
+  const copyDOM = async () => {
+    await html2canvas(homeRef.current, { useCORS: true }).then(canvas => {
+      const imgUrl = canvas.toDataURL('image/jpg').split(',')[1];
+      uploadImgur(imgUrl);
+    });
+  };
+
+  const uploadImgur = async imgUrl => {
+    const form = new FormData();
+    form.append('image', imgUrl);
+    const url = `https://api.imgbb.com/1/upload?key=${API_KEY_IMG}`;
+
+    try {
+      const result = await fetch(url, {
+        method: 'POST',
+        body: form,
+      }).then(response => response.json());
+      setShareImg(result.data.url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const kakaoShare = () => {};
+
   return (
-    <HomeContainer>
-      <Header location={WEATHER.name} openModal={openModal} />
+    <HomeContainer ref={homeRef}>
+      <Header location={WEATHER.name} openModal={openModal} onShare={copyDOM} />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
@@ -58,6 +89,7 @@ const HomeContainer = styled.div`
   height: 100%;
   overflow: hidden;
   text-align: center;
+  background-color: #fff;
 
   main {
     height: calc(100% - 3rem);
