@@ -4,14 +4,32 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Location from './Location';
 import SideHeader from './SideHeader';
-
 import SearchBar from '../addLocation/SearchBar';
 import CurrentLocation from './CurrentLocation';
+import { LocationListData } from './../../LocationListData';
+import SearchResult from './../addLocation/SearchResult';
 
 const SideBar = ({ visible, onClose }) => {
-	const [search, setSearch] = useState(false);
+	// LocationListData에서 가져올 지역 리스트
+  const locationList = LocationListData;
+  // const [location, setLocation] =  useState([]);
 
-	const onClickLocationPlus = () => {
+  // 유저가 검색하는 검색어 저장하는 곳
+  const [userInput, setUserInput] = useState("");
+  
+  // 검색창 보여주는 상태값
+  const [search, setSearch] = useState(false);
+
+	// SearchBar input에 입력되는 값들을 저장하는 역할. 
+  const handleChange = (e) => {
+    setUserInput(e.target.value);
+  };
+
+  const filterLocationListData = locationList.filter((list) => {
+    return list.name.toLowerCase().includes(userInput.toLowerCase());
+  });
+
+  const onClickLocationPlus = () => {
 		setSearch(true);
 		console.log(search);
 	};
@@ -33,8 +51,9 @@ const SideBar = ({ visible, onClose }) => {
 			<ModalOverlay onClick={onMaskClick} />
 			<ModalWrapper>
 				<SideHeader close={onClose} onClickLocationPlus={onClickLocationPlus} />
-				<SearchBar show={search} hide={onClickLocationCancel} />
+				<SearchBar show={search} hide={onClickLocationCancel} handleChange={handleChange}/>
 				<CurrentLocation />
+        <SearchResult key={locationList.id} data={filterLocationListData}/>
 			</ModalWrapper>
 		</SidebarContainer>
 	);

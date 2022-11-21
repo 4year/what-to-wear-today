@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const SearchBar = ({ show, hide }) => {
+const SearchBar = ({ show, hide, handleChange }) => {
   
   return (
     <div>
@@ -12,6 +12,7 @@ const SearchBar = ({ show, hide }) => {
             className="search-input"
             type="text"
             placeholder="도시명(city)으로 검색"
+            defaultValue={handleChange}
           ></input>
           <button 
             className="search-cancel"

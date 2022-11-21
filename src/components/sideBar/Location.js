@@ -4,6 +4,7 @@ import LocationList from "./LocationList";
 
 
 const Location = () => { 
+  
   return (
     <div>     
       <LocationList/>
