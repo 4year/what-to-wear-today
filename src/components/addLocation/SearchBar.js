@@ -2,15 +2,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchBar = ({ show, hide }) => {
+const SearchBar = ({ show, hide, handleChange }) => {
+  
   return (
     <div>
       {show && (
-        <SearchLocation>
-          <input className="search-input" type="text" placeholder="도시명(city)으로 검색"></input>
-          <button className="search-cancel" onClick={hide}>
-            취소
-          </button>
+        <SearchLocation>          
+          <input
+            className="search-input"
+            type="text"
+            placeholder="도시명(city)으로 검색"
+            defaultValue={handleChange}
+          ></input>
+          <button 
+            className="search-cancel"
+            onClick={hide}
+            >취소
+          </button>          
         </SearchLocation>
       )}
     </div>
