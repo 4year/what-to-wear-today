@@ -7,7 +7,7 @@ import { TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
   //내일
-  const temperature0 = Math.round(weekly.list[5].main.temp);
+  // const temperature0 = Math.round(weekly.list[5].main.temp);
   // const temperature3 = Math.round(weekly.list[6].main.temp);
   // const temperature6 = Math.round(weekly.list[7].main.temp);
   // const temperature9 = Math.round(weekly.list[8].main.temp);
@@ -28,7 +28,7 @@ const WeeklyWeather = ({ weekly }) => {
   //   const Twotemperature24 = Math.round(weekly.list[22].main.temp);
 
   //배열 => slice(weekly.list.7.25)
-  
+
   return (
     <>
       {/* 내일 */}
