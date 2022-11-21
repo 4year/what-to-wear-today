@@ -8,9 +8,9 @@ import { TiWeatherShower } from 'react-icons/ti';
 const WeeklyWeather = ({ weekly }) => {
   //내일
   const temperature0 = Math.round(weekly.list[5].main.temp);
-  const temperature3 = Math.round(weekly.list[6].main.temp);
-  const temperature6 = Math.round(weekly.list[7].main.temp);
-  const temperature9 = Math.round(weekly.list[8].main.temp);
+  // const temperature3 = Math.round(weekly.list[6].main.temp);
+  // const temperature6 = Math.round(weekly.list[7].main.temp);
+  // const temperature9 = Math.round(weekly.list[8].main.temp);
   //   const temperature12 = Math.round(weekly.list[9].main.temp);
   //   const temperature15 = Math.round(weekly.list[10].main.temp);
   //   const temperature18 = Math.round(weekly.list[11].main.temp);
@@ -27,6 +27,7 @@ const WeeklyWeather = ({ weekly }) => {
   //   const Twotemperature21 = Math.round(weekly.list[21].main.temp);
   //   const Twotemperature24 = Math.round(weekly.list[22].main.temp);
 
+  //배열 => slice(weekly.list.7.25)
   return (
     <>
       {/* 내일 */}
@@ -41,49 +42,9 @@ const WeeklyWeather = ({ weekly }) => {
         </Title>
         <Wrap>
           <WrapList>
-            <div>{temperature0}°C</div>
+            <div>{}°C</div>
             <div>img</div> {/* <img src="" alt="" /> */}
             <div>0시</div>
-          </WrapList>
-          <WrapList>
-            <div>{temperature3}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>3시</div>
-          </WrapList>
-          <WrapList>
-            <div>{temperature6}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>6시</div>
-          </WrapList>
-          <WrapList>
-            <div>{temperature9}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>9시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>12시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>15시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>18시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>21시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>24시</div>
           </WrapList>
         </Wrap>
       </Container>
@@ -102,45 +63,6 @@ const WeeklyWeather = ({ weekly }) => {
             <div>{}°C</div>
             <div>img</div> {/* <img src="" alt="" /> */}
             <div>0시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>3시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>6시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>9시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>12시</div>
-          </WrapList>
-          <WrapList>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>15시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>18시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>21시</div>
-          </WrapList>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>24시</div>
           </WrapList>
         </Wrap>
       </Container>
