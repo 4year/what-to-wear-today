@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
 
-const WeatherContainer = ({ weather, dragUp }) => {
+const WeatherContainer = ({ weather, dragUp, weekly }) => {
   const dateBuilder = d => {
     const months = [
       'January',
@@ -52,50 +52,50 @@ const WeatherContainer = ({ weather, dragUp }) => {
           {weather.weather[0].description}
         </div>
       </CurrentWeather>
-      <WeeklyWeather />
+      <WeeklyWeather weekly={weekly} />
     </Container>
   );
 };
 
 // animation
 const wave = keyframes`
-	0%{
-		background-position-x: 0;
-	}
-	100%{
-		background-position-x: 350px;
-	}
-	`;
+   0%{
+      background-position-x: 0;
+   }
+   100%{
+      background-position-x: 350px;
+   }
+   `;
 
 const waveHeight = keyframes`
-	0%{
-		background-position-x: 0;
-		height: 10%;
-	}
-	100%{
-		background-position-x: 350px;
-		height: 0;
-	}
+   0%{
+      background-position-x: 0;
+      height: 10%;
+   }
+   100%{
+      background-position-x: 350px;
+      height: 0;
+   }
 `;
 
 const dragUpTop = keyframes`
-	0% {
-		top: 370px;
-	}
-	100% {
-		top: 0;
-	}
+   0% {
+      top: 370px;
+   }
+   100% {
+      top: 0;
+   }
 `;
 
 const dragUpHeight = keyframes`
-	0% {
-		height: 90%;
-		margin-top: 0;
-	}
-	100% {
-		height: 40%;
-		margin-top: 3rem;
-	}
+   0% {
+      height: 90%;
+      margin-top: 0;
+   }
+   100% {
+      height: 40%;
+      margin-top: 3rem;
+   }
 `;
 
 const Container = styled.div`
