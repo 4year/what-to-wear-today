@@ -1,40 +1,40 @@
 {
   "coord": {
-      "lon": 127.0539,
-      "lat": 37.5856
+    "lon": 127.0539,
+    "lat": 37.5856
   },
   "weather": [
-      {
-          "id": 801,
-          "main": "Clouds",
-          "description": "약간의 구름이 낀 하늘",
-          "icon": "02d"
-      }
+    {
+      "id": 801,
+      "main": "Clouds",
+      "description": "약간의 구름이 낀 하늘",
+      "icon": "02d"
+    }
   ],
   "base": "stations",
   "main": {
-      "temp": 14.19,
-      "feels_like": 12.81,
-      "temp_min": 12.55,
-      "temp_max": 14.89,
-      "pressure": 1025,
-      "humidity": 44
+    "temp": 14.19,
+    "feels_like": 12.81,
+    "temp_min": 12.55,
+    "temp_max": 14.89,
+    "pressure": 1025,
+    "humidity": 44
   },
   "visibility": 10000,
   "wind": {
-      "speed": 1.54,
-      "deg": 210
+    "speed": 1.54,
+    "deg": 210
   },
   "clouds": {
-      "all": 20
+    "all": 20
   },
   "dt": 1668656374,
   "sys": {
-      "type": 1,
-      "id": 8096,
-      "country": "KR",
-      "sunrise": 1668636795,
-      "sunset": 1668673219
+    "type": 1,
+    "id": 8096,
+    "country": "KR",
+    "sunrise": 1668636795,
+    "sunset": 1668673219
   },
   "timezone": 32400,
   "id": 1835847,
