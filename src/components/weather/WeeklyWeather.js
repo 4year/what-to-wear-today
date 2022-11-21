@@ -28,6 +28,7 @@ const WeeklyWeather = ({ weekly }) => {
   //   const Twotemperature24 = Math.round(weekly.list[22].main.temp);
 
   //배열 => slice(weekly.list.7.25)
+  
   return (
     <>
       {/* 내일 */}
@@ -57,7 +58,7 @@ const WeeklyWeather = ({ weekly }) => {
             <TiWeatherSunny size="20px" />
             <TiWeatherShower size="20px" />
           </div>
-        </Title>{' '}
+        </Title>
         <Wrap>
           <WrapList>
             <div>{}°C</div>
@@ -71,8 +72,8 @@ const WeeklyWeather = ({ weekly }) => {
 };
 
 const Container = styled.div`
-  height: 60%;
-  width: 85%;
+  height: 30%;
+  width: 90%;
   margin: 10px;
   padding: 15px 5px;
   background-color: rgb(255 255 255 / 20%);

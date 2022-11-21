@@ -21,15 +21,7 @@ const WeatherContainer = ({ weather, dragUp, weekly }) => {
       'December',
     ];
 
-    const week = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     let date = d.getDate();
     let month = months[d.getMonth()];
@@ -47,27 +39,16 @@ const WeatherContainer = ({ weather, dragUp, weekly }) => {
 
   return (
     <Container
-      className={
-        dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
-      }
+      className={dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''}
       background={background}
       scrollY={dragUp}
     >
-      <WaveContianer
-        className={
-          dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''
-        }
-      />
-      <CurrentWeather
-        className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}
-      >
+      <WaveContianer className={dragUp ? (dragUp < 0 && dragUp > -100 ? 'dragUp' : 'dragEnd') : ''} />
+      <CurrentWeather className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}>
         <div className="date">{dateBuilder(new Date())}</div>
         <div className="weather">
           {temperature}°C
-          <img
-            src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt="weather icon"
-          />
+          <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
           {weather.weather[0].description}
         </div>
       </CurrentWeather>
@@ -76,6 +57,7 @@ const WeatherContainer = ({ weather, dragUp, weekly }) => {
   );
 };
 
+// animation
 const wave = keyframes`
    0%{
       background-position-x: 0;

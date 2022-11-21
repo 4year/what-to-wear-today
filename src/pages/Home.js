@@ -1,5 +1,4 @@
 // Home
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './../components/Header';
@@ -8,10 +7,15 @@ import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
 import { registerDragEvent } from '../utils/drag';
 import { inrange } from './../utils/drag';
+import { useLocation } from 'react-router-dom';
 
-const Home = ({ weather, weekly }) => {
+const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [dragUp, setDragUp] = useState(0);
+
+  // 날씨 정보 받아오기
+  const location = useLocation();
+  const WEATHER = location.state.result;
 
   const openModal = () => {
     setModalVisible(true);
@@ -23,7 +27,7 @@ const Home = ({ weather, weekly }) => {
 
   return (
     <HomeContainer>
-      <Header location={weather.name} openModal={openModal} />
+      <Header location={WEATHER.name} openModal={openModal} />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
@@ -40,16 +44,10 @@ const Home = ({ weather, weekly }) => {
           },
         })}
       >
-        <Dresses temperature={Math.round(weather.main.temp)} />
-        <WeatherContainer weather={weather} dragUp={dragUp} weekly={weekly} />
+        <Dresses temperature={Math.round(WEATHER.main.temp)} />
+        <WeatherContainer weather={WEATHER} dragUp={dragUp} />
       </main>
-      {modalVisible && (
-        <SideBar
-          visible={modalVisible}
-          maskClosable={true}
-          onClose={closeModal}
-        />
-      )}
+      {modalVisible && <SideBar onClose={closeModal} />}
     </HomeContainer>
   );
 };
