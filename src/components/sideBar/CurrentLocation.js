@@ -4,7 +4,7 @@ import Location from './Location';
 const CurrentLocation = () => {
   return (
     <div>
-      <Location/>
+      <Location />
     </div>
   );
 };

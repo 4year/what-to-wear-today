@@ -14,7 +14,7 @@ const LocationList = ({ name, icon, temp}) => {
         <h4>{name}</h4>
         <div className='temp'>
           {icon}
-          <span>{temp}</span>          
+          <span>{temp}</span>
         </div>
       </List>
     </div>
@@ -28,18 +28,21 @@ const List = styled.div`
   border: 2px solid black;
   border-radius: 15px;
   padding: 2px 20px;
-  margin:0 8px;   
+  margin: 0 8px;
   margin-bottom: 15px;
-  h4{
+
+  h4 {
     font-size: 12px;
   }
-  .temp{
-    width : 50px;
+
+  .temp {
+    width: 50px;
     display: flex;
-    justify-content: space-between;        
-    span{
+    justify-content: space-between;
+
+    span {
       font-size: 15px;
     }
   }
-`
+`;
 export default LocationList;

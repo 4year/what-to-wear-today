@@ -1,6 +1,6 @@
 // 주소 검색창
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const SearchBar = ({ show, hide, handleChange }) => {
   
@@ -21,7 +21,6 @@ const SearchBar = ({ show, hide, handleChange }) => {
           </button>          
         </SearchLocation>
       )}
-      
     </div>
   );
 };
@@ -29,14 +28,15 @@ const SearchBar = ({ show, hide, handleChange }) => {
 const SearchLocation = styled.div`
   width: 100%;
   height: 852px;
-  box-sizing: border-box ;
+  box-sizing: border-box;
   position: absolute;
-  top: 0;  
+  top: 0;
   right: 0;
-  padding: 25px 20px;  
+  padding: 25px 20px;
   display: flex;
-  background-color: rgba(245, 245, 245, 0.5); 
-  backdrop-filter: blur(5px);  
+  background-color: rgba(245, 245, 245, 0.5);
+  backdrop-filter: blur(5px);
+
   .search-input {
     position: relative;
     top: 0px;
@@ -49,22 +49,22 @@ const SearchLocation = styled.div`
     background-color: #dcdcdc;
     box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.25);
   }
-  .search-cancel{
+
+  .search-cancel {
     box-sizing: border-box;
-    background: none; 
-    /* background-color: tomato; */
-    border:none; 
-    box-shadow:none; 
-    border-radius:0; 
-    padding: 10px; 
-    overflow: visible; 
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 10px;
+    overflow: visible;
     cursor: pointer;
     position: absolute;
     height: 30px;
     top: 22px;
     right: 7px;
     text-align: center;
-    font-size: 12px;    
+    font-size: 12px;
   }
 `;
 
