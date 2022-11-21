@@ -1,46 +1,14 @@
 // weather container
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { convertDate, convertTemp } from '../../utils/weather';
 import { WeatherData } from '../../WeatherData';
 import WeeklyWeather from './WeeklyWeather';
 
 const WeatherContainer = ({ weather, dragUp, weekly }) => {
-  const dateBuilder = d => {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-
-    const week = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
-
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
-    let dayOfWeek = week[d.getDay()];
-
-    return `${date} ${month} ${year} ${dayOfWeek}`;
-  };
+  const temperature = convertTemp(weather.main.temp);
 
   // 배경 색
-  const temperature = Math.round(weather.main.temp);
   const background = WeatherData.find(data => {
     return data.temp.indexOf(temperature) !== -1 && data.background;
   });
@@ -61,7 +29,7 @@ const WeatherContainer = ({ weather, dragUp, weekly }) => {
       <CurrentWeather
         className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}
       >
-        <div className="date">{dateBuilder(new Date())}</div>
+        <div className="date">{convertDate(weather.dt)}</div>
         <div className="weather">
           {temperature}°C
           <img
