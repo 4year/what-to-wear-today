@@ -1,18 +1,18 @@
 import { WeatherData } from '../WeatherData';
 
 // 유닉스 -> 한국 시간
-export const convertDate = dt => {
-  return new Date(dt * 1000).toLocaleDateString('KR', {
-    weekday: 'long',
+export const convertDate = weather => {
+  return new Date(weather.dt * 1000).toLocaleDateString('ko', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    weekday: 'long',
   });
 };
 
 // 온도 반올림
-export const convertTemp = temp => {
-  return Math.round(temp);
+export const convertTemp = weather => {
+  return Math.round(weather.main.temp);
 };
 
 // 해당 기온에 맞는 WeatherData 찾기

@@ -5,7 +5,7 @@ import { convertDate, convertTemp, getWeatherData } from '../../utils/weather';
 import WeeklyWeather from './WeeklyWeather';
 
 const WeatherContainer = ({ weather, dragUp, weekly }) => {
-  const temperature = convertTemp(weather.main.temp);
+  const temperature = convertTemp(weather);
   const background = getWeatherData(temperature).background;
 
   return (
@@ -24,7 +24,7 @@ const WeatherContainer = ({ weather, dragUp, weekly }) => {
       <CurrentWeather
         className={dragUp ? (dragUp < 0 && dragUp > -100 ? '' : 'dragEnd') : ''}
       >
-        <div className="date">{convertDate(weather.dt)}</div>
+        <div className="date">{convertDate(weather)}</div>
         <div className="weather">
           {temperature}°C
           <img

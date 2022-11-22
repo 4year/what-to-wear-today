@@ -33,16 +33,14 @@ const Home = () => {
   // 카카오 공유하기
   const kakaoShare = useCallback(() => {
     // 공유할 옷 정보
-    const shareData = getWeatherData(convertTemp(WEATHER.main.temp));
+    const shareData = getWeatherData(convertTemp(WEATHER));
     const shareImages = shareData.images;
     const shareDesc = shareData.desc;
 
     window.Kakao.Share.sendCustom({
       templateId: shareImages.length === 1 ? 86217 : 86200,
       templateArgs: {
-        title: `${convertDate(WEATHER.dt)}\n현재 날씨: ${convertTemp(
-          WEATHER.main.temp
-        )}°C`,
+        title: `${convertDate(WEATHER)}\n현재 날씨: ${convertTemp(WEATHER)}°C`,
         description: shareDesc,
         [`${shareImages.length === 1 ? 'img' : 'img1'}`]: shareImages[0],
         [`${shareImages.length !== 1 && 'img2'}`]: shareImages[1],
@@ -58,22 +56,22 @@ const Home = () => {
         onShare={kakaoShare}
       />
       <main
-        // dragUp 이벤트
-        {...registerDragEvent({
-          onDragStart: (moveX, moveY) => {
-            // console.log(moveY);
-            setDragUp(inrange(moveY, -100, 0));
-          },
-          onDragEnd: (moveX, moveY) => {
-            if (moveY <= -100) {
-              setDragUp(1);
-            } else {
-              setDragUp(0);
-            }
-          },
-        })}
+      // dragUp 이벤트
+      // {...registerDragEvent({
+      //   onDragStart: (moveX, moveY) => {
+      //     // console.log(moveY);
+      //     setDragUp(inrange(moveY, -100, 0));
+      //   },
+      //   onDragEnd: (moveX, moveY) => {
+      //     if (moveY <= -100) {
+      //       setDragUp(1);
+      //     } else {
+      //       setDragUp(0);
+      //     }
+      //   },
+      // })}
       >
-        <Dresses temperature={convertTemp(WEATHER.main.temp)} />
+        <Dresses temperature={convertTemp(WEATHER)} />
         <WeatherContainer
           weather={WEATHER}
           dragUp={dragUp}
