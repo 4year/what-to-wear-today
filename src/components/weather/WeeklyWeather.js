@@ -6,28 +6,40 @@ import { TiWeatherSunny } from 'react-icons/ti';
 import { TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
-  //내일
-  // const temperature0 = Math.round(weekly.list[5].main.temp);
-  // const temperature3 = Math.round(weekly.list[6].main.temp);
-  // const temperature6 = Math.round(weekly.list[7].main.temp);
-  // const temperature9 = Math.round(weekly.list[8].main.temp);
-  //   const temperature12 = Math.round(weekly.list[9].main.temp);
-  //   const temperature15 = Math.round(weekly.list[10].main.temp);
-  //   const temperature18 = Math.round(weekly.list[11].main.temp);
-  //   const temperature21 = Math.round(weekly.list[12].main.temp);
-  //   const temperature24 = Math.round(weekly.list[13].main.temp);
-  //모레
-  //   const Twotemperature0 = Math.round(weekly.list[14].main.temp);
-  //   const Twotemperature3 = Math.round(weekly.list[15].main.temp);
-  //   const Twotemperature6 = Math.round(weekly.list[16].main.temp);
-  //   const Twotemperature9 = Math.round(weekly.list[17].main.temp);
-  //   const Twotemperature12 = Math.round(weekly.list[18].main.temp);
-  //   const Twotemperature15 = Math.round(weekly.list[19].main.temp);
-  //   const Twotemperature18 = Math.round(weekly.list[20].main.temp);
-  //   const Twotemperature21 = Math.round(weekly.list[21].main.temp);
-  //   const Twotemperature24 = Math.round(weekly.list[22].main.temp);
+  //내일 날씨 리스트
+  const oneDayList = weekly.list.slice(7, 16);
 
-  //배열 => slice(weekly.list.7.25)
+  //모레 날씨 리스트
+  const twoDayList = weekly.list.slice(15, 24);
+  console.log(twoDayList);
+
+  const hour = [0, 3, 6, 9, 12, 15, 18, 21, 24];
+
+  //내일 날씨 리스트 렌더링
+  const postList = oneDayList.map((data, idx) => (
+    <WrapList key={idx}>
+      <p>{Math.round(data.main.temp)}°C</p>
+      <img
+        style={{ width: '50px', height: '50px' }}
+        src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        alt="weather icon"
+      />
+      <span>{hour[idx]}시</span>
+    </WrapList>
+  ));
+
+  //모레 날씨 리스트 렌더링
+  const twoPostList = twoDayList.map((data, idx) => (
+    <WrapList key={idx}>
+      <p>{Math.round(data.main.temp)}°C</p>
+      <img
+        style={{ width: '50px', height: '50px' }}
+        src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        alt="weather icon"
+      />
+      <span>{hour[idx]}시</span>
+    </WrapList>
+  ));
 
   return (
     <>
@@ -41,13 +53,7 @@ const WeeklyWeather = ({ weekly }) => {
             <TiWeatherShower size="20px" />
           </div>
         </Title>
-        <Wrap>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>0시</div>
-          </WrapList>
-        </Wrap>
+        <Wrap>{postList}</Wrap>
       </Container>
       {/* 모레 */}
       <Container>
@@ -59,23 +65,17 @@ const WeeklyWeather = ({ weekly }) => {
             <TiWeatherShower size="20px" />
           </div>
         </Title>
-        <Wrap>
-          <WrapList>
-            <div>{}°C</div>
-            <div>img</div> {/* <img src="" alt="" /> */}
-            <div>0시</div>
-          </WrapList>
-        </Wrap>
+        <Wrap>{twoPostList}</Wrap>
       </Container>
     </>
   );
 };
 
 const Container = styled.div`
-  height: 30%;
+  height: 28%;
   width: 90%;
-  margin: 10px;
-  padding: 15px 5px;
+  margin: 5px 10px;
+  padding: 5px 5px;
   background-color: rgb(255 255 255 / 20%);
   border-radius: 20px;
   font-size: 14px;
@@ -87,8 +87,8 @@ const Wrap = styled.div`
 `;
 
 const WrapList = styled.div`
-  margin: 5px 20px;
-  line-height: 30px;
+  margin: 0px 20px;
+  line-height: 20px;
 
   div {
     width: 2.2rem;

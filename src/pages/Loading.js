@@ -14,7 +14,6 @@ const Loading = () => {
     navigator.geolocation.getCurrentPosition(position => {
       const lat = position.coords.latitude; // 위도
       const lon = position.coords.longitude; // 경도
-
       getCurrentWeather(lat, lon);
     });
   };
@@ -25,18 +24,34 @@ const Loading = () => {
 
     try {
       const result = await fetch(url).then(response => response.json());
+
+      getWeeklyWeather(lat, lon, result);
       // 날씨 정보 보내기
-      navigate('/home', {
-        replace: false,
-        state: {
-          result,
-        },
-      });
     } catch (error) {
       console.error(error);
     }
   };
 
+  //주간 날씨 가져오기
+  const getWeeklyWeather = async (lat, lon, result) => {
+    const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
+
+    try {
+      const weeklyResult = await fetch(weeklyUrl).then(response =>
+        response.json()
+      );
+      naviagate('/home', {
+
+        replace: false,
+        state: {
+          result,
+          weeklyResult,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // api fetching 후 페이지 이동
   useEffect(() => {
     getCurrentLocation();
