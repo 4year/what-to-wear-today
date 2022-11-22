@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const loadingImg = process.env.PUBLIC_URL + '/images/loading.gif';
 
 const Loading = () => {
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   // 현재 위치 가져오기
   const getCurrentLocation = () => {
@@ -26,7 +26,7 @@ const Loading = () => {
     try {
       const result = await fetch(url).then(response => response.json());
       // 날씨 정보 보내기
-      naviagate('/home', {
+      navigate('/home', {
         replace: false,
         state: {
           result,
