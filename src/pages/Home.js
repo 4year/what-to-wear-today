@@ -16,6 +16,8 @@ const Home = () => {
   // 날씨 정보 받아오기
   const location = useLocation();
   const WEATHER = location.state.result;
+  const WEEKLYWEATHER = location.state.weeklyResult;
+  console.log(WEEKLYWEATHER);
 
   const openModal = () => {
     setModalVisible(true);
@@ -45,7 +47,11 @@ const Home = () => {
         })}
       >
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
-        <WeatherContainer weather={WEATHER} dragUp={dragUp} />
+        <WeatherContainer
+          weather={WEATHER}
+          weekly={WEEKLYWEATHER}
+          dragUp={dragUp}
+        />
       </main>
       {modalVisible && <SideBar onClose={closeModal} />}
     </HomeContainer>
