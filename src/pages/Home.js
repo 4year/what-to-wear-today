@@ -36,14 +36,14 @@ const Home = () => {
     const shareDesc = shareData.desc;
 
     window.Kakao.Share.sendCustom({
-      templateId: 86200,
+      templateId: shareImages.length === 1 ? 86217 : 86200,
       templateArgs: {
         title: `${convertDate(WEATHER.dt)}\n현재 날씨: ${convertTemp(
           WEATHER.main.temp
         )}°C`,
         description: shareDesc,
-        img1: shareImages[0],
-        img2: shareImages[1] || 'https://i.ibb.co/3YmZK5n/logo.png', // 두번째 이미지 없으면 로고
+        [`${shareImages.length === 1 ? 'img' : 'img1'}`]: shareImages[0],
+        [`${shareImages.length !== 1 && 'img2'}`]: shareImages[1],
       },
     });
   }, [WEATHER]);
@@ -71,7 +71,7 @@ const Home = () => {
           },
         })}
       >
-        <Dresses temperature={Math.round(WEATHER.main.temp)} />
+        <Dresses temperature={convertTemp(WEATHER.main.temp)} />
         <WeatherContainer weather={WEATHER} dragUp={dragUp} />
       </main>
       {modalVisible && <SideBar onClose={closeModal} />}
