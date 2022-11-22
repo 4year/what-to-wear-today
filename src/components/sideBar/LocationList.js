@@ -9,15 +9,13 @@ import styled from 'styled-components';
 const LocationList = ({ name, icon, temp}) => {
 	// const { name, icon, temp } = props;
   return (
-    <div>
-      <List>
-        <h4>{name}</h4>
-        <div className='temp'>
-          {icon}
-          <span>{temp}</span>
-        </div>
-      </List>
-    </div>
+    <List>
+      <h4>{name}</h4>
+      <div className='temp'>
+        {icon}
+        <span>{temp}</span>
+      </div>
+    </List>
   );
 };
 

@@ -1,27 +1,38 @@
 // 주소 검색창
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import SearchResult from './SearchResult';
+import cityList from '../../cityList.json';
 
-const SearchBar = ({ show, hide, handleChange }) => {
-  
+const SearchBar = ({ hide }) => {
+  // 유저가 검색하는 검색어 저장하는 곳
+  const [userInput, setUserInput] = useState("");
+
+  // SearchBar input에 입력되는 값들을 저장하는 역할. 
+  const handleChange = (e) => {
+    setUserInput(e.target.value);
+  };
+
+  const filterLocationListData = cityList.filter((list) => {
+    return list.name.includes(userInput);
+  });
+
   return (
-    <div>
-      {show && (
-        <SearchLocation>          
-          <input
-            className="search-input"
-            type="text"
-            placeholder="도시명(city)으로 검색"
-            defaultValue={handleChange}
-          ></input>
-          <button 
-            className="search-cancel"
-            onClick={hide}
-            >취소
-          </button>          
-        </SearchLocation>
-      )}
-    </div>
+    <SearchLocation>
+      <input
+        className="search-input"
+        type="text"
+        placeholder="도시명(city)으로 검색"
+        value={userInput}
+        onChange={handleChange}
+      ></input>
+      <button 
+        className="search-cancel"
+        onClick={hide}
+        >취소
+      </button>          
+      {userInput && <SearchResult cityList={filterLocationListData} />}
+    </SearchLocation>
   );
 };
 
@@ -32,8 +43,10 @@ const SearchLocation = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  padding: 25px 20px;
+  padding: 25px 10px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: rgba(245, 245, 245, 0.5);
   backdrop-filter: blur(5px);
 
