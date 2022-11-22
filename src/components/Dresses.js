@@ -1,14 +1,12 @@
 // 기온별 의상 이미지 슬라이더, text
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { WeatherData } from '../WeatherData';
+import { getWeatherData } from '../utils/weather';
 import { inrange, registerDragEvent } from './../utils/drag';
 
 const Dresses = ({ temperature }) => {
   // 현재 기온에 맞는 옷 정보 data
-  const dressInfo = WeatherData.find(data => {
-    return data.temp.indexOf(temperature) !== -1 && data;
-  });
+  const dressInfo = getWeatherData(temperature);
 
   // 슬라이드 리스트
   const slideList =
@@ -16,7 +14,9 @@ const Dresses = ({ temperature }) => {
       ? dressInfo.images
       : [dressInfo.images.at(-1), ...dressInfo.images, dressInfo.images.at(0)];
 
-  const [currentIndex, setCurrentIndex] = useState(slideList.length === 1 ? 0 : 1);
+  const [currentIndex, setCurrentIndex] = useState(
+    slideList.length === 1 ? 0 : 1
+  );
   const [transX, setTransX] = useState(0);
   const [animate, setAnimate] = useState(false);
   const [slideWidth, setSlideWidth] = useState(0);
@@ -28,8 +28,10 @@ const Dresses = ({ temperature }) => {
     const slideWidthHandler = () => {
       setSlideWidth(containerRef.current.offsetWidth);
     };
+    window.addEventListener('load', slideWidthHandler);
     window.addEventListener('resize', slideWidthHandler);
     return () => {
+      window.removeEventListener('load', slideWidthHandler);
       window.removeEventListener('resize', slideWidthHandler);
     };
   }, []);
@@ -52,8 +54,10 @@ const Dresses = ({ temperature }) => {
               onDragEnd: moveX => {
                 const maxIndex = slideList.length - 1;
 
-                if (moveX < -100) setCurrentIndex(inrange(currentIndex + 1, 0, maxIndex));
-                if (moveX > 100) setCurrentIndex(inrange(currentIndex - 1, 0, maxIndex));
+                if (moveX < -100)
+                  setCurrentIndex(inrange(currentIndex + 1, 0, maxIndex));
+                if (moveX > 100)
+                  setCurrentIndex(inrange(currentIndex - 1, 0, maxIndex));
 
                 setAnimate(true);
                 setTransX(0);
@@ -72,14 +76,22 @@ const Dresses = ({ temperature }) => {
         >
           {slideList.map((url, idx) => (
             <Slide key={idx}>
-              <SlideImage slide={slideList} src={url} alt="img" draggable={false} />
+              <SlideImage
+                slide={slideList}
+                src={url}
+                alt="img"
+                draggable={false}
+              />
             </Slide>
           ))}
         </Slider>
         {slideList.length > 1 && (
           <Bullets>
             {dressInfo.images.map((url, idx) => (
-              <span key={idx} className={currentIndex - 1 === idx ? 'current' : ''}>
+              <span
+                key={idx}
+                className={currentIndex - 1 === idx ? 'current' : ''}
+              >
                 ●
               </span>
             ))}

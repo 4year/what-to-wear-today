@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { IoShareOutline } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
 
-const Header = ({ openModal, location }) => {
+const Header = ({ onShare, openModal, location }) => {
   return (
     <HeaderContainer>
       <span>{location}</span>
-      <div className="iconBox">
-        <IoShareOutline className="icon" />
+      <div className="iconBox" data-html2canvas-ignore>
+        <IoShareOutline className="icon" onClick={onShare} />
         <BiMenuAltRight className="icon" onClick={openModal} />
       </div>
     </HeaderContainer>
