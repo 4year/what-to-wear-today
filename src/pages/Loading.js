@@ -41,6 +41,7 @@ const Loading = () => {
         response.json()
       );
       navigate('/home', {
+
         replace: false,
         state: {
           result,
