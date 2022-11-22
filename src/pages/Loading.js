@@ -40,7 +40,7 @@ const Loading = () => {
       const weeklyResult = await fetch(weeklyUrl).then(response =>
         response.json()
       );
-      naviagate('/home', {
+      navigate('/home', {
 
         replace: false,
         state: {
