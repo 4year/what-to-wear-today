@@ -7,10 +7,10 @@ import { TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
   //내일 날씨 리스트
-  const oneDayList = weekly.list.slice(7, 16);
+  const oneDayList = weekly.list.slice(6, 15);
 
   //모레 날씨 리스트
-  const twoDayList = weekly.list.slice(15, 24);
+  const twoDayList = weekly.list.slice(14, 23);
   console.log(twoDayList);
 
   const hour = [0, 3, 6, 9, 12, 15, 18, 21, 24];
@@ -40,6 +40,8 @@ const WeeklyWeather = ({ weekly }) => {
       <span>{hour[idx]}시</span>
     </WrapList>
   ));
+  console.log(twoDayList);
+  console.log(oneDayList);
 
   return (
     <>
@@ -83,7 +85,12 @@ const Container = styled.div`
 
 const Wrap = styled.div`
   display: flex;
-  overflow: hidden;
+  overflow: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 1em;
+  }
 `;
 
 const WrapList = styled.div`
