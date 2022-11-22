@@ -28,8 +28,10 @@ const Dresses = ({ temperature }) => {
     const slideWidthHandler = () => {
       setSlideWidth(containerRef.current.offsetWidth);
     };
+    window.addEventListener('load', slideWidthHandler);
     window.addEventListener('resize', slideWidthHandler);
     return () => {
+      window.removeEventListener('load', slideWidthHandler);
       window.removeEventListener('resize', slideWidthHandler);
     };
   }, []);
