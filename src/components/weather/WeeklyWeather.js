@@ -50,9 +50,9 @@ const WeeklyWeather = ({ weekly }) => {
         <Title>
           <h3>내일</h3>
           <div>
-            <TbTemperature size="20px" />
-            <TiWeatherSunny size="20px" />
-            <TiWeatherShower size="20px" />
+            <TbTemperature size="18px" />
+            <TiWeatherSunny size="18px" />
+            <TiWeatherShower size="18px" />
           </div>
         </Title>
         <Wrap>{postList}</Wrap>
@@ -62,9 +62,9 @@ const WeeklyWeather = ({ weekly }) => {
         <Title>
           <h3>모레</h3>
           <div>
-            <TbTemperature size="20px" />
-            <TiWeatherSunny size="20px" />
-            <TiWeatherShower size="20px" />
+            <TbTemperature size="18px" />
+            <TiWeatherSunny size="18px" />
+            <TiWeatherShower size="18px" />
           </div>
         </Title>
         <Wrap>{twoPostList}</Wrap>
@@ -74,39 +74,48 @@ const WeeklyWeather = ({ weekly }) => {
 };
 
 const Container = styled.div`
-  height: 28%;
+  /* height: 28%; */
   width: 90%;
-  margin: 5px 10px;
-  padding: 5px 5px;
+  margin: 5px 20px;
+  padding: 7px 5px;
   background-color: rgb(255 255 255 / 20%);
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const Wrap = styled.div`
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 150px;
 
   ::-webkit-scrollbar {
-    width: 0px;
-    height: 1em;
+    height: 15px;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    margin: 20px;
   }
 `;
 
 const WrapList = styled.div`
-  margin: 0px 20px;
+  margin: -10px 20px;
   line-height: 20px;
-
-  div {
-    width: 2.2rem;
-  }
 `;
 
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 5px 23px;
+  height: 40px;
 
   h3 {
     font-size: 14px;
