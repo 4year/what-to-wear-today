@@ -50,11 +50,7 @@ const Home = () => {
 
   return (
     <HomeContainer ref={homeRef}>
-      <Header
-        location={WEATHER.name}
-        openModal={openModal}
-        onShare={kakaoShare}
-      />
+      <Header location={WEATHER.name} openModal={openModal} onShare={kakaoShare} />
       <main
       // dragUp 이벤트
       // {...registerDragEvent({
@@ -72,11 +68,7 @@ const Home = () => {
       // })}
       >
         <Dresses temperature={convertTemp(WEATHER)} />
-        <WeatherContainer
-          weather={WEATHER}
-          dragUp={dragUp}
-          weekly={WEEKLYWEATHER}
-        />
+        <WeatherContainer weather={WEATHER} dragUp={dragUp} weekly={WEEKLYWEATHER} />
       </main>
       {modalVisible && <SideBar onClose={closeModal} />}
     </HomeContainer>
