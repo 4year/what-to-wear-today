@@ -19,6 +19,7 @@ const Home = () => {
   const location = useLocation();
   const WEATHER = location.state.result;
   const WEEKLYWEATHER = location.state.weeklyResult;
+  console.log(WEATHER);
   console.log(WEEKLYWEATHER);
 
   // 모달
@@ -53,7 +54,7 @@ const Home = () => {
       <Header
         location={WEATHER.name}
         openModal={openModal}
-        onShare={kakaoShare}
+        onShare={kakaoShare}        
       />
       <main
       // dragUp 이벤트
@@ -78,7 +79,7 @@ const Home = () => {
           weekly={WEEKLYWEATHER}
         />
       </main>
-      {modalVisible && <SideBar onClose={closeModal} />}
+      {modalVisible && <SideBar onClose={closeModal} weather={WEATHER}/>}
     </HomeContainer>
   );
 };
