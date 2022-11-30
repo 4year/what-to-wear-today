@@ -52,7 +52,7 @@ const Loading = () => {
       localStorage.setItem('CityList', JSON.stringify(storeCityList));
 
       // 현재 위치 주간 날씨 가져오기
-      getWeeklyWeather(lat, lon, name, result);
+      getWeeklyWeather(lat, lon, result);
     } catch (error) {
       console.error(error);
     }
