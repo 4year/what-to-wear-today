@@ -1,19 +1,20 @@
 // 주소 검색창
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { searchCityList } from '../../utils/city';
 import SearchResult from './SearchResult';
-import cityList from '../../cityList.json';
+// import cityList from '../../cityList.json';
 
 const SearchBar = ({ hide }) => {
   // 유저가 검색하는 검색어 저장하는 곳
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
 
-  // SearchBar input에 입력되는 값들을 저장하는 역할. 
-  const handleChange = (e) => {
+  // SearchBar input에 입력되는 값들을 저장하는 역할.
+  const handleChange = e => {
     setUserInput(e.target.value);
   };
 
-  const filterLocationListData = cityList.filter((list) => {
+  const filterLocationListData = searchCityList.filter(list => {
     return list.name.includes(userInput);
   });
 
@@ -26,11 +27,9 @@ const SearchBar = ({ hide }) => {
         value={userInput}
         onChange={handleChange}
       ></input>
-      <button 
-        className="search-cancel"
-        onClick={hide}
-        >취소
-      </button>          
+      <button className="search-cancel" onClick={hide}>
+        취소
+      </button>
       {userInput && <SearchResult cityList={filterLocationListData} />}
     </SearchLocation>
   );

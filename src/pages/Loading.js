@@ -2,12 +2,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { API_KEY } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getCityName } from '../utils/city';
 
 const loadingImg = process.env.PUBLIC_URL + '/images/loading.gif';
 
 const Loading = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  // 지역목록 클릭하여 넘어오면 isFirstLoading === false
+  const isFirstLoading = location.state?.isFirstLoading ?? true;
 
   // 현재 위치 가져오기
   const getCurrentLocation = () => {
@@ -19,31 +23,53 @@ const Loading = () => {
   };
 
   // 현재 날씨 가져오기
-  const getCurrentWeather = async (lat, lon) => {
+  const getCurrentWeather = async (lat, lon, name) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
     try {
       const result = await fetch(url).then(response => response.json());
 
-      getWeeklyWeather(lat, lon, result);
-      // 날씨 정보 보내기
+      // name값이 없으면 id를 이용해 지역이름 -> 한국어로 변경
+      name ??= getCityName(result.id);
+
+      // localStorage에 지역 목록 추가
+      const prevLocationList =
+        JSON.parse(localStorage.getItem('LocationList')) || [];
+
+      localStorage.setItem(
+        'LocationList',
+        JSON.stringify([
+          ...prevLocationList,
+          {
+            name: name,
+            lat: lat,
+            lon: lon,
+            temp: Math.round(result.main.temp),
+            icon: result.weather[0].icon,
+          },
+        ])
+      );
+
+      // 현재 위치 주간 날씨 가져오기
+      getWeeklyWeather(lat, lon, name, result);
     } catch (error) {
       console.error(error);
     }
   };
 
   //주간 날씨 가져오기
-  const getWeeklyWeather = async (lat, lon, result) => {
+  const getWeeklyWeather = async (lat, lon, name, result) => {
     const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
     try {
       const weeklyResult = await fetch(weeklyUrl).then(response =>
         response.json()
       );
+      // home으로 이동
       navigate('/home', {
-
         replace: false,
         state: {
+          name,
           result,
           weeklyResult,
         },
@@ -52,9 +78,18 @@ const Loading = () => {
       console.log(error);
     }
   };
-  // api fetching 후 페이지 이동
+
   useEffect(() => {
-    getCurrentLocation();
+    // 첫 로딩이면 getCurrentLocation, 아니면 getCurrentWeather
+    if (isFirstLoading) {
+      getCurrentLocation();
+    } else {
+      // localStorage에서 선택된 지역정보 가져오기기
+      const { lat, lon, name } = JSON.parse(
+        localStorage.getItem('SelectedLocation')
+      );
+      getCurrentWeather(lat, lon, name);
+    }
   }, []);
 
   return (

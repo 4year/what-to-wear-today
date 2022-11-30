@@ -1,20 +1,11 @@
-// 지역이름, 날씨 아이콘, 현재 기온
+// 지역 목록 item - 지역 이름
 import React from 'react';
 import styled from 'styled-components';
-// import { WiDayCloudyWindy } from 'react-icons/wi'
-// import { useState } from 'react';
 
-
-
-const LocationList = ({ name, icon, temp}) => {
-	// const { name, icon, temp } = props;
+const LocationList = ({ name, lat, lon, onClick }) => {
   return (
-    <List>
+    <List onClick={() => onClick(lat, lon, name)}>
       <h4>{name}</h4>
-      <div className='temp'>
-        {icon}
-        <span>{temp}</span>
-      </div>
     </List>
   );
 };
@@ -28,6 +19,7 @@ const List = styled.div`
   padding: 2px 20px;
   margin: 0 8px;
   margin-bottom: 15px;
+  cursor: pointer;
 
   h4 {
     font-size: 12px;

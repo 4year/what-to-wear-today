@@ -1,4 +1,4 @@
-import { WeatherData } from '../WeatherData';
+import { WeatherData } from './WeatherData';
 
 // 유닉스 -> 한국 시간
 export const convertDate = weather => {
@@ -8,11 +8,6 @@ export const convertDate = weather => {
     day: 'numeric',
     weekday: 'long',
   });
-};
-
-// 온도 반올림
-export const convertTemp = weather => {
-  return Math.round(weather.main.temp);
 };
 
 // 해당 기온에 맞는 WeatherData 찾기

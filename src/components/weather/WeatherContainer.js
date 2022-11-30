@@ -1,11 +1,11 @@
 // weather container
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { convertDate, convertTemp, getWeatherData } from '../../utils/weather';
+import { convertDate, getWeatherData } from '../../utils/weather';
 import WeeklyWeather from './WeeklyWeather';
 
 const WeatherContainer = ({ weather, dragUp, weekly }) => {
-  const temperature = convertTemp(weather);
+  const temperature = Math.round(weather.main.temp);
   const background = getWeatherData(temperature).background;
 
   return (
