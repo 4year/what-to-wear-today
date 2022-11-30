@@ -59,7 +59,7 @@ const Loading = () => {
   };
 
   //주간 날씨 가져오기
-  const getWeeklyWeather = async (lat, lon, name, result) => {
+  const getWeeklyWeather = async (lat, lon, result) => {
     const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
     try {
@@ -70,7 +70,6 @@ const Loading = () => {
       navigate('/home', {
         replace: false,
         state: {
-          name,
           result,
           weeklyResult,
         },

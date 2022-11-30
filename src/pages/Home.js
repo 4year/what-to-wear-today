@@ -8,6 +8,7 @@ import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
+import { getCityName } from './../utils/city/index';
 
 const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -17,7 +18,6 @@ const Home = () => {
 
   // 날씨 정보 받아오기
   const location = useLocation();
-  const CITYNAME = location.state.name;
   const WEATHER = location.state.result;
   const WEEKLYWEATHER = location.state.weeklyResult;
 
@@ -52,22 +52,26 @@ const Home = () => {
 
   return (
     <HomeContainer ref={homeRef}>
-      <Header location={CITYNAME} openModal={openModal} onShare={kakaoShare} />
+      <Header
+        location={getCityName(WEATHER.id)}
+        openModal={openModal}
+        onShare={kakaoShare}
+      />
       <main
-      // dragUp 이벤트
-      // {...registerDragEvent({
-      //   onDragStart: (moveX, moveY) => {
-      //     // console.log(moveY);
-      //     setDragUp(inrange(moveY, -100, 0));
-      //   },
-      //   onDragEnd: (moveX, moveY) => {
-      //     if (moveY <= -100) {
-      //       setDragUp(1);
-      //     } else {
-      //       setDragUp(0);
-      //     }
-      //   },
-      // })}
+        // dragUp 이벤트
+        {...registerDragEvent({
+          onDragStart: (moveX, moveY) => {
+            // console.log(moveY);
+            setDragUp(inrange(moveY, -100, 0));
+          },
+          onDragEnd: (moveX, moveY) => {
+            if (moveY <= -100) {
+              setDragUp(1);
+            } else {
+              setDragUp(0);
+            }
+          },
+        })}
       >
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
         <WeatherContainer
@@ -77,7 +81,11 @@ const Home = () => {
         />
       </main>
       {modalVisible && (
-        <SideBar onClose={closeModal} cityName={CITYNAME} weather={WEATHER} />
+        <SideBar
+          onClose={closeModal}
+          cityName={getCityName(WEATHER.id)}
+          weather={WEATHER}
+        />
       )}
     </HomeContainer>
   );
