@@ -33,22 +33,23 @@ const Loading = () => {
       name ??= getCityName(result.id);
 
       // localStorage에 지역 목록 추가
-      const prevLocationList =
-        JSON.parse(localStorage.getItem('LocationList')) || [];
+      let prevCityList = JSON.parse(localStorage.getItem('CityList')) || [];
 
-      localStorage.setItem(
-        'LocationList',
-        JSON.stringify([
-          ...prevLocationList,
-          {
-            name: name,
-            lat: lat,
-            lon: lon,
-            temp: Math.round(result.main.temp),
-            icon: result.weather[0].icon,
-          },
-        ])
-      );
+      // 이미 있는 지역이면 추가 안 되게
+      prevCityList &&= prevCityList.filter(city => city.name !== name);
+
+      const storeCityList = [
+        ...prevCityList,
+        {
+          name: name,
+          lat: lat,
+          lon: lon,
+          temp: Math.round(result.main.temp),
+          icon: result.weather[0].icon,
+        },
+      ];
+
+      localStorage.setItem('CityList', JSON.stringify(storeCityList));
 
       // 현재 위치 주간 날씨 가져오기
       getWeeklyWeather(lat, lon, name, result);

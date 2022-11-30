@@ -2,7 +2,6 @@ import cityList from './cityList.json';
 
 // 현재 위치 한글로 변경
 export const getCityName = id => {
-  console.log(id);
   return cityList.find(city => city.id === id).name;
 };
 
