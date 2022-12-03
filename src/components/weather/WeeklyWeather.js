@@ -40,8 +40,9 @@ const WeeklyWeather = ({ weekly }) => {
       <span>{hour[idx]}시</span>
     </WrapList>
   ));
-  console.log(twoDayList);
-  console.log(oneDayList);
+
+  console.log(postList);
+  console.log(twoPostList);
 
   return (
     <>
