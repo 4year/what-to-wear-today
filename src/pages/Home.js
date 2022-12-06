@@ -80,13 +80,7 @@ const Home = () => {
           weekly={WEEKLYWEATHER}
         />
       </main>
-      {modalVisible && (
-        <SideBar
-          onClose={closeModal}
-          cityName={getCityName(WEATHER.id)}
-          weather={WEATHER}
-        />
-      )}
+      {modalVisible && <SideBar onClose={closeModal} />}
     </HomeContainer>
   );
 };
