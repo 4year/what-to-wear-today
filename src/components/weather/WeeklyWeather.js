@@ -2,8 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TbTemperature } from 'react-icons/tb';
-import { TiWeatherSunny } from 'react-icons/ti';
-import { TiWeatherShower } from 'react-icons/ti';
+import { TiWeatherSunny, TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
   //내일 날씨 리스트
@@ -11,7 +10,6 @@ const WeeklyWeather = ({ weekly }) => {
 
   //모레 날씨 리스트
   const twoDayList = weekly.list.slice(14, 23);
-  console.log(twoDayList);
 
   const hour = [0, 3, 6, 9, 12, 15, 18, 21, 24];
 
@@ -40,9 +38,6 @@ const WeeklyWeather = ({ weekly }) => {
       <span>{hour[idx]}시</span>
     </WrapList>
   ));
-
-  console.log(postList);
-  console.log(twoPostList);
 
   return (
     <>

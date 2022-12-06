@@ -1,27 +1,20 @@
 // 사이드 바
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SideHeader from './SideHeader';
 import SearchBar from '../addLocation/SearchBar';
-import CurrentLocation from './CurrentLocation';
+import LocationList from './LocationList';
 
-const SideBar = ({ visible, onClose, weather }) => {
-	// LocationListData에서 가져올 지역 리스트
-  // const locationList = cityList;
-  // const [location, setLocation] =  useState([]);
-
+const SideBar = ({ onClose, cityName }) => {
   // 검색창 보여주는 상태값
   const [search, setSearch] = useState(false);
 
   const onClickLocationPlus = () => {
-		setSearch(true);
-		console.log(search);
-	};
+    setSearch(true);
+  };
 
   const onClickLocationCancel = () => {
     setSearch(false);
-    console.log(search);
   };
 
   const onMaskClick = e => {
@@ -30,23 +23,38 @@ const SideBar = ({ visible, onClose, weather }) => {
     }
   };
 
-	return (
-		<SidebarContainer>
-			<ModalOverlay onClick={onMaskClick} />
-			<ModalWrapper>
-				<SideHeader close={onClose} onClickLocationPlus={onClickLocationPlus} />
-				{search ? (<SearchBar hide={onClickLocationCancel}/>) : (<CurrentLocation weather={weather}/>)}
-			</ModalWrapper>
-		</SidebarContainer>
-	);
-};
+  // localStorage에 저장된 지역목록 가져오기
+  let cityList = JSON.parse(localStorage.getItem('CityList'));
 
-Location.propTypes = {
-	visible: PropTypes.bool,
-};
+  // 현재 위치 정보 추가 및 sorting
+  cityList &&= cityList
+    .map(item => {
+      if (item.name === cityName) {
+        item.className = 'current';
+      }
+      return item;
+    })
+    .sort(
+      (a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className')
+    );
 
-SearchBar.propTypes = {
-  show: PropTypes.bool,
+  return (
+    <SidebarContainer>
+      <ModalOverlay onClick={onMaskClick} />
+      <ModalWrapper>
+        <SideHeader close={onClose} onClickLocationPlus={onClickLocationPlus} />
+        {search ? (
+          <SearchBar hide={onClickLocationCancel} />
+        ) : (
+          <LocationContainer>
+            {cityList.map((location, idx) => (
+              <LocationList key={idx} {...location} />
+            ))}
+          </LocationContainer>
+        )}
+      </ModalWrapper>
+    </SidebarContainer>
+  );
 };
 
 const SidebarContainer = styled.div`
@@ -73,8 +81,14 @@ const ModalWrapper = styled.div`
   height: 100%;
   padding: 10px;
   background-color: #fff;
-  /* background-color: tomato; */
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+`;
+
+const LocationContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default SideBar;

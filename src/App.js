@@ -2,17 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Loading from './pages/Loading';
 import Home from './pages/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (
     <AppContainer className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Loading />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Loading />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </AppContainer>
   );
 };
