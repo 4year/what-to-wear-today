@@ -19,6 +19,7 @@ const Home = () => {
   const location = useLocation();
   const WEATHER = location.state.result;
   const WEEKLYWEATHER = location.state.weeklyResult;
+  console.log(WEATHER);
   console.log(WEEKLYWEATHER);
 
   // 모달
@@ -70,7 +71,7 @@ const Home = () => {
         <Dresses temperature={convertTemp(WEATHER)} />
         <WeatherContainer weather={WEATHER} dragUp={dragUp} weekly={WEEKLYWEATHER} />
       </main>
-      {modalVisible && <SideBar onClose={closeModal} />}
+      {modalVisible && <SideBar onClose={closeModal} weather={WEATHER} />}
     </HomeContainer>
   );
 };
