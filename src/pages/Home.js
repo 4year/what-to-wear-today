@@ -51,20 +51,20 @@ const Home = () => {
     <HomeContainer>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
       <main
-        // dragUp 이벤트
-        {...registerDragEvent({
-          onDragStart: (moveX, moveY) => {
-            // console.log(moveY);
-            setDragUp(inrange(moveY, -100, 0));
-          },
-          onDragEnd: (moveX, moveY) => {
-            if (moveY <= -100) {
-              setDragUp(1);
-            } else {
-              setDragUp(0);
-            }
-          },
-        })}
+      // dragUp 이벤트
+      // {...registerDragEvent({
+      //   onDragStart: (moveX, moveY) => {
+      //     // console.log(moveY);
+      //     setDragUp(inrange(moveY, -100, 0));
+      //   },
+      //   onDragEnd: (moveX, moveY) => {
+      //     if (moveY <= -100) {
+      //       setDragUp(1);
+      //     } else {
+      //       setDragUp(0);
+      //     }
+      //   },
+      // })}
       >
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
         <WeatherContainer weather={WEATHER} dragUp={dragUp} weekly={WEEKLYWEATHER} />

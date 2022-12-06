@@ -13,7 +13,7 @@ const RemoveLocaiotn = ({ hide, cityList }) => {
           <button onClick={hide}>취소</button>
         </div>
       </div>
-      <div>
+      <div style={{ width: '90%' }}>
         {cityList.map((location, idx) => (
           <div className="location-list">
             <input type="checkBox" />
