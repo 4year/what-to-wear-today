@@ -46,9 +46,11 @@ const SideBar = ({ onClose, cityName }) => {
         {search ? (
           <SearchBar hide={onClickLocationCancel} />
         ) : (
-          cityList.map((location, idx) => (
-            <LocationList key={idx} {...location} />
-          ))
+          <LocationContainer>
+            {cityList.map((location, idx) => (
+              <LocationList key={idx} {...location} />
+            ))}
+          </LocationContainer>
         )}
       </ModalWrapper>
     </SidebarContainer>
@@ -80,6 +82,13 @@ const ModalWrapper = styled.div`
   padding: 10px;
   background-color: #fff;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+`;
+
+const LocationContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default SideBar;

@@ -39,11 +39,11 @@ const LocationList = ({ name, icon, temp, lat, lon, className }) => {
 };
 
 const List = styled.div`
+  width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   position: relative;
-  margin: 0 8px;
   margin-bottom: 15px;
   padding: 2px 20px;
   border: 2px solid black;
