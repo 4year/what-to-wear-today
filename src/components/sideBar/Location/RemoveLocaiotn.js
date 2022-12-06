@@ -32,6 +32,7 @@ const RemoveLocaiotn = ({ hide, cityList }) => {
     },
     [checkedList],
   );
+  console.log(checkedList);
 
   // 삭제 버튼 클릭 시
 
@@ -57,7 +58,12 @@ const RemoveLocaiotn = ({ hide, cityList }) => {
               onChange={e => onCheckedElement(e.target.checked, location)}
               checked={checkedList.includes(location) ? true : false}
             />
-            <LocationList key={idx} {...location} />
+            <LocationList
+              key={idx}
+              location={location}
+              onClick={onCheckedElement}
+              checked={checkedList.includes(location) ? false : true}
+            />
           </div>
         ))}
       </List>

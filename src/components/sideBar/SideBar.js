@@ -55,7 +55,7 @@ const SideBar = ({ onClose, cityName }) => {
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (
-              <LocationList key={idx} {...location} />
+              <LocationList key={idx} location={location} />
             ))}
           </LocationContainer>
         )}

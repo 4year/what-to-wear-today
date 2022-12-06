@@ -3,8 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const LocationList = ({ name, icon, temp, lat, lon, className }) => {
+const LocationList = ({ location, onClick, checked }) => {
   const navigate = useNavigate();
+  const { name, icon, temp, lat, lon, className } = { ...location };
 
   // 지역 리스트 클릭 시,
   // 1. 해당 지역의 위도 경도를 localStorage에 저장
@@ -19,8 +20,16 @@ const LocationList = ({ name, icon, temp, lat, lon, className }) => {
     });
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick(checked, location);
+    } else {
+      addLocation(lat, lon, name);
+    }
+  };
+
   return (
-    <List onClick={() => addLocation(lat, lon, name)} className={className}>
+    <List onClick={handleClick} className={className}>
       <h4>{name}</h4>
       {icon && (
         <div className="weather">
