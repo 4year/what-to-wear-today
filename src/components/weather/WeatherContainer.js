@@ -58,9 +58,9 @@ const scrollUpHeight = keyframes`
 
 const Container = styled.div`
   position: absolute;
-  top: 50%;
+  top: 55%;
   width: 100%;
-  height: 50%;
+  height: 45%;
   font-size: 20px;
   line-height: 50px;
   font-weight: 600;

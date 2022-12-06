@@ -17,7 +17,7 @@ const Header = ({ onShare, openModal, location }) => {
 };
 
 const HeaderContainer = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   display: flex;
   justify-content: space-between;

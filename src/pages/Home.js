@@ -86,9 +86,7 @@ const HomeContainer = styled.div`
   }
 
   main {
-    /* position: relative; */
     height: calc(100% - 3rem);
-    margin-top: 3rem;
   }
 `;
 

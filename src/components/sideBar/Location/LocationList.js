@@ -10,10 +10,7 @@ const LocationList = ({ name, icon, temp, lat, lon, className }) => {
   // 1. 해당 지역의 위도 경도를 localStorage에 저장
   // 2. loading navigate
   const addLocation = (lat, lon, name) => {
-    localStorage.setItem(
-      'SelectedLocation',
-      JSON.stringify({ lat, lon, name })
-    );
+    localStorage.setItem('SelectedLocation', JSON.stringify({ lat, lon, name }));
     navigate('/', {
       replace: false,
       state: {
@@ -27,10 +24,7 @@ const LocationList = ({ name, icon, temp, lat, lon, className }) => {
       <h4>{name}</h4>
       {icon && (
         <div className="weather">
-          <img
-            src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-            alt="weather icon"
-          />
+          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="weather icon" />
           {temp}°C
         </div>
       )}
