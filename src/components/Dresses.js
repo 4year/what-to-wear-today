@@ -6,7 +6,7 @@ import { inrange, registerDragEvent } from './../utils/drag';
 
 const Dresses = ({ temperature }) => {
   // 현재 기온에 맞는 옷 정보 data
-  const dressInfo = getWeatherData(23);
+  const dressInfo = getWeatherData(temperature);
 
   // 슬라이드 리스트
   const slideList =
@@ -96,8 +96,10 @@ const Dresses = ({ temperature }) => {
 };
 
 const DressContainer = styled.div`
+  position: sticky;
+  top: 0;
   width: 100%;
-  height: 53%;
+  height: 50%;
 
   p {
     font-size: 1.2rem;
@@ -108,10 +110,13 @@ const DressContainer = styled.div`
 
 const Viewer = styled.div`
   width: 100%;
+  height: 80%;
+  overflow: hidden;
 `;
 
 const Slider = styled.div`
   display: flex;
+  height: 93%;
 `;
 
 const Slide = styled.div`
@@ -121,8 +126,7 @@ const Slide = styled.div`
 
 const SlideImage = styled.img`
   width: 100%;
-  height: 320px;
-  object-fit: contain;
+  height: 100%;
   cursor: ${props => (props.slide.length === 1 ? 'default' : 'pointer')};
 `;
 
