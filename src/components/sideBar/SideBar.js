@@ -5,7 +5,7 @@ import SideHeader from './SideHeader';
 import SearchBar from '../addLocation/SearchBar';
 import LocationList from './LocationList';
 
-const SideBar = ({ onClose }) => {
+const SideBar = ({ onClose, cityName }) => {
   // 검색창 보여주는 상태값
   const [search, setSearch] = useState(false);
 
@@ -24,9 +24,19 @@ const SideBar = ({ onClose }) => {
   };
 
   // localStorage에 저장된 지역목록 가져오기
-  const cityList = JSON.parse(localStorage.getItem('CityList'));
+  let cityList = JSON.parse(localStorage.getItem('CityList'));
 
   // 현재 위치 정보 추가 및 sorting
+  cityList &&= cityList
+    .map(item => {
+      if (item.name === cityName) {
+        item.className = 'current';
+      }
+      return item;
+    })
+    .sort(
+      (a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className')
+    );
 
   return (
     <SidebarContainer>

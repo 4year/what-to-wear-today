@@ -1,5 +1,5 @@
 // Home
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { registerDragEvent, inrange } from '../utils/drag';
@@ -14,12 +14,11 @@ const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [dragUp, setDragUp] = useState(0);
 
-  const homeRef = useRef();
-
   // 날씨 정보 받아오기
   const location = useLocation();
   const WEATHER = location.state.result;
   const WEEKLYWEATHER = location.state.weeklyResult;
+  const cityName = getCityName(WEATHER.id);
 
   // 모달
   const openModal = () => {
@@ -51,12 +50,8 @@ const Home = () => {
   }, [WEATHER]);
 
   return (
-    <HomeContainer ref={homeRef}>
-      <Header
-        location={getCityName(WEATHER.id)}
-        openModal={openModal}
-        onShare={kakaoShare}
-      />
+    <HomeContainer>
+      <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
@@ -80,7 +75,7 @@ const Home = () => {
           weekly={WEEKLYWEATHER}
         />
       </main>
-      {modalVisible && <SideBar onClose={closeModal} />}
+      {modalVisible && <SideBar onClose={closeModal} cityName={cityName} />}
     </HomeContainer>
   );
 };

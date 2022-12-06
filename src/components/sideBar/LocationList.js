@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const LocationList = ({ name, icon, temp, lat, lon }) => {
+const LocationList = ({ name, icon, temp, lat, lon, className }) => {
   const navigate = useNavigate();
 
   // 지역 리스트 클릭 시,
@@ -23,7 +23,7 @@ const LocationList = ({ name, icon, temp, lat, lon }) => {
   };
 
   return (
-    <List onClick={() => addLocation(lat, lon, name)}>
+    <List onClick={() => addLocation(lat, lon, name)} className={className}>
       <h4>{name}</h4>
       {icon && (
         <div className="weather">
@@ -42,12 +42,30 @@ const List = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   margin: 0 8px;
   margin-bottom: 15px;
+  padding: 2px 20px;
   border: 2px solid black;
   border-radius: 15px;
-  padding: 2px 20px;
   cursor: pointer;
+
+  &.current {
+    background-color: lightblue;
+
+    &::before {
+      content: '현재 위치';
+      position: absolute;
+      top: -12px;
+      left: -10px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid black;
+    }
+  }
 
   h4 {
     font-size: 12px;
