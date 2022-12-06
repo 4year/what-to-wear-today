@@ -1,9 +1,8 @@
 // 주소 검색창
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { searchCityList } from '../../utils/city';
+import { searchCityList } from '../../../utils/city';
 import SearchResult from './SearchResult';
-// import cityList from '../../cityList.json';
 
 const SearchBar = ({ hide }) => {
   // 유저가 검색하는 검색어 저장하는 곳

@@ -2,19 +2,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideHeader from './SideHeader';
-import SearchBar from '../addLocation/SearchBar';
-import LocationList from './LocationList';
+import SearchBar from './Location/SearchBar';
+import LocationList from './Location/LocationList';
+import RemoveLocaiotn from './Location/RemoveLocaiotn';
 
 const SideBar = ({ onClose, cityName }) => {
   // 검색창 보여주는 상태값
   const [search, setSearch] = useState(false);
+  const [remove, setRemove] = useState(false);
 
-  const onClickLocationPlus = () => {
+  const onClickPlus = () => {
     setSearch(true);
   };
 
-  const onClickLocationCancel = () => {
+  const onClickMinus = () => {
+    setRemove(true);
+  };
+
+  const onClickCancel = () => {
     setSearch(false);
+    setRemove(false);
   };
 
   const onMaskClick = e => {
@@ -42,9 +49,15 @@ const SideBar = ({ onClose, cityName }) => {
     <SidebarContainer>
       <ModalOverlay onClick={onMaskClick} />
       <ModalWrapper>
-        <SideHeader close={onClose} onClickLocationPlus={onClickLocationPlus} />
+        <SideHeader
+          close={onClose}
+          onClickPlus={onClickPlus}
+          onClickMinus={onClickMinus}
+        />
         {search ? (
-          <SearchBar hide={onClickLocationCancel} />
+          <SearchBar hide={onClickCancel} />
+        ) : remove ? (
+          <RemoveLocaiotn hide={onClickCancel} cityList={cityList} />
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (
