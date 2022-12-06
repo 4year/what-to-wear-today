@@ -1,15 +1,24 @@
 // 주소 검색 결과 container
 import React from 'react';
+import styled from 'styled-components';
 import LocationList from '../sideBar/LocationList';
 
 const SearchResult = ({ cityList }) => {
-	return (
-    <div>
-      {cityList.map((locationList) => (
-        <LocationList key={locationList.id} {...locationList} />
+  return (
+    <ResultContainer>
+      {cityList.map(location => (
+        <LocationList key={location.id} {...location} />
       ))}
-    </div>
-  )
+    </ResultContainer>
+  );
 };
+
+const ResultContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  overflow: auto;
+`;
 
 export default SearchResult;

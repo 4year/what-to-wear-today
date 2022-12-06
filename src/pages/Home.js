@@ -1,26 +1,24 @@
 // Home
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { registerDragEvent, inrange } from '../utils/drag';
-import { convertDate, convertTemp, getWeatherData } from '../utils/weather';
+import { convertDate, getWeatherData } from '../utils/weather';
 import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
+import { getCityName } from './../utils/city/index';
 
 const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [dragUp, setDragUp] = useState(0);
 
-  const homeRef = useRef();
-
   // 날씨 정보 받아오기
   const location = useLocation();
   const WEATHER = location.state.result;
   const WEEKLYWEATHER = location.state.weeklyResult;
-  console.log(WEATHER);
-  console.log(WEEKLYWEATHER);
+  const cityName = getCityName(WEATHER.id);
 
   // 모달
   const openModal = () => {
@@ -34,14 +32,14 @@ const Home = () => {
   // 카카오 공유하기
   const kakaoShare = useCallback(() => {
     // 공유할 옷 정보
-    const shareData = getWeatherData(convertTemp(WEATHER.main.temp));
+    const shareData = getWeatherData(Math.round(WEATHER.main.temp));
     const shareImages = shareData.images;
     const shareDesc = shareData.desc;
 
     window.Kakao.Share.sendCustom({
       templateId: shareImages.length === 1 ? 86217 : 86200,
       templateArgs: {
-        title: `${convertDate(WEATHER.dt)}\n현재 날씨: ${convertTemp(
+        title: `${convertDate(WEATHER)}\n현재 날씨: ${Math.round(
           WEATHER.main.temp
         )}°C`,
         description: shareDesc,
@@ -52,12 +50,8 @@ const Home = () => {
   }, [WEATHER]);
 
   return (
-    <HomeContainer ref={homeRef}>
-      <Header
-        location={WEATHER.name}
-        openModal={openModal}
-        onShare={kakaoShare}        
-      />
+    <HomeContainer>
+      <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
       <main
         // dragUp 이벤트
         {...registerDragEvent({
@@ -74,14 +68,14 @@ const Home = () => {
           },
         })}
       >
-        <Dresses temperature={convertTemp(WEATHER.main.temp)} />
+        <Dresses temperature={Math.round(WEATHER.main.temp)} />
         <WeatherContainer
           weather={WEATHER}
           dragUp={dragUp}
           weekly={WEEKLYWEATHER}
         />
       </main>
-      {modalVisible && <SideBar onClose={closeModal} weather={WEATHER}/>}
+      {modalVisible && <SideBar onClose={closeModal} cityName={cityName} />}
     </HomeContainer>
   );
 };
