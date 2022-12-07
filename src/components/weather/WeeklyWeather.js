@@ -70,7 +70,7 @@ const WeeklyWeather = ({ weekly }) => {
 };
 
 const Container = styled.div`
-  /* height: 28%; */
+  height: 25%;
   width: 90%;
   margin: 5px 20px;
   padding: 7px 5px;
@@ -83,7 +83,7 @@ const Wrap = styled.div`
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 150px;
+  height: 80%;
 
   ::-webkit-scrollbar {
     height: 15px;
@@ -111,7 +111,7 @@ const Title = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 5px 23px;
-  height: 40px;
+  height: 20%;
 
   h3 {
     font-size: 14px;

@@ -2,17 +2,16 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import { registerDragEvent, inrange } from '../utils/drag';
 import { convertDate, getWeatherData } from '../utils/weather';
+import { getCityName } from './../utils/city/index';
 import Header from './../components/Header';
 import Dresses from '../components/Dresses';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import SideBar from '../components/sideBar/SideBar';
-import { getCityName } from './../utils/city/index';
 
 const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [dragUp, setDragUp] = useState(0);
+  const [scroll, setScroll] = useState('');
 
   // 날씨 정보 받아오기
   const location = useLocation();
@@ -47,27 +46,25 @@ const Home = () => {
     });
   }, [WEATHER]);
 
+  // 스크롤 이벤트
+  const handleScroll = e => {
+    const scrollTop = e.target.scrollTop; // 0(start) ~  100(mideum) ~ 352(end)
+
+    if (scrollTop >= 352) {
+      setScroll('scrollEnd');
+    } else if (scrollTop === 0) {
+      setScroll('');
+    } else {
+      setScroll('scroll');
+    }
+  };
+
   return (
-    <HomeContainer>
+    <HomeContainer onScroll={handleScroll}>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
-      <main
-      // dragUp 이벤트
-      // {...registerDragEvent({
-      //   onDragStart: (moveX, moveY) => {
-      //     // console.log(moveY);
-      //     setDragUp(inrange(moveY, -100, 0));
-      //   },
-      //   onDragEnd: (moveX, moveY) => {
-      //     if (moveY <= -100) {
-      //       setDragUp(1);
-      //     } else {
-      //       setDragUp(0);
-      //     }
-      //   },
-      // })}
-      >
+      <main>
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
-        <WeatherContainer weather={WEATHER} dragUp={dragUp} weekly={WEEKLYWEATHER} />
+        <WeatherContainer className="weatherContainer" weather={WEATHER} scroll={scroll} weekly={WEEKLYWEATHER} />
       </main>
       {modalVisible && <SideBar onClose={closeModal} cityName={cityName} />}
     </HomeContainer>
@@ -78,13 +75,18 @@ const HomeContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   text-align: center;
-  background-color: #fff;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  /* border: 1px solid red; */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   main {
     height: calc(100% - 3rem);
-    margin-top: 3rem;
   }
 `;
 

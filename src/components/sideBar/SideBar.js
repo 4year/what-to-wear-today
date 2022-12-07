@@ -41,19 +41,13 @@ const SideBar = ({ onClose, cityName }) => {
       }
       return item;
     })
-    .sort(
-      (a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className')
-    );
+    .sort((a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className'));
 
   return (
     <SidebarContainer>
       <ModalOverlay onClick={onMaskClick} />
       <ModalWrapper>
-        <SideHeader
-          close={onClose}
-          onClickPlus={onClickPlus}
-          onClickMinus={onClickMinus}
-        />
+        <SideHeader close={onClose} onClickPlus={onClickPlus} onClickMinus={onClickMinus} />
         {search ? (
           <SearchBar hide={onClickCancel} />
         ) : remove ? (
@@ -61,7 +55,7 @@ const SideBar = ({ onClose, cityName }) => {
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (
-              <LocationList key={idx} {...location} />
+              <LocationList key={idx} location={location} />
             ))}
           </LocationContainer>
         )}
@@ -92,7 +86,7 @@ const ModalWrapper = styled.div`
   right: 0;
   width: 70%;
   height: 100%;
-  padding: 10px;
+  padding: 0 10px;
   background-color: #fff;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 `;
