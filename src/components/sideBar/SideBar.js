@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideHeader from './SideHeader';
 import SearchBar from './Location/SearchBar';
-import LocationList from './Location/LocationList';
 import RemoveLocaiotn from './Location/RemoveLocaiotn';
+import LocationList from './Location/LocationList';
 
-const SideBar = ({ onClose, cityName }) => {
+const SideBar = ({ scroll, onClose, cityName }) => {
   // 검색창 보여주는 상태값
   const [search, setSearch] = useState(false);
   const [remove, setRemove] = useState(false);
@@ -44,7 +44,7 @@ const SideBar = ({ onClose, cityName }) => {
     .sort((a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className'));
 
   return (
-    <SidebarContainer>
+    <SidebarContainer className={scroll === 'scrollEnd' && 'top50'}>
       <ModalOverlay onClick={onMaskClick} />
       <ModalWrapper>
         <SideHeader close={onClose} onClickPlus={onClickPlus} onClickMinus={onClickMinus} />
@@ -70,6 +70,10 @@ const SidebarContainer = styled.div`
   width: 100%;
   height: 100%;
   z-index: 9999;
+
+  &.top50 {
+    top: 50%;
+  }
 `;
 
 const ModalOverlay = styled.div`
