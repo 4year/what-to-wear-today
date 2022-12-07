@@ -48,7 +48,7 @@ const Home = () => {
 
   // 스크롤 이벤트
   const handleScroll = e => {
-    const scrollTop = e.target.scrollTop; // 0(start) ~  100(mideum) ~ 352(end)
+    const scrollTop = e.target.scrollTop; // 0(start) ~ 352(end)
 
     if (scrollTop >= 352) {
       setScroll('scrollEnd');
@@ -60,13 +60,13 @@ const Home = () => {
   };
 
   return (
-    <HomeContainer onScroll={handleScroll}>
+    <HomeContainer onScroll={handleScroll} className={modalVisible && 'openModal'}>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
       <main>
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
         <WeatherContainer className="weatherContainer" weather={WEATHER} scroll={scroll} weekly={WEEKLYWEATHER} />
       </main>
-      {modalVisible && <SideBar onClose={closeModal} cityName={cityName} />}
+      {modalVisible && <SideBar scroll={scroll} onClose={closeModal} cityName={cityName} />}
     </HomeContainer>
   );
 };
@@ -79,7 +79,10 @@ const HomeContainer = styled.div`
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  /* border: 1px solid red; */
+
+  &.openModal {
+    overflow: hidden;
+  }
 
   &::-webkit-scrollbar {
     display: none;
