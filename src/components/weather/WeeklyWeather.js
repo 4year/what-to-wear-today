@@ -10,8 +10,16 @@ const WeeklyWeather = ({ weekly }) => {
 
   //모레 날씨 리스트
   const twoDayList = weekly.list.slice(14, 23);
+  console.log(twoDayList);
+  // console.log(twoDayList[0].dt_txt);
 
-  const hour = [0, 3, 6, 9, 12, 15, 18, 21, 24];
+  // const SliceLength = twoDayList.length;
+
+  // console.log(Slice.slice(11, 13));
+
+  // console.log(Object.keys(twoDayList).slice(0));
+
+  // const hour = [0, 3, 6, 9, 12, 15, 18, 21];
 
   //내일 날씨 리스트 렌더링
   const postList = oneDayList.map((data, idx) => (
@@ -22,7 +30,7 @@ const WeeklyWeather = ({ weekly }) => {
         src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
-      <span>{hour[idx]}시</span>
+      <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
 
@@ -35,7 +43,7 @@ const WeeklyWeather = ({ weekly }) => {
         src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
-      <span>{hour[idx]}시</span>
+      <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
 
