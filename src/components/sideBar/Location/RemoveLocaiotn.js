@@ -1,26 +1,72 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import LocationList from './LocationList';
 
 const RemoveLocaiotn = ({ hide, cityList }) => {
+  const [checkedList, setCheckedLists] = useState([]);
+
+  // 전체 체크 클릭 시
+  const onCheckedAll = useCallback(
+    checked => {
+      if (checked) {
+        const checkedListArray = [];
+
+        cityList.forEach(list => checkedListArray.push(list));
+
+        setCheckedLists(checkedListArray);
+      } else {
+        setCheckedLists([]);
+      }
+    },
+    [cityList],
+  );
+
+  // 개별 체크 클릭 시
+  const onCheckedElement = useCallback(
+    (checked, list) => {
+      if (checked) {
+        setCheckedLists([...checkedList, list]);
+      } else {
+        setCheckedLists(checkedList.filter(el => el !== list));
+      }
+    },
+    [checkedList],
+  );
+  console.log(checkedList);
+
+  // 삭제 버튼 클릭 시
+
   return (
     <Container>
-      <div className="header">
-        <input type="checkBox" />
+      <Header>
+        <input
+          type="checkBox"
+          onChange={e => onCheckedAll(e.target.checked)}
+          checked={checkedList.length === 0 ? false : checkedList.length === cityList.length ? true : false}
+        />
         <h4>지역 목록 삭제</h4>
         <div>
           <button className="removeBtn">삭제</button>
           <button onClick={hide}>취소</button>
         </div>
-      </div>
-      <div style={{ width: '90%' }}>
+      </Header>
+      <List>
         {cityList.map((location, idx) => (
           <div className="location-list">
-            <input type="checkBox" />
-            <LocationList key={idx} {...location} />
+            <input
+              type="checkBox"
+              onChange={e => onCheckedElement(e.target.checked, location)}
+              checked={checkedList.includes(location) ? true : false}
+            />
+            <LocationList
+              key={idx}
+              location={location}
+              onClick={onCheckedElement}
+              checked={checkedList.includes(location) ? false : true}
+            />
           </div>
         ))}
-      </div>
+      </List>
     </Container>
   );
 };
@@ -42,31 +88,37 @@ const Container = styled.div`
   input {
     zoom: 1.5;
     margin-right: 10px;
+    cursor: pointer;
+  }
+`;
+
+const Header = styled.div`
+  width: 88%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid black;
+
+  h4 {
+    font-size: 20px;
   }
 
-  .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid black;
+  button {
+    background: none;
+    border-radius: 20px;
+    padding: 5px 7px;
+    cursor: pointer;
 
-    h4 {
-      font-size: 20px;
-    }
-
-    button {
-      background: none;
-      border-radius: 20px;
-      padding: 5px 7px;
-      cursor: pointer;
-
-      &.removeBtn {
-        margin-right: 5px;
-      }
+    &.removeBtn {
+      margin-right: 10px;
     }
   }
+`;
+
+const List = styled.div`
+  width: 90%;
 
   .location-list {
     display: flex;

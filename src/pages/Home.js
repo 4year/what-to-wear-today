@@ -90,7 +90,6 @@ const HomeContainer = styled.div`
 
   main {
     height: calc(100% - 3rem);
-    /* margin-top: 3rem; */
   }
 `;
 
