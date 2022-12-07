@@ -39,9 +39,7 @@ const Home = () => {
     window.Kakao.Share.sendCustom({
       templateId: shareImages.length === 1 ? 86217 : 86200,
       templateArgs: {
-        title: `${convertDate(WEATHER)}\n현재 날씨: ${Math.round(
-          WEATHER.main.temp
-        )}°C`,
+        title: `${convertDate(WEATHER)}\n현재 날씨: ${Math.round(WEATHER.main.temp)}°C`,
         description: shareDesc,
         [`${shareImages.length === 1 ? 'img' : 'img1'}`]: shareImages[0],
         [`${shareImages.length !== 1 && 'img2'}`]: shareImages[1],
@@ -53,27 +51,23 @@ const Home = () => {
     <HomeContainer>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
       <main
-        // dragUp 이벤트
-        {...registerDragEvent({
-          onDragStart: (moveX, moveY) => {
-            // console.log(moveY);
-            setDragUp(inrange(moveY, -100, 0));
-          },
-          onDragEnd: (moveX, moveY) => {
-            if (moveY <= -100) {
-              setDragUp(1);
-            } else {
-              setDragUp(0);
-            }
-          },
-        })}
+      // dragUp 이벤트
+      // {...registerDragEvent({
+      //   onDragStart: (moveX, moveY) => {
+      //     // console.log(moveY);
+      //     setDragUp(inrange(moveY, -100, 0));
+      //   },
+      //   onDragEnd: (moveX, moveY) => {
+      //     if (moveY <= -100) {
+      //       setDragUp(1);
+      //     } else {
+      //       setDragUp(0);
+      //     }
+      //   },
+      // })}
       >
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
-        <WeatherContainer
-          weather={WEATHER}
-          dragUp={dragUp}
-          weekly={WEEKLYWEATHER}
-        />
+        <WeatherContainer weather={WEATHER} dragUp={dragUp} weekly={WEEKLYWEATHER} />
       </main>
       {modalVisible && <SideBar onClose={closeModal} cityName={cityName} />}
     </HomeContainer>

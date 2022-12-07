@@ -64,9 +64,7 @@ const Loading = () => {
     const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
     try {
-      const weeklyResult = await fetch(weeklyUrl).then(response =>
-        response.json()
-      );
+      const weeklyResult = await fetch(weeklyUrl).then(response => response.json());
       // home으로 이동
       navigate('/home', {
         replace: false,
@@ -98,9 +96,7 @@ const Loading = () => {
       getCurrentLocation();
     } else {
       // localStorage에서 선택된 지역정보 가져오기기
-      const { lat, lon, name } = JSON.parse(
-        localStorage.getItem('SelectedLocation')
-      );
+      const { lat, lon, name } = JSON.parse(localStorage.getItem('SelectedLocation'));
       getCurrentWeather(lat, lon, name);
     }
   }, []);
