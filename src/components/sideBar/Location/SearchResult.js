@@ -1,7 +1,7 @@
 // 주소 검색 결과 container
 import React from 'react';
 import styled from 'styled-components';
-import LocationList from '../sideBar/LocationList';
+import LocationList from './LocationList';
 
 const SearchResult = ({ cityList }) => {
   return (

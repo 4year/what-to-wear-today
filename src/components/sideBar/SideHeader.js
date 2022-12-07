@@ -2,15 +2,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IoIosArrowBack } from 'react-icons/io';
-import { HiOutlinePlus } from 'react-icons/hi';
+import { HiOutlinePlus, HiOutlineMinus } from 'react-icons/hi';
 
-const SideHeader = ({ close, onClickLocationPlus }) => {
+const SideHeader = ({ close, onClickPlus, onClickMinus }) => {
   return (
     <div>
       <Header>
-        <IoIosArrowBack className="modal-close" size="20px" onClick={close} />
+        <IoIosArrowBack className="modal-close" onClick={close} />
         <h3>지역목록</h3>
-        <HiOutlinePlus className="add-list" size="20px" onClick={onClickLocationPlus} />
+        <div>
+          <HiOutlinePlus className="list add-list" onClick={onClickPlus} />
+          <HiOutlineMinus className="list remove-list" onClick={onClickMinus} />
+        </div>
       </Header>
     </div>
   );
@@ -23,9 +26,20 @@ const Header = styled.div`
   margin-bottom: 20px;
   border-bottom: 1px solid #00000021;
 
+  h4 {
+    flex: 1;
+    margin: 0;
+  }
+
   .modal-close,
-  .add-list {
+  .list {
+    font-size: 20px;
     cursor: pointer;
+    padding: 10px;
+  }
+
+  .remove-list {
+    padding-left: 0;
   }
 `;
 
