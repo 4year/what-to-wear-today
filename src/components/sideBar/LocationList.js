@@ -1,45 +1,86 @@
-// 지역이름, 날씨 아이콘, 현재 기온
+// 지역 목록 item
 import React from 'react';
 import styled from 'styled-components';
-// import { WiDayCloudyWindy } from 'react-icons/wi'
-// import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const LocationList = ({ name, icon, temp, lat, lon, className }) => {
+  const navigate = useNavigate();
 
+  // 지역 리스트 클릭 시,
+  // 1. 해당 지역의 위도 경도를 localStorage에 저장
+  // 2. loading navigate
+  const addLocation = (lat, lon, name) => {
+    localStorage.setItem(
+      'SelectedLocation',
+      JSON.stringify({ lat, lon, name })
+    );
+    navigate('/', {
+      replace: false,
+      state: {
+        isFirstLoading: false,
+      },
+    });
+  };
 
-const LocationList = ({ name, icon, temp}) => {
-	// const { name, icon, temp } = props;
   return (
-    <List>
+    <List onClick={() => addLocation(lat, lon, name)} className={className}>
       <h4>{name}</h4>
-      <div className='temp'>
-        {icon}
-        <span>{temp}</span>
-      </div>
+      {icon && (
+        <div className="weather">
+          <img
+            src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+            alt="weather icon"
+          />
+          {temp}°C
+        </div>
+      )}
     </List>
   );
 };
 
 const List = styled.div`
+  width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  position: relative;
+  margin-bottom: 15px;
+  padding: 2px 20px;
   border: 2px solid black;
   border-radius: 15px;
-  padding: 2px 20px;
-  margin: 0 8px;
-  margin-bottom: 15px;
+  cursor: pointer;
+
+  &.current {
+    background-color: lightblue;
+
+    &::before {
+      content: '현재 위치';
+      position: absolute;
+      top: -12px;
+      left: -10px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid black;
+    }
+  }
 
   h4 {
     font-size: 12px;
   }
 
-  .temp {
+  .weather {
     width: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
 
-    span {
-      font-size: 15px;
+    img {
+      width: 40px;
+      padding: 0 10px;
     }
   }
 `;
