@@ -44,7 +44,7 @@ const SideBar = ({ scroll, onClose, cityName }) => {
     .sort((a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className'));
 
   return (
-    <SidebarContainer className={scroll === 'scrollEnd' && 'top50'}>
+    <SidebarContainer className={scroll === 'scrollEnd' && 'top'}>
       <ModalOverlay onClick={onMaskClick} />
       <ModalWrapper>
         <SideHeader close={onClose} onClickPlus={onClickPlus} onClickMinus={onClickMinus} />
@@ -71,8 +71,8 @@ const SidebarContainer = styled.div`
   height: 100%;
   z-index: 9999;
 
-  &.top50 {
-    top: 50%;
+  &.top {
+    top: 55%;
   }
 `;
 
