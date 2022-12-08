@@ -93,7 +93,14 @@ const Loading = () => {
   useEffect(() => {
     // 첫 로딩이면 getCurrentLocation, 아니면 getCurrentWeather
     if (isFirstLoading) {
-      getCurrentLocation();
+      // localStorage CityList에 current가 있는지 확인
+      const currentCity = JSON.parse(localStorage.getItem('CityList')).find(item => item.className === 'current');
+
+      if (currentCity) {
+        getCurrentWeather(currentCity.lat, currentCity.lon, currentCity.name);
+      } else {
+        getCurrentLocation();
+      }
     } else {
       // localStorage에서 선택된 지역정보 가져오기기
       const { lat, lon, name } = JSON.parse(localStorage.getItem('SelectedLocation'));

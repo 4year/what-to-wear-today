@@ -30,18 +30,8 @@ const SideBar = ({ scroll, onClose, cityName }) => {
     }
   };
 
-  // localStorage에 저장된 지역목록 가져오기
-  let cityList = JSON.parse(localStorage.getItem('CityList'));
-
-  // 현재 위치 정보 추가 및 sorting
-  cityList &&= cityList
-    .map(item => {
-      if (item.name === cityName) {
-        item.className = 'current';
-      }
-      return item;
-    })
-    .sort((a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className'));
+  // localStorage에서 CityList 받아오기
+  const cityList = JSON.parse(localStorage.getItem('CityList'));
 
   return (
     <SidebarContainer className={scroll === 'scrollEnd' && 'top'}>
@@ -51,7 +41,7 @@ const SideBar = ({ scroll, onClose, cityName }) => {
         {search ? (
           <SearchBar hide={onClickCancel} />
         ) : remove ? (
-          <RemoveLocaiotn hide={onClickCancel} cityList={cityList} />
+          <RemoveLocaiotn hide={onClickCancel} />
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (

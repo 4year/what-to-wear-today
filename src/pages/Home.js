@@ -59,6 +59,25 @@ const Home = () => {
     }
   };
 
+  // localStorage에 저장된 지역목록 가져오기
+  let cityList = JSON.parse(localStorage.getItem('CityList'));
+
+  // 현재 위치 정보 추가 및 sorting
+  cityList &&= cityList
+    .map(item => {
+      if (item.className) {
+        delete item.className;
+      }
+      if (item.name === cityName) {
+        item.className = 'current';
+      }
+      return item;
+    })
+    .sort((a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className'));
+
+  // 새로 바꾼 cityList 다시 localStorage에 저장
+  localStorage.setItem('CityList', JSON.stringify(cityList));
+
   return (
     <HomeContainer onScroll={handleScroll} className={modalVisible && 'openModal'}>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />
@@ -66,7 +85,7 @@ const Home = () => {
         <Dresses temperature={Math.round(WEATHER.main.temp)} />
         <WeatherContainer className="weatherContainer" weather={WEATHER} scroll={scroll} weekly={WEEKLYWEATHER} />
       </main>
-      {modalVisible && <SideBar scroll={scroll} onClose={closeModal} cityName={cityName} />}
+      {modalVisible && <SideBar scroll={scroll} onClose={closeModal} />}
     </HomeContainer>
   );
 };
