@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { API_KEY } from '../config';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getCityName } from '../utils/city';
-// import Crontab from 'reactjs-crontab';
 
 const loadingImg = process.env.PUBLIC_URL + '/images/loading.gif';
 
@@ -77,17 +76,7 @@ const Loading = () => {
       console.log(error);
     }
   };
-
-  // const tasks = [
-  //   {
-  //     fn: getWeeklyWeather,
-  //     id: '2',
-  //     config:
-  //       '0 0,1,2,4,3,5,6,7,9,8,10,11,12,19,18,22,21,20,23,17,16,15,13 * * *',
-  //     name: '',
-  //     description: '',
-  //   },
-  // ];
+  console.log(getWeeklyWeather);
 
   // api fetching 후 페이지 이동
   useEffect(() => {
@@ -102,11 +91,9 @@ const Loading = () => {
   }, []);
 
   return (
-    // <Crontab tasks={tasks} timeZone="Asia/Seoul" dashboard={{ hidden: false }}>
     <LoadingContainer>
       <img src={loadingImg} alt="loading" />
     </LoadingContainer>
-    // </Crontab>
   );
 };
 
