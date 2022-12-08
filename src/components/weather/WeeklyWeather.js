@@ -6,10 +6,10 @@ import { TiWeatherSunny, TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
   //내일 날씨 리스트
-  const oneDayList = weekly.list.slice(6, 15);
+  const oneDayList = weekly.list.slice(6, 14);
 
   //모레 날씨 리스트
-  const twoDayList = weekly.list.slice(14, 23);
+  const twoDayList = weekly.list.slice(14, 22);
   console.log(twoDayList);
   // console.log(twoDayList[0].dt_txt);
 
