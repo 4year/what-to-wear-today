@@ -2,8 +2,11 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import LocationList from './LocationList';
 
-const RemoveLocaiotn = ({ hide, cityList }) => {
+const RemoveLocaiotn = ({ hide }) => {
   const [checkedList, setCheckedLists] = useState([]);
+
+  // localStorage에서 CityList 받아오기
+  const cityList = JSON.parse(localStorage.getItem('CityList'));
 
   // 전체 체크 클릭 시
   const onCheckedAll = useCallback(
