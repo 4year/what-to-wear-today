@@ -15,10 +15,8 @@ const Loading = () => {
 
   // 현재 위치 가져오기
   const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude; // 위도
-      const lon = position.coords.longitude; // 경도
-      getCurrentWeather(lat, lon);
+    return new Promise((res, rej) => {
+      navigator.geolocation.getCurrentPosition(res, rej);
     });
   };
 
@@ -76,19 +74,23 @@ const Loading = () => {
       console.log(error);
     }
   };
-  console.log(getWeeklyWeather);
 
   // api fetching 후 페이지 이동
   useEffect(() => {
     // 첫 로딩이면 getCurrentLocation, 아니면 getCurrentWeather
     if (isFirstLoading) {
       // localStorage CityList에 current가 있는지 확인
-      const currentCity = JSON.parse(localStorage.getItem('CityList')).find(item => item.className === 'current');
+      const currentCity =
+        JSON.parse(localStorage.getItem('CityList'))?.find(item => item.className === 'current') || undefined;
 
       if (currentCity) {
         getCurrentWeather(currentCity.lat, currentCity.lon, currentCity.name);
       } else {
-        getCurrentLocation();
+        getCurrentLocation().then(position => {
+          const lat = position.coords.latitude; // 위도
+          const lon = position.coords.longitude; // 경도
+          getCurrentWeather(lat, lon);
+        });
       }
     } else {
       // localStorage에서 선택된 지역정보 가져오기기
@@ -98,9 +100,11 @@ const Loading = () => {
   }, []);
 
   return (
-    <LoadingContainer>
-      <img src={loadingImg} alt="loading" />
-    </LoadingContainer>
+    <>
+      <LoadingContainer>
+        <img src={loadingImg} alt="loading" />
+      </LoadingContainer>
+    </>
   );
 };
 
