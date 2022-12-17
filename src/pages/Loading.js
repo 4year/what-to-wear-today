@@ -15,10 +15,8 @@ const Loading = () => {
 
   // 현재 위치 가져오기
   const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude; // 위도
-      const lon = position.coords.longitude; // 경도
-      getCurrentWeather(lat, lon);
+    return new Promise((res, rej) => {
+      navigator.geolocation.getCurrentPosition(res, rej);
     });
   };
 
@@ -41,6 +39,7 @@ const Loading = () => {
       const storeCityList = [
         ...prevCityList,
         {
+          // id: prevCityList.length !== 0 ? prevCityList.at(-1).id + 1 : 0,
           name: name,
           lat: lat,
           lon: lon,
@@ -59,13 +58,11 @@ const Loading = () => {
   };
 
   //주간 날씨 가져오기
-  const getWeeklyWeather = setInterval(async (lat, lon, result) => {
+  const getWeeklyWeather = async (lat, lon, result) => {
     const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
     try {
-      const weeklyResult = await fetch(weeklyUrl).then(response =>
-        response.json()
-      );
+      const weeklyResult = await fetch(weeklyUrl).then(response => response.json());
       // home으로 이동
       navigate('/home', {
         replace: false,
@@ -77,39 +74,38 @@ const Loading = () => {
     } catch (error) {
       console.log(error);
     }
-  }, 86400);
-
-  // const tasks = [
-  //   {
-  //     fn: getWeeklyWeather,
-  //     id: '2',
-  //     config:
-  //       '0 0,1,2,4,3,5,6,7,9,8,10,11,12,19,18,22,21,20,23,17,16,15,13 * * *',
-  //     name: '',
-  //     description: '',
-  //   },
-  // ];
+  };
 
   // api fetching 후 페이지 이동
   useEffect(() => {
     // 첫 로딩이면 getCurrentLocation, 아니면 getCurrentWeather
     if (isFirstLoading) {
-      getCurrentLocation();
+      // localStorage CityList에 current가 있는지 확인
+      const currentCity =
+        JSON.parse(localStorage.getItem('CityList'))?.find(item => item.className === 'current') || undefined;
+
+      if (currentCity) {
+        getCurrentWeather(currentCity.lat, currentCity.lon, currentCity.name);
+      } else {
+        getCurrentLocation().then(position => {
+          const lat = position.coords.latitude; // 위도
+          const lon = position.coords.longitude; // 경도
+          getCurrentWeather(lat, lon);
+        });
+      }
     } else {
       // localStorage에서 선택된 지역정보 가져오기기
-      const { lat, lon, name } = JSON.parse(
-        localStorage.getItem('SelectedLocation')
-      );
+      const { lat, lon, name } = JSON.parse(localStorage.getItem('SelectedLocation'));
       getCurrentWeather(lat, lon, name);
     }
   }, []);
 
   return (
-    // <Crontab tasks={tasks} timeZone="Asia/Seoul" dashboard={{ hidden: false }}>
-    <LoadingContainer>
-      <img src={loadingImg} alt="loading" />
-    </LoadingContainer>
-    // </Crontab>
+    <>
+      <LoadingContainer>
+        <img src={loadingImg} alt="loading" />
+      </LoadingContainer>
+    </>
   );
 };
 

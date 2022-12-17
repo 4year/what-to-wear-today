@@ -6,12 +6,10 @@ import { TiWeatherSunny, TiWeatherShower } from 'react-icons/ti';
 
 const WeeklyWeather = ({ weekly }) => {
   //내일 날씨 리스트
-  const oneDayList = weekly.list.slice(6, 15);
+  const oneDayList = weekly.list.slice(6, 14);
 
   //모레 날씨 리스트
-  const twoDayList = weekly.list.slice(14, 23);
-
-  const hour = [0, 3, 6, 9, 12, 15, 18, 21, 24];
+  const twoDayList = weekly.list.slice(14, 22);
 
   //내일 날씨 리스트 렌더링
   const postList = oneDayList.map((data, idx) => (
@@ -22,7 +20,7 @@ const WeeklyWeather = ({ weekly }) => {
         src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
-      <span>{hour[idx]}시</span>
+      <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
 
@@ -35,11 +33,14 @@ const WeeklyWeather = ({ weekly }) => {
         src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
-      <span>{hour[idx]}시</span>
+      <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
+<<<<<<< HEAD
   console.log(twoDayList);
   console.log(oneDayList);
+=======
+>>>>>>> e47d883bddeae148e4e2f9841c5c4dab37baeacf
 
   return (
     <>
@@ -72,7 +73,7 @@ const WeeklyWeather = ({ weekly }) => {
 };
 
 const Container = styled.div`
-  /* height: 28%; */
+  height: 25%;
   width: 90%;
   margin: 5px 20px;
   padding: 7px 5px;
@@ -85,7 +86,7 @@ const Wrap = styled.div`
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 150px;
+  height: 80%;
 
   ::-webkit-scrollbar {
     height: 15px;
@@ -113,7 +114,7 @@ const Title = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 5px 23px;
-  height: 40px;
+  height: 20%;
 
   h3 {
     font-size: 14px;

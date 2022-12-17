@@ -7,7 +7,7 @@ const SearchResult = ({ cityList }) => {
   return (
     <ResultContainer>
       {cityList.map(location => (
-        <LocationList key={location.id} {...location} />
+        <LocationList key={location.id} location={location} />
       ))}
     </ResultContainer>
   );

@@ -20,12 +20,7 @@ const SearchBar = ({ hide }) => {
   return (
     <SearchLocation>
       <div className="search-bar">
-        <input
-          type="text"
-          placeholder="도시명(city)으로 검색"
-          value={userInput}
-          onChange={handleChange}
-        ></input>
+        <input type="text" placeholder="도시명(city)으로 검색" value={userInput} onChange={handleChange}></input>
         <button onClick={hide}>취소</button>
       </div>
       {userInput && <SearchResult cityList={filterLocationListData} />}
@@ -36,7 +31,6 @@ const SearchBar = ({ hide }) => {
 const SearchLocation = styled.div`
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
   position: absolute;
   top: 0;
   right: 0;
@@ -46,6 +40,7 @@ const SearchLocation = styled.div`
   align-items: center;
   background-color: rgba(245, 245, 245, 0.5);
   backdrop-filter: blur(5px);
+  box-sizing: border-box;
 
   .search-bar {
     width: 100%;
@@ -53,12 +48,10 @@ const SearchLocation = styled.div`
 
     input {
       position: relative;
-      top: 0px;
-      width: 60%;
+      width: 65%;
       height: 15px;
       padding: 8px 14px;
-      border: 0;
-      outline: none;
+      border: none;
       border-radius: 20px;
       background-color: #dcdcdc;
       box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.25);

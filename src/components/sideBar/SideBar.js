@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideHeader from './SideHeader';
 import SearchBar from './Location/SearchBar';
+import RemoveLocation from './Location/RemoveLocation';
 import LocationList from './Location/LocationList';
-import RemoveLocaiotn from './Location/RemoveLocaiotn';
 
-const SideBar = ({ onClose, cityName }) => {
+const SideBar = ({ scroll, onClose, cityName }) => {
   // 검색창 보여주는 상태값
   const [search, setSearch] = useState(false);
   const [remove, setRemove] = useState(false);
@@ -29,39 +29,24 @@ const SideBar = ({ onClose, cityName }) => {
       onClose(e);
     }
   };
-
-  // localStorage에 저장된 지역목록 가져오기
-  let cityList = JSON.parse(localStorage.getItem('CityList'));
-
-  // 현재 위치 정보 추가 및 sorting
-  cityList &&= cityList
-    .map(item => {
-      if (item.name === cityName) {
-        item.className = 'current';
-      }
-      return item;
-    })
-    .sort(
-      (a, b) => b.hasOwnProperty('className') - a.hasOwnProperty('className')
-    );
+  // localStorage.removeItem('SelectedLocation')
+ 
+  // localStorage에서 CityList 받아오기
+  const cityList = JSON.parse(localStorage.getItem('CityList'));
 
   return (
-    <SidebarContainer>
+    <SidebarContainer className={scroll === 'scrollEnd' && 'top'}>
       <ModalOverlay onClick={onMaskClick} />
       <ModalWrapper>
-        <SideHeader
-          close={onClose}
-          onClickPlus={onClickPlus}
-          onClickMinus={onClickMinus}
-        />
+        <SideHeader close={onClose} onClickPlus={onClickPlus} onClickMinus={onClickMinus} />
         {search ? (
           <SearchBar hide={onClickCancel} />
         ) : remove ? (
-          <RemoveLocaiotn hide={onClickCancel} cityList={cityList} />
+          <RemoveLocation hide={onClickCancel}/>
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (
-              <LocationList key={idx} {...location} />
+              <LocationList key={idx} location={location} />
             ))}
           </LocationContainer>
         )}
@@ -76,6 +61,10 @@ const SidebarContainer = styled.div`
   width: 100%;
   height: 100%;
   z-index: 9999;
+
+  &.top {
+    top: 55%;
+  }
 `;
 
 const ModalOverlay = styled.div`
@@ -92,7 +81,7 @@ const ModalWrapper = styled.div`
   right: 0;
   width: 70%;
   height: 100%;
-  padding: 10px;
+  padding: 0 10px;
   background-color: #fff;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 `;
