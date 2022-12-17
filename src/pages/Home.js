@@ -77,7 +77,7 @@ const Home = () => {
 
   // 새로 바꾼 cityList 다시 localStorage에 저장
   localStorage.setItem('CityList', JSON.stringify(cityList));
-
+  
   return (
     <HomeContainer onScroll={handleScroll} className={modalVisible && 'openModal'}>
       <Header location={cityName} openModal={openModal} onShare={kakaoShare} />

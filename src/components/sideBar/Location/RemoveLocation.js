@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import LocationList from './LocationList';
 
-const RemoveLocaiotn = ({ hide }) => {
+const RemoveLocation = ({ hide }) => {
   const [checkedList, setCheckedLists] = useState([]);
+  const navigate = useNavigate();
 
   // localStorage에서 CityList 받아오기
   const cityList = JSON.parse(localStorage.getItem('CityList'));
@@ -14,7 +16,7 @@ const RemoveLocaiotn = ({ hide }) => {
       if (checked) {
         const checkedListArray = [];
 
-        cityList.forEach(list => checkedListArray.push(list));
+        cityList.forEach(list => checkedListArray.push(list.name));
 
         setCheckedLists(checkedListArray);
       } else {
@@ -25,20 +27,32 @@ const RemoveLocaiotn = ({ hide }) => {
   );
 
   // 개별 체크 클릭 시
-  const onCheckedElement = useCallback(
-    (checked, list) => {
-      if (checked) {
-        setCheckedLists([...checkedList, list]);
-      } else {
-        setCheckedLists(checkedList.filter(el => el !== list));
-      }
-    },
-    [checkedList],
-  );
-  console.log(checkedList);
+  const onCheckedElement = (checked, city) => {
+    if (checked) {
+      setCheckedLists([...checkedList, city]);
+    } else {
+      setCheckedLists(checkedList.filter(el => el !== city));
+    }
+  };
 
   // 삭제 버튼 클릭 시
-
+  const onClickRemove = () => {    
+    if(checkedList.length !== 0){
+      const answer = window.confirm("삭제하시겠습니까?");
+      if(answer) {      
+        const newCityList = cityList.filter(el => !checkedList.includes(el.name));
+        // console.log(">>>> new cityList :", newCityList);
+        localStorage.setItem('CityList', JSON.stringify(newCityList));
+        // 로딩 페이지로 이동
+        navigate('/', {
+          replace: false,
+          state: {
+            isFirstLoading: true,
+          },
+        });
+      }
+    }
+  }
   return (
     <Container>
       <Header>
@@ -49,7 +63,7 @@ const RemoveLocaiotn = ({ hide }) => {
         />
         <h4>지역 목록 삭제</h4>
         <div>
-          <button className="removeBtn">삭제</button>
+          <button className="removeBtn" onClick={onClickRemove}>삭제</button>
           <button onClick={hide}>취소</button>
         </div>
       </Header>
@@ -57,15 +71,17 @@ const RemoveLocaiotn = ({ hide }) => {
         {cityList.map((location, idx) => (
           <div className="location-list">
             <input
+              key={'checkbox'+idx}
               type="checkBox"
-              onChange={e => onCheckedElement(e.target.checked, location)}
-              checked={checkedList.includes(location) ? true : false}
+              value={location.name}
+              onChange={e => onCheckedElement(e.target.checked, location.name)}
+              checked={checkedList.includes(location.name) ? true : false}
             />
             <LocationList
               key={idx}
               location={location}
               onClick={onCheckedElement}
-              checked={checkedList.includes(location) ? false : true}
+              checked={checkedList.includes(location.name) ? false : true}
             />
           </div>
         ))}
@@ -134,4 +150,4 @@ const List = styled.div`
   }
 `;
 
-export default RemoveLocaiotn;
+export default RemoveLocation;

@@ -10,16 +10,6 @@ const WeeklyWeather = ({ weekly }) => {
 
   //모레 날씨 리스트
   const twoDayList = weekly.list.slice(14, 22);
-  console.log(twoDayList);
-  // console.log(twoDayList[0].dt_txt);
-
-  // const SliceLength = twoDayList.length;
-
-  // console.log(Slice.slice(11, 13));
-
-  // console.log(Object.keys(twoDayList).slice(0));
-
-  // const hour = [0, 3, 6, 9, 12, 15, 18, 21];
 
   //내일 날씨 리스트 렌더링
   const postList = oneDayList.map((data, idx) => (
