@@ -36,11 +36,8 @@ const WeeklyWeather = ({ weekly }) => {
       <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
-<<<<<<< HEAD
   console.log(twoDayList);
   console.log(oneDayList);
-=======
->>>>>>> e47d883bddeae148e4e2f9841c5c4dab37baeacf
 
   return (
     <>
