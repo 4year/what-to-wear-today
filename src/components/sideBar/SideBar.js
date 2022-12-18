@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideHeader from './SideHeader';
 import SearchBar from './Location/SearchBar';
-import RemoveLocaiotn from './Location/RemoveLocaiotn';
+import RemoveLocation from './Location/RemoveLocation';
 import LocationList from './Location/LocationList';
 
 const SideBar = ({ scroll, onClose, cityName }) => {
@@ -29,7 +29,8 @@ const SideBar = ({ scroll, onClose, cityName }) => {
       onClose(e);
     }
   };
-
+  // localStorage.removeItem('SelectedLocation')
+ 
   // localStorage에서 CityList 받아오기
   const cityList = JSON.parse(localStorage.getItem('CityList'));
 
@@ -41,7 +42,7 @@ const SideBar = ({ scroll, onClose, cityName }) => {
         {search ? (
           <SearchBar hide={onClickCancel} />
         ) : remove ? (
-          <RemoveLocaiotn hide={onClickCancel} />
+          <RemoveLocation hide={onClickCancel}/>
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (

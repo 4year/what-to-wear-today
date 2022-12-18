@@ -39,6 +39,7 @@ const Loading = () => {
       const storeCityList = [
         ...prevCityList,
         {
+          // id: prevCityList.length !== 0 ? prevCityList.at(-1).id + 1 : 0,
           name: name,
           lat: lat,
           lon: lon,

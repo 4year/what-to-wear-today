@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LocationList = ({ location, onClick, checked }) => {
   const navigate = useNavigate();
   const { name, icon, temp, lat, lon, className } = { ...location };
-
+  
   // 지역 리스트 클릭 시,
   // 1. 해당 지역의 위도 경도를 localStorage에 저장
   // 2. loading navigate
@@ -19,7 +19,7 @@ const LocationList = ({ location, onClick, checked }) => {
       },
     });
   };
-
+  
   const handleClick = () => {
     if (onClick) {
       onClick(checked, location);
