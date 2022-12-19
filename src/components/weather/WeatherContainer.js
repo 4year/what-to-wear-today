@@ -15,7 +15,7 @@ const WeatherContainer = ({ weather, scroll, weekly }) => {
         <div className="date">{convertDate(weather)}</div>
         <div className="weather">
           {temperature}°C
-          <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
+          <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
           {weather.weather[0].description}
         </div>
       </CurrentWeather>

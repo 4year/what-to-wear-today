@@ -17,7 +17,7 @@ const WeeklyWeather = ({ weekly }) => {
       <p>{Math.round(data.main.temp)}°C</p>
       <img
         style={{ width: '50px', height: '50px' }}
-        src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
       <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
@@ -30,14 +30,12 @@ const WeeklyWeather = ({ weekly }) => {
       <p>{Math.round(data.main.temp)}°C</p>
       <img
         style={{ width: '50px', height: '50px' }}
-        src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
         alt="weather icon"
       />
       <span>{data.dt_txt.slice(11, 13).replace('0', '')}시</span>
     </WrapList>
   ));
-  console.log(twoDayList);
-  console.log(oneDayList);
 
   return (
     <>

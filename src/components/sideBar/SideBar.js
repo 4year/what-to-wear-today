@@ -29,8 +29,7 @@ const SideBar = ({ scroll, onClose, cityName }) => {
       onClose(e);
     }
   };
-  // localStorage.removeItem('SelectedLocation')
- 
+
   // localStorage에서 CityList 받아오기
   const cityList = JSON.parse(localStorage.getItem('CityList'));
 
@@ -42,7 +41,7 @@ const SideBar = ({ scroll, onClose, cityName }) => {
         {search ? (
           <SearchBar hide={onClickCancel} />
         ) : remove ? (
-          <RemoveLocation hide={onClickCancel}/>
+          <RemoveLocation hide={onClickCancel} />
         ) : (
           <LocationContainer>
             {cityList.map((location, idx) => (
