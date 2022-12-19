@@ -97,7 +97,7 @@ const Loading = () => {
       const { lat, lon, name } = JSON.parse(localStorage.getItem('SelectedLocation'));
       getCurrentWeather(lat, lon, name);
     }
-  }, []);
+  }, [getCurrentWeather, isFirstLoading]);
 
   return (
     <>
