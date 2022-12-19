@@ -38,6 +38,10 @@ const Header = styled.div`
     padding: 10px;
   }
 
+  .add-list {
+    padding-right: 20px;
+  }
+
   .remove-list {
     padding-left: 0;
   }
