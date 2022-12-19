@@ -23,7 +23,7 @@ const Loading = () => {
   //주간 날씨 가져오기
   const getWeeklyWeather = useCallback(
     async (lat, lon, result) => {
-      const weeklyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
+      const weeklyUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
 
       try {
         const weeklyResult = await fetch(weeklyUrl).then(response => response.json());
