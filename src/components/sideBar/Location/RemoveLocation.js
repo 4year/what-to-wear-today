@@ -36,10 +36,10 @@ const RemoveLocation = ({ hide }) => {
   };
 
   // 삭제 버튼 클릭 시
-  const onClickRemove = () => {    
-    if(checkedList.length !== 0){
-      const answer = window.confirm("삭제하시겠습니까?");
-      if(answer) {      
+  const onClickRemove = () => {
+    if (checkedList.length !== 0) {
+      const answer = window.confirm('삭제하시겠습니까?');
+      if (answer) {
         const newCityList = cityList.filter(el => !checkedList.includes(el.name));
         // console.log(">>>> new cityList :", newCityList);
         localStorage.setItem('CityList', JSON.stringify(newCityList));
@@ -52,7 +52,7 @@ const RemoveLocation = ({ hide }) => {
         });
       }
     }
-  }
+  };
   return (
     <Container>
       <Header>
@@ -63,7 +63,9 @@ const RemoveLocation = ({ hide }) => {
         />
         <h4>지역 목록 삭제</h4>
         <div>
-          <button className="removeBtn" onClick={onClickRemove}>삭제</button>
+          <button className="removeBtn" onClick={onClickRemove}>
+            삭제
+          </button>
           <button onClick={hide}>취소</button>
         </div>
       </Header>
@@ -71,7 +73,7 @@ const RemoveLocation = ({ hide }) => {
         {cityList.map((location, idx) => (
           <div className="location-list">
             <input
-              key={'checkbox'+idx}
+              key={'checkbox' + idx}
               type="checkBox"
               value={location.name}
               onChange={e => onCheckedElement(e.target.checked, location.name)}
@@ -121,7 +123,7 @@ const Header = styled.div`
   border-bottom: 2px solid black;
 
   h4 {
-    font-size: 20px;
+    font-size: 90%;
   }
 
   button {
